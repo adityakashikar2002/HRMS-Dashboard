@@ -1,0 +1,9 @@
+.dashboard-content {
+    background-color: #ffffff;
+  }
+  
+  @media (max-width: 768px) {
+    .dashboard-content {
+      padding: 1rem;
+    }
+  }

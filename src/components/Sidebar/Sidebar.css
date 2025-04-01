@@ -1,0 +1,11 @@
+.sidebar {
+    transition: all 0.3s;
+  }
+  
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+  }
