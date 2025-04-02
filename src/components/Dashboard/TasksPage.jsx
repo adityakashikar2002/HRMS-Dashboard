@@ -1,62 +1,3 @@
-// // src/pages/TasksPage.js
-// import React, { useState } from 'react';
-// import { toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
-// import './TasksPage.css';
-
-// const TasksPage = () => {
-//   const [showCreateTaskModal, setShowCreateTaskModal] = useState(false);
-//   const [tasks, setTasks] = useState({
-//     todo: [],
-//     inProgress: [],
-//     completed: []
-//   });
-//   const [newTask, setNewTask] = useState({
-//     title: '',
-//     description: '',
-//     dateAssigned: '',
-//     deadlineDate: '',
-//     deadlineTime: '',
-//     assignerName: '',
-//     assigneeName: '',
-//     assignerEmail: '',
-//     assigneeEmail: ''
-//   });
-
-//   const handleInputChange = (e) => {
-//     const { name, value } = e.target;
-//     setNewTask(prev => ({ ...prev, [name]: value }));
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     const taskWithId = { ...newTask, id: Date.now(), status: 'todo' };
-//     setTasks(prev => ({
-//       ...prev,
-//       todo: [...prev.todo, taskWithId]
-//     }));
-    
-//     // In a real app, you would send an email notification here
-//     console.log('Email would be sent to:', taskWithId.assigneeEmail);
-    
-//     toast.success('Task assigned successfully!');
-//     setShowCreateTaskModal(false);
-//     setNewTask({
-//       title: '',
-//       description: '',
-//       dateAssigned: '',
-//       deadlineDate: '',
-//       deadlineTime: '',
-//       assignerName: '',
-//       assigneeName: '',
-//       assignerEmail: '',
-//       assigneeEmail: ''
-//     });
-//   };
-
-
-
-
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -304,54 +245,6 @@ const TasksPage = () => {
         </div>
       )}
 
-      {/* <div className="task-board grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-        <div className="task-column bg-white p-4 rounded-lg shadow">
-          <h3 className="text-lg font-semibold text-red-500 mb-4">To Do</h3>
-          {tasks.todo.length === 0 ? (
-            <p className="text-gray-500 text-center py-4">No tasks to display</p>
-          ) : (
-            tasks.todo.map(task => (
-              <TaskCard 
-                key={task.id} 
-                task={task} 
-                onStartWorking={startWorking}
-                status="todo"
-              />
-            ))
-          )}
-        </div>
-        
-        <div className="task-column bg-white p-4 rounded-lg shadow">
-          <h3 className="text-lg font-semibold text-yellow-500 mb-4">In Progress</h3>
-          {tasks.inProgress.length === 0 ? (
-            <p className="text-gray-500 text-center py-4">No tasks in progress</p>
-          ) : (
-            tasks.inProgress.map(task => (
-              <TaskCard 
-                key={task.id} 
-                task={task} 
-                onMarkComplete={markAsComplete}
-                status="inProgress"
-              />
-            ))
-          )}
-        </div>
-        
-        <div className="task-column bg-white p-4 rounded-lg shadow">
-          <h3 className="text-lg font-semibold text-green-500 mb-4">Completed</h3>
-          {tasks.completed.length === 0 ? (
-            <p className="text-gray-500 text-center py-4">No completed tasks</p>
-          ) : (
-            tasks.completed.map(task => (
-              <TaskCard 
-                key={task.id} 
-                task={task} 
-                status="completed"
-              />
-            ))
-          )}
-        </div>
-      </div> */}
     <div className="task-board grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
             <div className="task-column bg-white p-4 rounded-lg shadow">
                 <div className="flex items-center mb-4">
@@ -423,54 +316,78 @@ const TasksPage = () => {
 };
 
 // const TaskCard = ({ task, onStartWorking, onMarkComplete, status }) => {
-//   const deadline = new Date(`${task.deadlineDate}T${task.deadlineTime}`);
-//   const now = new Date();
-//   const isOverdue = now > deadline && status !== 'completed';
+//     const deadline = new Date(`${task.deadlineDate}T${task.deadlineTime}`);
+//     const now = new Date();
+//     const isOverdue = now > deadline && status !== 'completed';
+    
+//     const statusClasses = {
+//       todo: 'border-l-4 border-red-500 bg-red-50',
+//       inProgress: 'border-l-4 border-yellow-500 bg-yellow-50',
+//       completed: 'border-l-4 border-green-500 bg-green-50',
+//       overdue: 'border-l-4 border-red-700 bg-red-100'
+//     };
   
-//   const statusClasses = {
-//     todo: 'border-l-4 border-red-500 bg-red-50',
-//     inProgress: 'border-l-4 border-yellow-500 bg-yellow-50',
-//     completed: 'border-l-4 border-green-500 bg-green-50',
-//     overdue: 'border-l-4 border-red-700 bg-red-100'
+//     const statusColors = {
+//       todo: 'bg-red-500',
+//       inProgress: 'bg-yellow-500',
+//       completed: 'bg-green-500',
+//       overdue: 'bg-red-700'
+//     };
+  
+//     const textColors = {
+//       todo: 'text-red-500',
+//       inProgress: 'text-yellow-500',
+//       completed: 'text-green-500',
+//       overdue: 'text-red-700'
+//     };
+  
+//     const currentStatus = isOverdue ? 'overdue' : status;
+  
+//     return (
+//       <div className={`task-card mb-4 p-4 rounded ${statusClasses[currentStatus]}`}>
+//         <div className="flex items-start">
+//           <div className={`w-2 h-2 rounded-full mt-1.5 mr-2 flex-shrink-0 ${statusColors[currentStatus]}`}></div>
+//           <div className="flex-1">
+//             <div className="task-card-header flex justify-between items-center mb-2">
+//               <h4 className={`font-medium ${textColors[currentStatus]}`}>{task.title}</h4>
+//               {isOverdue && <span className="bg-red-600 text-white text-xs px-2 py-1 rounded">OVERDUE</span>}
+//             </div>
+//             <p className="task-description text-sm text-gray-600 mb-3">{task.description}</p>
+//             <div className="task-details text-xs text-gray-500 space-y-1 mb-3">
+//               <p><span className="font-medium">Assigned:</span> {task.dateAssigned}</p>
+//               <p><span className="font-medium">Deadline:</span> {task.deadlineDate} at {task.deadlineTime}</p>
+//               <p><span className="font-medium">Assignee:</span> {task.assigneeName}</p>
+//               <p><span className="font-medium">Assigned by:</span> {task.assignerName}</p>
+//             </div>
+//             <div className="task-actions flex justify-end">
+//               {status === 'todo' && !isOverdue && (
+//                 <button 
+//                   className="bg-yellow-500 text-white px-3 py-1 text-sm rounded hover:bg-yellow-600 transition-colors"
+//                   onClick={() => onStartWorking(task.id)}
+//                 >
+//                   Start Working
+//                 </button>
+//               )}
+//               {status === 'inProgress' && (
+//                 <button 
+//                   className="bg-green-500 text-white px-3 py-1 text-sm rounded hover:bg-green-600 transition-colors"
+//                   onClick={() => onMarkComplete(task.id)}
+//                 >
+//                   Mark as Complete
+//                 </button>
+//               )}
+//               {status === 'completed' && (
+//                 <span className="bg-green-500 text-white px-3 py-1 text-sm rounded">COMPLETED</span>
+//               )}
+//               {isOverdue && status !== 'completed' && (
+//                 <span className="bg-red-600 text-white px-3 py-1 text-sm rounded">OVERDUE</span>
+//               )}
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     );
 //   };
-
-//   return (
-//     <div className={`task-card mb-4 p-4 rounded ${statusClasses[status]} ${isOverdue ? statusClasses.overdue : ''}`}>
-//       <div className="task-card-header flex justify-between items-center mb-2">
-//         <h4 className="font-medium">{task.title}</h4>
-//         {isOverdue && <span className="bg-red-600 text-white text-xs px-2 py-1 rounded">OVERDUE</span>}
-//       </div>
-//       <p className="task-description text-sm text-gray-600 mb-3">{task.description}</p>
-//       <div className="task-details text-xs text-gray-500 space-y-1 mb-3">
-//         <p><span className="font-medium">Assigned:</span> {task.dateAssigned}</p>
-//         <p><span className="font-medium">Deadline:</span> {task.deadlineDate} at {task.deadlineTime}</p>
-//         <p><span className="font-medium">Assignee:</span> {task.assigneeName}</p>
-//         <p><span className="font-medium">Assigned by:</span> {task.assignerName}</p>
-//       </div>
-//       <div className="task-actions flex justify-end">
-//         {status === 'todo' && (
-//           <button 
-//             className="bg-yellow-500 text-white px-3 py-1 text-sm rounded hover:bg-yellow-600 transition-colors"
-//             onClick={() => onStartWorking(task.id)}
-//           >
-//             Start Working
-//           </button>
-//         )}
-//         {status === 'inProgress' && (
-//           <button 
-//             className="bg-green-500 text-white px-3 py-1 text-sm rounded hover:bg-green-600 transition-colors"
-//             onClick={() => onMarkComplete(task.id)}
-//           >
-//             Mark as Complete
-//           </button>
-//         )}
-//         {status === 'completed' && (
-//           <span className="bg-green-500 text-white px-3 py-1 text-sm rounded">COMPLETED</span>
-//         )}
-//       </div>
-//     </div>
-//   );
-// };
 const TaskCard = ({ task, onStartWorking, onMarkComplete, status }) => {
     const deadline = new Date(`${task.deadlineDate}T${task.deadlineTime}`);
     const now = new Date();
@@ -508,20 +425,24 @@ const TaskCard = ({ task, onStartWorking, onMarkComplete, status }) => {
               <h4 className={`font-medium ${textColors[currentStatus]}`}>{task.title}</h4>
               {isOverdue && <span className="bg-red-600 text-white text-xs px-2 py-1 rounded">OVERDUE</span>}
             </div>
-            <p className="task-description text-sm text-gray-600 mb-3">{task.description}</p>
+            <p className="task-description text-sm text-gray-600 mb-3 font-bold">{task.description}</p>
             <div className="task-details text-xs text-gray-500 space-y-1 mb-3">
-              <p><span className="font-medium">Assigned:</span> {task.dateAssigned}</p>
-              <p><span className="font-medium">Deadline:</span> {task.deadlineDate} at {task.deadlineTime}</p>
-              <p><span className="font-medium">Assignee:</span> {task.assigneeName}</p>
-              <p><span className="font-medium">Assigned by:</span> {task.assignerName}</p>
+              <p><span className="font-bold">Assigned:</span> {task.dateAssigned}</p>
+              <p><span className="font-bold">Deadline:</span> {task.deadlineDate} at {task.deadlineTime}</p>
+              <p><span className="font-bold">Assignee:</span> {task.assigneeName}</p>
+              <p><span className="font-bold">Assigned by:</span> {task.assignerName}</p>
             </div>
             <div className="task-actions flex justify-end">
-              {status === 'todo' && !isOverdue && (
+              {status === 'todo' && (
                 <button 
-                  className="bg-yellow-500 text-white px-3 py-1 text-sm rounded hover:bg-yellow-600 transition-colors"
+                  className={`px-3 py-1 text-sm rounded text-white ${
+                    isOverdue 
+                      ? 'bg-red-600 hover:bg-red-700' 
+                      : 'bg-yellow-500 hover:bg-yellow-600'
+                  } transition-colors`}
                   onClick={() => onStartWorking(task.id)}
                 >
-                  Start Working
+                  {isOverdue ? 'Start Working (Overdue)' : 'Start Working'}
                 </button>
               )}
               {status === 'inProgress' && (
@@ -534,9 +455,6 @@ const TaskCard = ({ task, onStartWorking, onMarkComplete, status }) => {
               )}
               {status === 'completed' && (
                 <span className="bg-green-500 text-white px-3 py-1 text-sm rounded">COMPLETED</span>
-              )}
-              {isOverdue && status !== 'completed' && (
-                <span className="bg-red-600 text-white px-3 py-1 text-sm rounded">OVERDUE</span>
               )}
             </div>
           </div>

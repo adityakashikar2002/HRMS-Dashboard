@@ -292,7 +292,8 @@
   } */
 
 .tasks-page {
-    background-color: #f5f7fa;
+    background-color: #f8f8f8;
+    margin-left: 6px;
   }
   
   .task-card {
