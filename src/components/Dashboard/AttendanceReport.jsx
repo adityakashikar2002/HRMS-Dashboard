@@ -77,7 +77,7 @@
 
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfoCircle, faEllipsisH, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
+import { faInfoCircle, faEllipsisH,} from '@fortawesome/free-solid-svg-icons';
 
 const AttendanceReport = () => {
   return (
