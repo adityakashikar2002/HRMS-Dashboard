@@ -1,37 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import EmailList from '../components/EmailList';
 
-const Sent = ({ 
+const AllEmails = ({ 
   emails, 
   setEmails,
   selectedEmails,
   setSelectedEmails,
-  onToggleFavorite,
   onArchive,
   onDelete,
-  onMarkAsSpam
+  onMarkAsSpam,
+  onToggleFavorite
 }) => {
-  const [sentEmails, setSentEmails] = useState([]);
-
-  useEffect(() => {
-    const sent = emails.filter(email => email.isSent);
-    setSentEmails(sent);
-  }, [emails]);
-
   return (
     <div className="flex-1 overflow-y-auto">
       <EmailList 
-        emails={sentEmails} 
+        emails={emails} 
         setEmails={setEmails}
         selectedEmails={selectedEmails}
         setSelectedEmails={setSelectedEmails}
-        onToggleFavorite={onToggleFavorite}
         onArchive={onArchive}
         onDelete={onDelete}
         onMarkAsSpam={onMarkAsSpam}
+        onToggleFavorite={onToggleFavorite}
+        showAllActions={true}
       />
     </div>
   );
 };
 
-export default Sent;
+export default AllEmails;

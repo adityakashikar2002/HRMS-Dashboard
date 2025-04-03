@@ -1,27 +1,44 @@
-// import React from 'react';
-// import { FaReply, FaReplyAll, FaForward, FaTrash, FaEllipsisV, FaStar, FaPaperclip } from 'react-icons/fa';
-
-// const EmailView = ({ email, onBack }) => {
-//   const [isFavorite, setIsFavorite] = useState(email.isFavorite);
-
-//   const toggleFavorite = () => {
-//     setIsFavorite(!isFavorite);
-//     // Update in the database/state
-//   };
-
 import React, { useState } from 'react';
-import { FaReply, FaReplyAll, FaForward, FaTrash, FaEllipsisV, FaStar, FaPaperclip } from 'react-icons/fa';
+import { 
+  FaReply, 
+  FaReplyAll, 
+  FaForward, 
+  FaTrash, 
+  FaEllipsisV, 
+  FaStar, 
+  FaPaperclip,
+  FaArchive,
+  FaExclamationCircle
+} from 'react-icons/fa';
 
-const EmailView = ({ email, onBack, onToggleFavorite, onDelete, onMarkAsSpam }) => {
+const EmailView = ({ 
+  email, 
+  onBack,
+  onToggleFavorite,
+  onDelete,
+  onMarkAsSpam,
+  onArchive
+}) => {
   const [isFavorite, setIsFavorite] = useState(email.isFavorite);
 
   const handleToggleFavorite = () => {
-    setIsFavorite(!isFavorite);
-    onToggleFavorite(email.id);
+    const newFavoriteStatus = !isFavorite;
+    setIsFavorite(newFavoriteStatus);
+    onToggleFavorite([email.id], newFavoriteStatus);
   };
 
   const handleDelete = () => {
-    onDelete(email.id);
+    onDelete([email.id]);
+    onBack();
+  };
+
+  const handleMarkAsSpam = () => {
+    onMarkAsSpam([email.id]);
+    onBack();
+  };
+
+  const handleArchive = () => {
+    onArchive([email.id]);
     onBack();
   };
 
@@ -35,38 +52,35 @@ const EmailView = ({ email, onBack, onToggleFavorite, onDelete, onMarkAsSpam }) 
           &larr; Back
         </button>
         <div className="flex space-x-2">
-          {/* <button 
-            onClick={toggleFavorite}
-            className={`p-2 rounded-full ${isFavorite ? 'text-yellow-500' : 'text-gray-400'}`}
-          >
-            <FaStar />
-          </button> */}
-           <button 
+          <button 
             onClick={handleToggleFavorite}
             className={`p-2 rounded-full ${isFavorite ? 'text-yellow-500' : 'text-gray-400'}`}
+            title={isFavorite ? "Remove from favorites" : "Add to favorites"}
           >
             <FaStar />
           </button>
-          <button className="p-2 rounded-full text-gray-600 hover:bg-gray-100">
-            <FaReply />
+          <button 
+            onClick={handleArchive}
+            className="p-2 rounded-full text-gray-600 hover:bg-gray-100"
+            title="Archive"
+          >
+            <FaArchive />
           </button>
-          <button className="p-2 rounded-full text-gray-600 hover:bg-gray-100">
-            <FaReplyAll />
+          <button 
+            onClick={handleMarkAsSpam}
+            className="p-2 rounded-full text-gray-600 hover:bg-gray-100"
+            title="Mark as spam"
+          >
+            <FaExclamationCircle />
           </button>
-          <button className="p-2 rounded-full text-gray-600 hover:bg-gray-100">
-            <FaForward />
-          </button>
-          {/* <button className="p-2 rounded-full text-gray-600 hover:bg-gray-100">
-            <FaTrash />
-          </button> */}
           <button 
             onClick={handleDelete}
             className="p-2 rounded-full text-gray-600 hover:bg-gray-100"
+            title="Delete"
           >
             <FaTrash />
           </button>
-
-          <button className="p-2 rounded-full text-gray-600 hover:bg-gray-100">
+          <button className="p-2 rounded-full text-gray-600 hover:bg-gray-100" title="More options">
             <FaEllipsisV />
           </button>
         </div>
@@ -99,7 +113,7 @@ const EmailView = ({ email, onBack, onToggleFavorite, onDelete, onMarkAsSpam }) 
       </div>
 
       <div className="prose max-w-none mb-6">
-        <p>{email.body}</p>
+        <p className="whitespace-pre-line">{email.body}</p>
       </div>
 
       {email.hasAttachment && (
@@ -114,10 +128,13 @@ const EmailView = ({ email, onBack, onToggleFavorite, onDelete, onMarkAsSpam }) 
 
       <div className="mt-8 pt-4 border-t">
         <button className="bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 rounded mr-2">
-          Reply
+          <FaReply className="inline mr-1" /> Reply
+        </button>
+        <button className="bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 px-4 rounded mr-2">
+          <FaReplyAll className="inline mr-1" /> Reply All
         </button>
         <button className="bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 px-4 rounded">
-          Forward
+          <FaForward className="inline mr-1" /> Forward
         </button>
       </div>
     </div>

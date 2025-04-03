@@ -1,40 +1,3 @@
-// import React, { useState } from 'react';
-// import { FaTimes, FaPaperclip } from 'react-icons/fa';
-// import LabelSelector from './LabelSelector';
-
-// const ComposeEmail = ({ setComposeOpen, setDrafts }) => {
-//   const [email, setEmail] = useState({
-//     to: '',
-//     subject: '',
-//     body: '',
-//     label: '',
-//     isDraft: false
-//   });
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setEmail(prev => ({ ...prev, [name]: value }));
-//   };
-
-//   const handleLabelSelect = (label) => {
-//     setEmail(prev => ({ ...prev, label }));
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     if (email.isDraft) {
-//       setDrafts(prev => [...prev, { ...email, id: Date.now() }]);
-//     } else {
-//       // Send email logic here
-//       console.log('Email sent:', email);
-//     }
-//     setComposeOpen(false);
-//   };
-
-//   const saveAsDraft = () => {
-//     setEmail(prev => ({ ...prev, isDraft: true }));
-//   };
-
 import React, { useState } from 'react';
 import { FaTimes, FaPaperclip } from 'react-icons/fa';
 import LabelSelector from './LabelSelector';
@@ -60,13 +23,43 @@ const ComposeEmail = ({ setComposeOpen, onSend, onSaveDraft }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (email.isDraft) {
-      onSaveDraft(email);
+      onSaveDraft({
+        ...email,
+        id: Date.now(),
+        isDraft: true,
+        isSent: false,
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        date: new Date().toISOString(),
+        isRead: true,
+        sender: 'Me',
+        senderInitials: 'ME',
+        preview: email.body.substring(0, 50) + '...',
+        isFavorite: false,
+        isSpam: false,
+        isTrash: false,
+        isArchived: false
+      });
     } else {
-      onSend(email);
+      onSend({
+        ...email,
+        id: Date.now(),
+        isSent: true,
+        isDraft: false,
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        date: new Date().toISOString(),
+        isRead: true,
+        sender: 'Me',
+        senderInitials: 'ME',
+        preview: email.body.substring(0, 50) + '...',
+        isFavorite: false,
+        isSpam: false,
+        isTrash: false,
+        isArchived: false
+      });
     }
     setComposeOpen(false);
   };
-
+  
   const saveAsDraft = () => {
     setEmail(prev => ({ ...prev, isDraft: true }));
     handleSubmit(new Event('submit'));

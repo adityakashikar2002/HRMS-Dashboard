@@ -1,54 +1,31 @@
-// import React, { useState, useEffect } from 'react';
-// import EmailList from '../components/EmailList';
-// import EmailView from '../components/EmailView';
-// import { useParams, useNavigate } from 'react-router-dom';
-
-// const Inbox = ({ emails, setEmails, selectedEmails, setSelectedEmails }) => {
-//   const { emailId } = useParams();
-//   const navigate = useNavigate();
-//   const [inboxEmails, setInboxEmails] = useState([]);
-
-//   useEffect(() => {
-//     // Filter emails for inbox (not spam, not trash)
-//     const filtered = emails.filter(email => !email.isSpam && !email.isTrash);
-//     setInboxEmails(filtered);
-//   }, [emails]);
-
-//   const handleBack = () => {
-//     navigate('/inbox');
-//   };
-
-//   if (emailId) {
-//     const email = emails.find(e => e.id === parseInt(emailId));
-//     return <EmailView email={email} onBack={handleBack} />;
-//   }
-
-//   return (
-//     <div className="flex-1 overflow-y-auto">
-//       <EmailList 
-//         emails={inboxEmails} 
-//         setEmails={setEmails} 
-//         selectedEmails={selectedEmails}
-//         setSelectedEmails={setSelectedEmails}
-//       />
-//     </div>
-//   );
-// };
-
-// export default Inbox;
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import EmailList from '../components/EmailList';
 import EmailView from '../components/EmailView';
 
-const Inbox = ({ emails, setEmails, selectedEmails, setSelectedEmails }) => {
+const Inbox = ({ 
+  emails = [], 
+  setEmails = () => {}, 
+  selectedEmails = [], 
+  setSelectedEmails = () => {}, 
+  onArchive = () => {},
+  onDelete = () => {},
+  onMarkAsSpam = () => {},
+  onToggleFavorite = () => {}
+}) => {
   const { emailId } = useParams();
   const navigate = useNavigate();
   const [inboxEmails, setInboxEmails] = useState([]);
 
   useEffect(() => {
-    const filtered = emails.filter(email => !email.isSpam && !email.isTrash);
+    const filtered = emails.filter(email => 
+      !email.isSpam && 
+      !email.isTrash && 
+      !email.isArchived &&
+      !email.isDraft &&
+      !email.isSent &&
+      !email.fromMe
+    );
     setInboxEmails(filtered);
   }, [emails]);
 
@@ -56,37 +33,44 @@ const Inbox = ({ emails, setEmails, selectedEmails, setSelectedEmails }) => {
     navigate('/inbox');
   };
 
-  const handleToggleFavorite = (id) => {
+  const handleMarkAsRead = (id) => {
     setEmails(prev => prev.map(email => 
-      email.id === id ? { ...email, isFavorite: !email.isFavorite } : email
-    ));
-  };
-
-  const handleDelete = (id) => {
-    setEmails(prev => prev.map(email => 
-      email.id === id ? { ...email, isTrash: true } : email
+      email.id === id ? { ...email, isRead: true } : email
     ));
   };
 
   if (emailId) {
     const email = emails.find(e => e.id === parseInt(emailId));
+    if (!email) return null;
+    
+    handleMarkAsRead(email.id);
+    
     return (
       <EmailView 
         email={email} 
         onBack={handleBack}
-        onToggleFavorite={handleToggleFavorite}
-        onDelete={handleDelete}
+        onToggleFavorite={(id, isFavorite) => onToggleFavorite([id], isFavorite)}
+        onDelete={(id) => onDelete([id])}
+        onMarkAsSpam={(id) => onMarkAsSpam([id])}
+        onArchive={(id) => onArchive([id])}
       />
     );
   }
 
   return (
-    <div className="flex-1 overflow-y-auto">
+    <div className="flex-1 flex flex-col">
       <EmailList 
         emails={inboxEmails} 
-        setEmails={setEmails} 
+        drafts={[]}
+        setEmails={setEmails}
+        setDrafts={() => {}}
         selectedEmails={selectedEmails}
         setSelectedEmails={setSelectedEmails}
+        onArchive={onArchive}
+        onDelete={onDelete}
+        onMarkAsSpam={onMarkAsSpam}
+        onToggleFavorite={onToggleFavorite}
+        showAllActions={true}
       />
     </div>
   );

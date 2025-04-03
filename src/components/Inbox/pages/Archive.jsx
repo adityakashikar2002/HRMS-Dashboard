@@ -1,37 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import EmailList from '../components/EmailList';
 
-const Sent = ({ 
+const Archive = ({ 
   emails, 
   setEmails,
   selectedEmails,
   setSelectedEmails,
-  onToggleFavorite,
-  onArchive,
+  onUnarchive,
   onDelete,
-  onMarkAsSpam
+  onToggleFavorite
 }) => {
-  const [sentEmails, setSentEmails] = useState([]);
+  const [archivedEmails, setArchivedEmails] = useState([]);
 
   useEffect(() => {
-    const sent = emails.filter(email => email.isSent);
-    setSentEmails(sent);
+    const archived = emails.filter(email => email.isArchived);
+    setArchivedEmails(archived);
   }, [emails]);
 
   return (
     <div className="flex-1 overflow-y-auto">
       <EmailList 
-        emails={sentEmails} 
+        emails={archivedEmails} 
         setEmails={setEmails}
         selectedEmails={selectedEmails}
         setSelectedEmails={setSelectedEmails}
-        onToggleFavorite={onToggleFavorite}
-        onArchive={onArchive}
+        onUnarchive={onUnarchive}
         onDelete={onDelete}
-        onMarkAsSpam={onMarkAsSpam}
+        onToggleFavorite={onToggleFavorite}
+        showArchiveActions={true}
       />
     </div>
   );
 };
 
-export default Sent;
+export default Archive;

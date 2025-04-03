@@ -291,7 +291,38 @@
     }
   } */
 
-.tasks-page {
+/* .tasks-page {
+    background-color: #f8f8f8;
+    margin-left: 6px;
+  }
+  
+  .task-card {
+    transition: all 0.2s ease;
+  }
+  
+  .task-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .modal-overlay {
+    z-index: 1000;
+  }
+  
+  .create-task-modal {
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  
+  @media (max-width: 768px) {
+    .task-board {
+      grid-template-columns: 1fr !important;
+    }
+  } */
+
+
+
+  .tasks-page {
     background-color: #f8f8f8;
     margin-left: 6px;
   }

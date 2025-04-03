@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import EmailList from '../components/EmailList';
 
-const Trash = ({ emails, setEmails }) => {
+const Trash = ({ 
+  emails, 
+  setEmails,
+  selectedEmails,
+  setSelectedEmails,
+  onRestore, 
+  onDeletePermanently,
+  onToggleFavorite
+}) => {
   const [trashEmails, setTrashEmails] = useState([]);
 
   useEffect(() => {
@@ -9,28 +17,17 @@ const Trash = ({ emails, setEmails }) => {
     setTrashEmails(trash);
   }, [emails]);
 
-  const handleDeletePermanently = (emailIds) => {
-    const updatedEmails = emails.filter(email => !emailIds.includes(email.id));
-    setEmails(updatedEmails);
-  };
-
-  const handleRestore = (emailIds) => {
-    const updatedEmails = emails.map(email => {
-      if (emailIds.includes(email.id)) {
-        return { ...email, isTrash: false };
-      }
-      return email;
-    });
-    setEmails(updatedEmails);
-  };
-
   return (
     <div className="flex-1 overflow-y-auto">
       <EmailList 
         emails={trashEmails} 
+        setEmails={setEmails}
+        selectedEmails={selectedEmails}
+        setSelectedEmails={setSelectedEmails}
+        onRestore={onRestore}
+        onDeletePermanently={onDeletePermanently}
+        onToggleFavorite={onToggleFavorite}
         showTrashActions={true}
-        onDeletePermanently={handleDeletePermanently}
-        onRestore={handleRestore}
       />
     </div>
   );

@@ -15,7 +15,7 @@ const LabelSelector = ({ selectedLabel, onSelect }) => {
           key={label.name}
           type="button"
           onClick={() => onSelect(label.name)}
-          className={`flex items-center px-2 py-1 rounded-full text-xs ${selectedLabel === label.name ? 'bg-opacity-100' : 'bg-opacity-20'} ${label.color} ${label.color.replace('bg', 'text')}`}
+          className={`flex items-center px-2 py-1 rounded-full text-xs text-black ${selectedLabel === label.name ? 'bg-opacity-100' : 'bg-opacity-20'} ${label.color}`}
         >
           <span className={`w-2 h-2 rounded-full mr-1 ${label.color}`}></span>
           {label.name}
