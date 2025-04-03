@@ -168,7 +168,7 @@ const Sidebar = ({
           </li>
           <li className="flex items-center p-2 text-gray-700 hover:bg-gray-200 rounded-lg">
             <span className="w-3 h-3 bg-yellow-500 rounded-full mr-3"></span>
-            <span>Personal</span>
+            <span>Mail</span>
           </li>
         </ul>
       </div>

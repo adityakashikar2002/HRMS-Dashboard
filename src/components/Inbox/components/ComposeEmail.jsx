@@ -23,39 +23,9 @@ const ComposeEmail = ({ setComposeOpen, onSend, onSaveDraft }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (email.isDraft) {
-      onSaveDraft({
-        ...email,
-        id: Date.now(),
-        isDraft: true,
-        isSent: false,
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        date: new Date().toISOString(),
-        isRead: true,
-        sender: 'Me',
-        senderInitials: 'ME',
-        preview: email.body.substring(0, 50) + '...',
-        isFavorite: false,
-        isSpam: false,
-        isTrash: false,
-        isArchived: false
-      });
+      onSaveDraft(email);
     } else {
-      onSend({
-        ...email,
-        id: Date.now(),
-        isSent: true,
-        isDraft: false,
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        date: new Date().toISOString(),
-        isRead: true,
-        sender: 'Me',
-        senderInitials: 'ME',
-        preview: email.body.substring(0, 50) + '...',
-        isFavorite: false,
-        isSpam: false,
-        isTrash: false,
-        isArchived: false
-      });
+      onSend(email);
     }
     setComposeOpen(false);
   };

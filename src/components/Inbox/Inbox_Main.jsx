@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate} from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import TopBar from './components/TopBar';
 import ComposeEmail from './components/ComposeEmail';
+import EmailView from './components/EmailView';
 import Inbox from './pages/Inbox';
 import Drafts from './pages/Drafts';
 import Sent from './pages/Sent';
 import Favorites from './pages/Favorites';
 import Spam from './pages/Spam';
 import Trash from './pages/Trash';
-import Archive from './pages/Archive';
+import Archive from './/pages/Archive';
 import AllEmails from './pages/AllEmails';
 import { mockEmails, mockDrafts } from './mockEmails';
 
@@ -83,7 +84,7 @@ function Inbox_Main() {
   const handleArchiveEmail = (ids) => {
     ids = ensureArray(ids);
     setEmails(prev => prev.map(email => 
-      ids.includes(email.id) ? { ...email, isArchived: true } : email
+      ids.includes(email.id) ? { ...email, isArchived: true, isTrash: false, isSpam: false } : email
     ));
     setSelectedEmails([]);
   };
@@ -121,7 +122,7 @@ function Inbox_Main() {
   const handleMarkAsSpam = (ids) => {
     ids = ensureArray(ids);
     setEmails(prev => prev.map(email => 
-      ids.includes(email.id) ? { ...email, isSpam: true } : email
+      ids.includes(email.id) ? { ...email, isSpam: true, isTrash: false } : email
     ));
     setSelectedEmails([]);
   };
@@ -129,7 +130,7 @@ function Inbox_Main() {
   const handleDelete = (ids) => {
     ids = ensureArray(ids);
     setEmails(prev => prev.map(email => 
-      ids.includes(email.id) ? { ...email, isTrash: true } : email
+      ids.includes(email.id) ? { ...email, isTrash: true, isSpam: false } : email
     ));
     setSelectedEmails([]);
   };
@@ -166,24 +167,29 @@ function Inbox_Main() {
       !email.isTrash && 
       !email.isArchived &&
       !email.isDraft &&
-      !email.isSent &&
-      !email.fromMe
+      !email.isSent
+      // !email.fromMe
     );
   };
 
   const getSentEmails = () => {
-    return emails.filter(email => email.isSent);
+    return emails.filter(email => email.isSent && !email.isTrash && !email.isSpam && !email.isArchived);
   };
+
+  const getUnreadCount = () => getInboxEmails().filter(e => !e.isRead).length;
+  const getDraftCount = () => drafts.filter(d => !d.isTrash).length;
+  const getSpamCount = () => emails.filter(e => e.isSpam).length;
+  const getTrashCount = () => emails.filter(e => e.isTrash).length;
 
   return (
     <div className="flex h-screen bg-gray-100 font-sans antialiased">
       <Sidebar 
         composeOpen={composeOpen} 
         setComposeOpen={setComposeOpen}
-        unreadCount={getInboxEmails().filter(e => !e.isRead).length}
-        draftCount={drafts.length}
-        spamCount={emails.filter(e => e.isSpam).length}
-        trashCount={emails.filter(e => e.isTrash).length}
+        unreadCount={getUnreadCount()}
+        draftCount={getDraftCount()}
+        spamCount={getSpamCount()}
+        trashCount={getTrashCount()}
       />
       <div className="flex-1 flex flex-col">
         <TopBar 
@@ -293,6 +299,16 @@ function Inbox_Main() {
               onDelete={handleDelete}
               onMarkAsSpam={handleMarkAsSpam}
               onToggleFavorite={handleToggleFavorite}
+            />
+          } />
+          <Route path="emails/:emailId" element={
+            <EmailView 
+              emails={emails}
+              onBack={() => Navigate('/inbox')}
+              onToggleFavorite={handleToggleFavorite}
+              onDelete={handleDelete}
+              onMarkAsSpam={handleMarkAsSpam}
+              onArchive={handleArchiveEmail}
             />
           } />
         </Routes>

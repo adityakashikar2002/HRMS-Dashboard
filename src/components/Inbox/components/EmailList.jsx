@@ -41,23 +41,8 @@ const EmailList = ({
 
   const handleToggleFavorite = (id) => {
     const isDraft = drafts.some(d => d.id === id);
-    if (isDraft) {
-      setDrafts(prev => prev.map(draft => 
-        draft.id === id ? { ...draft, isFavorite: !draft.isFavorite } : draft
-      ));
-    } else {
-      setEmails(prev => prev.map(email => 
-        email.id === id ? { ...email, isFavorite: !email.isFavorite } : email
-      ));
-    }
-    onToggleFavorite([id], !allItems.find(item => item.id === id)?.isFavorite);
-  };
-
-  const handleMarkAsRead = (id) => {
-    setEmails(prev => prev.map(email => 
-      email.id === id ? { ...email, isRead: true } : email
-    ));
-    onMarkAsRead([id]);
+    const isFavorite = allItems.find(item => item.id === id)?.isFavorite;
+    onToggleFavorite([id], !isFavorite);
   };
 
   const handleDelete = (id) => {
@@ -119,10 +104,15 @@ const EmailList = ({
                 </td>
               )}
               <td className="px-4 py-2">
+                {/* <Link 
+                  to={item.isDraft ? `/inbox/drafts/${item.id}` : `/inbox/emails/${item.id}`}
+                  className="block"
+                  onClick={() => !item.isDraft && onMarkAsRead([item.id])}
+                > */}
                 <Link 
                   to={item.isDraft ? `/inbox/drafts/${item.id}` : `/inbox/emails/${item.id}`}
                   className="block"
-                  onClick={() => !item.isDraft && handleMarkAsRead(item.id)}
+                  onClick={() => !item.isDraft && onMarkAsRead([item.id])}
                 >
                   <span className={!item.isRead ? 'font-semibold' : ''}>{item.subject}</span>
                   <span className="text-gray-500 block truncate">{item.preview}</span>
@@ -205,7 +195,7 @@ const EmailList = ({
                           Spam
                         </button>
                         <button 
-                          onClick={() => onDelete([item.id])}
+                          onClick={() => handleDelete(item.id)}
                           className="text-gray-400 hover:text-gray-600"
                         >
                           Delete
@@ -234,7 +224,7 @@ const getLabelClass = (label) => {
       return 'bg-red-200 text-red-700';
     case 'Team':
       return 'bg-teal-200 text-teal-700';
-    case 'Personal':
+    case 'Mail':
       return 'bg-yellow-200 text-yellow-700';
     default:
       return 'bg-gray-200 text-gray-700';

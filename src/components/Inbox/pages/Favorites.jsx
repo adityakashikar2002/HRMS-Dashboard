@@ -12,19 +12,14 @@ const Favorites = ({
   onDelete,
   onDeleteDraft
 }) => {
-  const allFavorites = [...emails, ...drafts];
+  const allFavorites = [...emails.filter(e => e.isFavorite), ...drafts.filter(d => d.isFavorite)];
 
   const handleDelete = (ids) => {
-    // Check if the items are emails or drafts
     const emailIds = emails.filter(e => ids.includes(e.id)).map(e => e.id);
     const draftIds = drafts.filter(d => ids.includes(d.id)).map(d => d.id);
     
-    if (emailIds.length > 0) {
-      onDelete(emailIds);
-    }
-    if (draftIds.length > 0) {
-      draftIds.forEach(id => onDeleteDraft(id));
-    }
+    if (emailIds.length > 0) onDelete(emailIds);
+    if (draftIds.length > 0) draftIds.forEach(id => onDeleteDraft(id));
   };
 
   return (

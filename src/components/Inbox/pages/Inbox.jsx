@@ -33,17 +33,9 @@ const Inbox = ({
     navigate('/inbox');
   };
 
-  const handleMarkAsRead = (id) => {
-    setEmails(prev => prev.map(email => 
-      email.id === id ? { ...email, isRead: true } : email
-    ));
-  };
-
   if (emailId) {
     const email = emails.find(e => e.id === parseInt(emailId));
     if (!email) return null;
-    
-    handleMarkAsRead(email.id);
     
     return (
       <EmailView 

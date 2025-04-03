@@ -14,7 +14,7 @@ const Sent = ({
   const [sentEmails, setSentEmails] = useState([]);
 
   useEffect(() => {
-    const sent = emails.filter(email => email.isSent);
+    const sent = emails.filter(email => email.isSent && !email.isTrash && !email.isSpam && !email.isArchived);
     setSentEmails(sent);
   }, [emails]);
 
