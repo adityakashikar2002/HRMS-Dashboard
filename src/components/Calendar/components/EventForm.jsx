@@ -82,13 +82,24 @@ const EventForm = ({ event, onSave, onClose }) => {
     onSave(eventData);
   };
 
+  // const colorOptions = [
+  //   { value: '#3b82f6', name: 'Blue' },
+  //   { value: '#ef4444', name: 'Red' },
+  //   { value: '#10b981', name: 'Green' },
+  //   { value: '#f59e0b', name: 'Yellow' },
+  //   { value: '#8b5cf6', name: 'Purple' },
+  // ];
+  // Replace the colorOptions array and color selection UI with:
   const colorOptions = [
-    { value: '#3b82f6', name: 'Blue' },
-    { value: '#ef4444', name: 'Red' },
-    { value: '#10b981', name: 'Green' },
-    { value: '#f59e0b', name: 'Yellow' },
-    { value: '#8b5cf6', name: 'Purple' },
+    { value: '#3b82f6', name: 'Meeting', category: 'predefined' },
+    { value: '#10b981', name: 'Client Interaction', category: 'predefined' },
+    { value: '#f59e0b', name: 'Interview', category: 'predefined' },
+    { value: '#ef4444', name: 'Project', category: 'predefined' },
+    { value: 'custom', name: 'Custom', category: 'custom' }
   ];
+
+  const [showColorPicker, setShowColorPicker] = useState(false);
+  const [customColor, setCustomColor] = useState('#94a3b8');
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -202,7 +213,7 @@ const EventForm = ({ event, onSave, onClose }) => {
             </div>
           </div>
         )}
-          <div className="mb-6">
+          {/* <div className="mb-6">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Color
             </label>
@@ -222,8 +233,56 @@ const EventForm = ({ event, onSave, onClose }) => {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
           
+          <div className="mb-6">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Event Type
+            </label>
+            <select
+              value={color}
+              onChange={(e) => {
+                if (e.target.value === 'custom') {
+                  setShowColorPicker(true);
+                } else {
+                  setColor(e.target.value);
+                  setShowColorPicker(false);
+                }
+              }}
+              className="w-full px-3 py-2 border border-gray-300 rounded mb-2"
+            >
+              {colorOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.name}
+                </option>
+              ))}
+            </select>
+
+            {showColorPicker && (
+              <div className="mt-2">
+                <label className="block text-gray-700 text-sm font-bold mb-2">
+                  Custom Color
+                </label>
+                <input
+                  type="color"
+                  value={customColor}
+                  onChange={(e) => {
+                    setCustomColor(e.target.value);
+                    setColor(e.target.value);
+                  }}
+                  className="w-full h-10 cursor-pointer"
+                />
+                <div className="flex items-center mt-2">
+                  <div 
+                    className="w-6 h-6 rounded mr-2"
+                    style={{ backgroundColor: customColor }}
+                  ></div>
+                  <span className="text-sm">{customColor}</span>
+                </div>
+              </div>
+            )}
+          </div>
+
           <div className="flex justify-end space-x-2">
             <button
               type="button"

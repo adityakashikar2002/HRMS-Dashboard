@@ -1,45 +1,89 @@
+// export const generateRecurringEvents = () => {
+//   const recurringEvents = [];
+//   const startDate = new Date(2025, 0, 1); // Start from Jan 1, 2025
+//   const endDate = new Date(2025, 11, 31); // Until Dec 31, 2025
+  
+//   // Generate Morning Scrums (Mon-Fri)
+//   for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+//     if (d.getDay() >= 1 && d.getDay() <= 5) { // Monday to Friday
+//       const morningScrum = {
+//         id: `morning-${d.toISOString().split('T')[0]}`,
+//         title: 'Intern Morning Scrum',
+//         description: 'Daily standup meeting',
+//         start: new Date(d.setHours(9, 30, 0, 0)),
+//         end: new Date(d.setHours(10, 0, 0, 0)),
+//         color: '#3b82f6',
+//         isRecurring: true,
+//         originalId: 'morning-scrum'
+//       };
+//       recurringEvents.push(morningScrum);
+      
+//       // Reset date after modification
+//       d.setHours(0, 0, 0, 0);
+//     }
+//   }
+
+//   // Generate Evening Scrums (Mon-Fri)
+//   for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+//     if (d.getDay() >= 1 && d.getDay() <= 5) { // Monday to Friday
+//       const eveningScrum = {
+//         id: `evening-${d.toISOString().split('T')[0]}`,
+//         title: 'Intern Evening Scrum',
+//         description: 'End-of-day sync',
+//         start: new Date(d.setHours(18, 30, 0, 0)),
+//         end: new Date(d.setHours(19, 0, 0, 0)),
+//         color: '#3b82f6',
+//         isRecurring: true,
+//         originalId: 'evening-scrum'
+//       };
+//       recurringEvents.push(eveningScrum);
+      
+//       // Reset date after modification
+//       d.setHours(0, 0, 0, 0);
+//     }
+//   }
+
+//   return recurringEvents;
+// };
+
 export const generateRecurringEvents = () => {
   const recurringEvents = [];
-  const startDate = new Date(2025, 0, 1); // Start from Jan 1, 2025
-  const endDate = new Date(2025, 11, 31); // Until Dec 31, 2025
-  
+  const startDate = new Date();
+  startDate.setMonth(startDate.getMonth() - 1); // 1 month back
+  const endDate = new Date();
+  endDate.setFullYear(endDate.getFullYear() + 1); // 1 year forward
+
   // Generate Morning Scrums (Mon-Fri)
   for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
-    if (d.getDay() >= 1 && d.getDay() <= 5) { // Monday to Friday
-      const morningScrum = {
-        id: `morning-${d.toISOString().split('T')[0]}`,
+    if (d.getDay() >= 1 && d.getDay() <= 5) {
+      const morningDate = new Date(d);
+      recurringEvents.push({
+        id: `morning-${morningDate.toISOString().split('T')[0]}`,
         title: 'Intern Morning Scrum',
         description: 'Daily standup meeting',
-        start: new Date(d.setHours(9, 30, 0, 0)),
-        end: new Date(d.setHours(10, 0, 0, 0)),
+        start: new Date(morningDate.setHours(9, 30, 0, 0)),
+        end: new Date(morningDate.setHours(10, 0, 0, 0)),
         color: '#3b82f6',
         isRecurring: true,
         originalId: 'morning-scrum'
-      };
-      recurringEvents.push(morningScrum);
-      
-      // Reset date after modification
-      d.setHours(0, 0, 0, 0);
+      });
     }
   }
 
   // Generate Evening Scrums (Mon-Fri)
   for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
-    if (d.getDay() >= 1 && d.getDay() <= 5) { // Monday to Friday
-      const eveningScrum = {
-        id: `evening-${d.toISOString().split('T')[0]}`,
+    if (d.getDay() >= 1 && d.getDay() <= 5) {
+      const eveningDate = new Date(d);
+      recurringEvents.push({
+        id: `evening-${eveningDate.toISOString().split('T')[0]}`,
         title: 'Intern Evening Scrum',
         description: 'End-of-day sync',
-        start: new Date(d.setHours(18, 30, 0, 0)),
-        end: new Date(d.setHours(19, 0, 0, 0)),
+        start: new Date(eveningDate.setHours(18, 30, 0, 0)),
+        end: new Date(eveningDate.setHours(19, 0, 0, 0)),
         color: '#3b82f6',
         isRecurring: true,
         originalId: 'evening-scrum'
-      };
-      recurringEvents.push(eveningScrum);
-      
-      // Reset date after modification
-      d.setHours(0, 0, 0, 0);
+      });
     }
   }
 
