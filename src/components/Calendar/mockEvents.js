@@ -43,7 +43,7 @@ export const generateRecurringEvents = () => {
 };
 
 export const mockEvents = [
-  ...generateRecurringEvents(),
+  // ...generateRecurringEvents(),
     // {
     //   id: 1,
     //   title: 'Team Meeting',
