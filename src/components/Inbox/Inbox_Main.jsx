@@ -44,89 +44,256 @@ function Inbox_Main() {
 
   const ensureArray = (ids) => Array.isArray(ids) ? ids : [ids];
 
+  // const handleSendEmail = (newEmail) => {
+  //   console.log('Creating sent email:', newEmail);
+  //   const sentEmail = {
+  //     ...newEmail,
+  //     id: Date.now(),
+  //     fromMe: true, // Mark as from me
+  //     sender: 'Me',
+  //     senderInitials: 'ME',
+  //     time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+  //     date: new Date().toISOString(),
+  //     isFavorite: false,
+  //     isSpam: false,
+  //     isTrash: false,
+  //     isArchived: false,
+  //     isSent: true, // Mark as sent
+  //     isDraft: false,
+  //     isRead: true,
+  //     preview: newEmail.body.substring(0, 50) + '...',
+  //     attachments: newEmail.attachments.map(att => ({
+  //       name: att.name,
+  //       size: att.size,
+  //       type: att.type,
+  //       // In a real app, you might have a URL here after uploading
+  //       // url: uploadedFileUrl
+  //     }))
+  //   };
+
+  //   console.log('Sent email created:', sentEmail);
+    
+  //   // Add to sent emails
+
+  //   setSentEmails(prev => {
+  //     console.log('Previous sent emails:', prev);
+  //     return [sentEmail, ...prev];
+  //   });
+
+  //   // Check if the email is being sent to viperdogde07@gmail.com
+  //   const recipients = newEmail.to.split(',').map(email => email.trim());
+  //   if (recipients.includes('viperdogde07@gmail.com')) {
+  //     const receivedEmail = {
+  //       ...newEmail,
+  //       id: Date.now() + 1, // Different ID
+  //       fromMe: false, // Not from me (even though it is, we want it to appear as received)
+  //       sender: newEmail.from || 'Me',
+  //       senderInitials: (newEmail.from || 'Me').charAt(0).toUpperCase(),
+  //       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+  //       date: new Date().toISOString(),
+  //       isFavorite: false,
+  //       isSpam: false,
+  //       isTrash: false,
+  //       isArchived: false,
+  //       isSent: false, // Not a sent email
+  //       isDraft: false,
+  //       isRead: false, // Unread in inbox
+  //       preview: newEmail.body.substring(0, 50) + '...',
+  //     };
+  //     console.log('Received email created:', receivedEmail);
+  //     // setInboxEmails(prev => [receivedEmail, ...prev]);
+  //     setInboxEmails(prev => {
+  //       console.log('Previous inbox emails:', prev);
+  //       return [receivedEmail, ...prev];
+  //     });
+  //   }
+  // };
+  
+  // const handleSaveDraft = (draft) => {
+  //   const newDraft = {
+  //     ...draft,
+  //     id: Date.now(),
+  //     fromMe: true,
+  //     time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+  //     date: new Date().toISOString(),
+  //     isDraft: true,
+  //     isSent: false,
+  //     isRead: true,
+  //     sender: 'Me',
+  //     senderInitials: 'ME',
+  //     preview: draft.body.substring(0, 50) + '...',
+  //     isFavorite: false,
+  //     isSpam: false,
+  //     isTrash: false,
+  //     isArchived: false,
+  //     attachments: draft.attachments.map(att => ({
+  //       name: att.name,
+  //       size: att.size,
+  //       type: att.type,
+  //       // In a real app, you might have a URL here after uploading
+  //       // url: uploadedFileUrl
+  //     }))
+  //   };
+  //   setDrafts(prev => [...prev, newDraft]);
+  // };
+
+  // const handleDeleteDraft = (id) => {
+  //   setDrafts(prev => prev.filter(draft => draft.id !== id));
+  // };
+
   const handleSendEmail = (newEmail) => {
-    console.log('Creating sent email:', newEmail);
-    const sentEmail = {
-      ...newEmail,
-      id: Date.now(),
-      fromMe: true, // Mark as from me
-      sender: 'Me',
-      senderInitials: 'ME',
-      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      date: new Date().toISOString(),
-      isFavorite: false,
-      isSpam: false,
-      isTrash: false,
-      isArchived: false,
-      isSent: true, // Mark as sent
-      isDraft: false,
-      isRead: true,
-      preview: newEmail.body.substring(0, 50) + '...'
-    };
-
-    console.log('Sent email created:', sentEmail);
-    
-    // Add to sent emails
-    
-    // setSentEmails(prev => [sentEmail, ...prev]);
-
-    setSentEmails(prev => {
-      console.log('Previous sent emails:', prev);
-      return [sentEmail, ...prev];
-    });
-
-    // Check if the email is being sent to viperdogde07@gmail.com
-    const recipients = newEmail.to.split(',').map(email => email.trim());
-    if (recipients.includes('viperdogde07@gmail.com')) {
-      const receivedEmail = {
+    try {
+      // Validate email fields
+      if (!newEmail.to || !newEmail.body) {
+        console.error('Cannot send email - missing required fields');
+        return;
+      }
+  
+      // Process attachments
+      const processedAttachments = newEmail.attachments?.map(att => ({
+        name: att.name,
+        size: att.size,
+        type: att.type,
+        file: att.file, // Keep file reference for immediate viewing
+        // In production: url: await uploadFile(att.file) 
+      })) || [];
+  
+      // Create sent email object
+      const sentEmail = {
         ...newEmail,
-        id: Date.now() + 1, // Different ID
-        fromMe: false, // Not from me (even though it is, we want it to appear as received)
-        sender: newEmail.from || 'Me',
-        senderInitials: (newEmail.from || 'Me').charAt(0).toUpperCase(),
+        id: Date.now(),
+        from: 'Me',
+        sender: 'Me',
+        senderInitials: 'ME',
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         date: new Date().toISOString(),
         isFavorite: false,
         isSpam: false,
         isTrash: false,
         isArchived: false,
-        isSent: false, // Not a sent email
+        isSent: true,
         isDraft: false,
-        isRead: false, // Unread in inbox
-        preview: newEmail.body.substring(0, 50) + '...'
+        isRead: true,
+        preview: newEmail.body.substring(0, 50) + '...',
+        attachments: processedAttachments,
+        label: newEmail.label || '',
       };
-      console.log('Received email created:', receivedEmail);
-      // setInboxEmails(prev => [receivedEmail, ...prev]);
-      setInboxEmails(prev => {
-        console.log('Previous inbox emails:', prev);
-        return [receivedEmail, ...prev];
-      });
+  
+      // Update sent emails
+      setSentEmails(prev => [sentEmail, ...prev]);
+  
+      // Check if email is being sent to specific address (simulating received email)
+      const recipients = newEmail.to.split(',').map(email => email.trim());
+      if (recipients.includes('viperdogde07@gmail.com')) {
+        const receivedEmail = {
+          ...sentEmail,
+          id: Date.now() + 1,
+          fromMe: false,
+          isSent: false,
+          isRead: false,
+          sender: sentEmail.from || 'Me',
+          senderInitials: (sentEmail.from || 'Me').substring(0, 2).toUpperCase(),
+        };
+        
+        setInboxEmails(prev => [receivedEmail, ...prev]);
+      }
+  
+      // Show success notification
+      console.log('Email sent successfully:', sentEmail);
+      return true;
+    } catch (error) {
+      console.error('Error sending email:', error);
+      return false;
     }
   };
   
   const handleSaveDraft = (draft) => {
-    const newDraft = {
-      ...draft,
-      id: Date.now(),
-      fromMe: true,
-      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      date: new Date().toISOString(),
-      isDraft: true,
-      isSent: false,
-      isRead: true,
-      sender: 'Me',
-      senderInitials: 'ME',
-      preview: draft.body.substring(0, 50) + '...',
-      isFavorite: false,
-      isSpam: false,
-      isTrash: false,
-      isArchived: false
-    };
-    setDrafts(prev => [...prev, newDraft]);
+    try {
+      // Validate draft
+      if (!draft) {
+        console.error('Cannot save empty draft');
+        return false;
+      }
+  
+      // Process attachments
+      const processedAttachments = draft.attachments?.map(att => ({
+        name: att.name,
+        size: att.size,
+        type: att.type,
+        file: att.file, // Keep file reference
+      })) || [];
+  
+      // Create draft object
+      const newDraft = {
+        ...draft,
+        id: Date.now(),
+        fromMe: true,
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        date: new Date().toISOString(),
+        isDraft: true,
+        isSent: false,
+        isRead: true,
+        sender: 'Me',
+        senderInitials: 'ME',
+        preview: draft.body?.substring(0, 50) + '...' || 'Empty draft...',
+        isFavorite: false,
+        isSpam: false,
+        isTrash: false,
+        isArchived: false,
+        attachments: processedAttachments,
+        label: draft.label || '',
+      };
+  
+      // Update drafts
+      setDrafts(prev => [newDraft, ...prev]);
+  
+      console.log('Draft saved successfully:', newDraft);
+      return true;
+    } catch (error) {
+      console.error('Error saving draft:', error);
+      return false;
+    }
   };
-
+  
   const handleDeleteDraft = (id) => {
-    setDrafts(prev => prev.filter(draft => draft.id !== id));
+    try {
+      if (!id) {
+        console.error('Cannot delete draft - no ID provided');
+        return false;
+      }
+  
+      setDrafts(prev => {
+        const updatedDrafts = prev.filter(draft => draft.id !== id);
+        console.log(`Draft ${id} deleted. Remaining drafts:`, updatedDrafts.length);
+        return updatedDrafts;
+      });
+  
+      return true;
+    } catch (error) {
+      console.error('Error deleting draft:', error);
+      return false;
+    }
+  };
+  
+  // Optional: File upload helper (for production)
+  const uploadFile = async (file) => {
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+  
+      const response = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData
+      });
+  
+      if (!response.ok) throw new Error('Upload failed');
+  
+      const data = await response.json();
+      return data.url;
+    } catch (error) {
+      console.error('File upload error:', error);
+      throw error;
+    }
   };
 
   const handleArchiveEmail = (ids) => {
