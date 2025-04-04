@@ -3,10 +3,34 @@ import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown, faReply, faPrint, faStar } from '@fortawesome/free-solid-svg-icons';
 
-const EmailView = ({ emails, onBack, onToggleFavorite, onDelete, onMarkAsSpam, onArchive }) => {
+// const EmailView = ({ emails, onBack, onToggleFavorite, onDelete, onMarkAsSpam, onArchive }) => {
+//   const { emailId } = useParams();
+//   // const navigate = useNavigate();
+//   const email = emails.find(e => e.id === parseInt(emailId));
+
+//   if (!email) {
+//     return <div>Email not found</div>;
+//   }
+
+//   return (
+//     <div className="bg-white text-gray-800">
+//       <div className="max-w-4xl mx-auto p-4">
+//         <div className="flex justify-between items-center mb-4">
+//           <h1 className="text-2xl font-bold">{email.subject}</h1>
+//           <div className="flex space-x-2">
+//             {email.label && (
+//               <span className={`${getLabelClass(email.label)} px-2 py-1 rounded-full text-sm`}>
+//                 {email.label}
+//               </span>
+//             )}
+//           </div>
+//         </div>
+const EmailView = ({ emails, drafts, onBack, onToggleFavorite, onDelete, onMarkAsSpam, onArchive }) => {
   const { emailId } = useParams();
   // const navigate = useNavigate();
-  const email = emails.find(e => e.id === parseInt(emailId));
+  
+  // Search in both emails and drafts
+  const email = [...emails, ...drafts].find(e => e.id === parseInt(emailId));
 
   if (!email) {
     return <div>Email not found</div>;
@@ -16,7 +40,9 @@ const EmailView = ({ emails, onBack, onToggleFavorite, onDelete, onMarkAsSpam, o
     <div className="bg-white text-gray-800">
       <div className="max-w-4xl mx-auto p-4">
         <div className="flex justify-between items-center mb-4">
-          <h1 className="text-2xl font-bold">{email.subject}</h1>
+          <button onClick={onBack} className="text-purple-600 hover:text-purple-800">
+            ← Back
+          </button>
           <div className="flex space-x-2">
             {email.label && (
               <span className={`${getLabelClass(email.label)} px-2 py-1 rounded-full text-sm`}>

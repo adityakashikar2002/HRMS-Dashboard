@@ -20,25 +20,11 @@ const ComposeEmail = ({ setComposeOpen, onSend, onSaveDraft }) => {
     setEmail(prev => ({ ...prev, label }));
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const emailToSubmit = { 
-  //     ...email,
-  //     sender: 'me',
-  //     date: new Date().toISOString(),
-  //     isRead: true,
-  //     isSent: true
-  //   };
-    
-  //   onSend(emailToSubmit);
-  //   setComposeOpen(false);
-  //   setEmail({ to: '', subject: '', body: '', label: '', isDraft: false });
-  // };
   const handleSubmit = (e) => {
     e.preventDefault();
     const emailToSubmit = { 
       ...email,
-      from: 'me@example.com', // Add your default from address here
+      from: 'Me', // Add your default from address here
       sender: 'me',
       date: new Date().toISOString(),
       isRead: true,
