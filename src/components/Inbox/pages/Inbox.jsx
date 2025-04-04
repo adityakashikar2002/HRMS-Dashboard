@@ -4,8 +4,8 @@
 // import EmailView from '../components/EmailView';
 
 // const Inbox = ({ 
-//   emails = [], 
-//   setEmails = () => {}, 
+//   inboxEmails = [], 
+//   setInboxEmails = () => {}, 
 //   selectedEmails = [], 
 //   setSelectedEmails = () => {}, 
 //   onArchive = () => {},
@@ -15,26 +15,23 @@
 // }) => {
 //   const { emailId } = useParams();
 //   const navigate = useNavigate();
-//   const [inboxEmails, setInboxEmails] = useState([]);
+//   const [filteredInbox, setFilteredInbox] = useState([]);
 
 //   useEffect(() => {
-//     const filtered = emails.filter(email => 
+//     const filtered = inboxEmails.filter(email => 
 //       !email.isSpam && 
 //       !email.isTrash && 
-//       !email.isArchived &&
-//       !email.isDraft &&
-//       !email.isSent &&
-//       !email.fromMe
+//       !email.isArchived
 //     );
-//     setInboxEmails(filtered);
-//   }, [emails]);
+//     setFilteredInbox(filtered);
+//   }, [inboxEmails]);
 
 //   const handleBack = () => {
 //     navigate('/inbox');
 //   };
 
 //   if (emailId) {
-//     const email = emails.find(e => e.id === parseInt(emailId));
+//     const email = filteredInbox.find(e => e.id === parseInt(emailId));
 //     if (!email) return null;
     
 //     return (
@@ -52,10 +49,9 @@
 //   return (
 //     <div className="flex-1 flex flex-col">
 //       <EmailList 
-//         emails={inboxEmails} 
+//         emails={filteredInbox}
 //         drafts={[]}
-//         setEmails={setEmails}
-//         setDrafts={() => {}}
+//         setEmails={setInboxEmails}
 //         selectedEmails={selectedEmails}
 //         setSelectedEmails={setSelectedEmails}
 //         onArchive={onArchive}
@@ -71,7 +67,6 @@
 // export default Inbox;
 
 
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import EmailList from '../components/EmailList';
@@ -85,7 +80,8 @@ const Inbox = ({
   onArchive = () => {},
   onDelete = () => {},
   onMarkAsSpam = () => {},
-  onToggleFavorite = () => {}
+  onToggleFavorite = () => {},
+  onMarkAsRead = () => {}
 }) => {
   const { emailId } = useParams();
   const navigate = useNavigate();
@@ -95,7 +91,8 @@ const Inbox = ({
     const filtered = inboxEmails.filter(email => 
       !email.isSpam && 
       !email.isTrash && 
-      !email.isArchived
+      !email.isArchived &&
+      !email.isSent
     );
     setFilteredInbox(filtered);
   }, [inboxEmails]);
@@ -132,6 +129,7 @@ const Inbox = ({
         onDelete={onDelete}
         onMarkAsSpam={onMarkAsSpam}
         onToggleFavorite={onToggleFavorite}
+        onMarkAsRead={onMarkAsRead}
         showAllActions={true}
       />
     </div>

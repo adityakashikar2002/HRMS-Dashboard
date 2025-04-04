@@ -22,17 +22,30 @@
 
 //   const handleSubmit = (e) => {
 //     e.preventDefault();
-//     if (email.isDraft) {
-//       onSaveDraft(email);
+//     const emailToSubmit = { ...email };
+    
+//     if (emailToSubmit.isDraft) {
+//       // Ensure we're saving a draft
+//       emailToSubmit.isDraft = true;
+//       onSaveDraft(emailToSubmit);
 //     } else {
-//       onSend(email);
+//       // Ensure we're sending a regular email
+//       emailToSubmit.isDraft = false;
+//       onSend(emailToSubmit);
 //     }
 //     setComposeOpen(false);
+//     setEmail({ to: '', subject: '', body: '', label: '', isDraft: false }); // Reset form
 //   };
   
-//   const saveAsDraft = () => {
-//     setEmail(prev => ({ ...prev, isDraft: true }));
-//     handleSubmit(new Event('submit'));
+//   const saveAsDraft = (e) => {
+//     e.preventDefault();
+//     const draftEmail = { 
+//       ...email,
+//       isDraft: true 
+//     };
+//     onSaveDraft(draftEmail);
+//     setComposeOpen(false);
+//     setEmail({ to: '', subject: '', body: '', label: '', isDraft: false }); // Reset form
 //   };
 
 //   return (
@@ -55,7 +68,7 @@
 //             onChange={handleChange}
 //             placeholder="To"
 //             className="w-full p-2 border-b border-gray-300 focus:border-purple-500 focus:outline-none"
-//             required={!email.isDraft}
+//             required={!email.isDraft} // Only required when sending (not for drafts)
 //           />
 //         </div>
 //         <div className="mb-4">
@@ -120,8 +133,6 @@
 // };
 
 // export default ComposeEmail;
-
-
 import React, { useState } from 'react';
 import { FaTimes, FaPaperclip } from 'react-icons/fa';
 import LabelSelector from './LabelSelector';
@@ -146,30 +157,29 @@ const ComposeEmail = ({ setComposeOpen, onSend, onSaveDraft }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const emailToSubmit = { ...email };
+    const emailToSubmit = { 
+      ...email,
+      sender: 'me',
+      date: new Date().toISOString(),
+      isRead: true,
+      isSent: true
+    };
     
-    if (emailToSubmit.isDraft) {
-      // Ensure we're saving a draft
-      emailToSubmit.isDraft = true;
-      onSaveDraft(emailToSubmit);
-    } else {
-      // Ensure we're sending a regular email
-      emailToSubmit.isDraft = false;
-      onSend(emailToSubmit);
-    }
+    onSend(emailToSubmit);
     setComposeOpen(false);
-    setEmail({ to: '', subject: '', body: '', label: '', isDraft: false }); // Reset form
+    setEmail({ to: '', subject: '', body: '', label: '', isDraft: false });
   };
   
   const saveAsDraft = (e) => {
     e.preventDefault();
     const draftEmail = { 
       ...email,
-      isDraft: true 
+      isDraft: true,
+      date: new Date().toISOString()
     };
     onSaveDraft(draftEmail);
     setComposeOpen(false);
-    setEmail({ to: '', subject: '', body: '', label: '', isDraft: false }); // Reset form
+    setEmail({ to: '', subject: '', body: '', label: '', isDraft: false });
   };
 
   return (
@@ -192,7 +202,7 @@ const ComposeEmail = ({ setComposeOpen, onSend, onSaveDraft }) => {
             onChange={handleChange}
             placeholder="To"
             className="w-full p-2 border-b border-gray-300 focus:border-purple-500 focus:outline-none"
-            required={!email.isDraft} // Only required when sending (not for drafts)
+            required={!email.isDraft}
           />
         </div>
         <div className="mb-4">
