@@ -1,3 +1,77 @@
+// export const mockInboxEmails = [
+//   {
+//     id: 1,
+//     sender: 'John Doe',
+//     senderInitials: 'JD',
+//     subject: 'Weekly Team Meeting',
+//     preview: 'Reminder about our weekly sync tomorrow at 10 AM',
+//     time: '10:30 AM',
+//     date: new Date().toISOString(),
+//     label: 'Business',
+//     isFavorite: false,
+//     isRead: false,
+//     isSpam: false,
+//     isTrash: false,
+//     isArchived: false,
+//     isSent: false,
+//     isDraft: false,
+//     fromMe: false,
+//     body: 'Hi team,\n\nJust a reminder about our meeting...',
+//     hasAttachment: true
+//   },
+//   // Add more inbox emails...
+// ];
+
+// export const mockSentEmails = [
+//   {
+//     id: 101,
+//     sender: 'Me',
+//     senderInitials: 'ME',
+//     subject: 'Project Update',
+//     preview: 'Here are the updates on our current project',
+//     time: 'Yesterday',
+//     date: new Date(Date.now() - 86400000).toISOString(),
+//     label: 'Team',
+//     isFavorite: false,
+//     isRead: true,
+//     isSpam: false,
+//     isTrash: false,
+//     isArchived: false,
+//     isSent: true,
+//     isDraft: false,
+//     fromMe: true,
+//     body: 'Hello team,\n\nHere are the updates...',
+//     hasAttachment: false
+//   },
+//   // Add more sent emails...
+// ];
+
+// export const mockDrafts = [
+//   {
+//     id: 201,
+//     sender: 'Me',
+//     senderInitials: 'ME',
+//     to: 'team@company.com',
+//     subject: 'Draft: Project Timeline',
+//     body: 'Hi team,\n\nI wanted to share an update...',
+//     label: 'Business',
+//     time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+//     date: new Date().toISOString(),
+//     isDraft: true,
+//     isFavorite: false,
+//     isRead: true,
+//     isSpam: false,
+//     isTrash: false,
+//     isArchived: false,
+//     isSent: false,
+//     fromMe: true,
+//     hasAttachment: false,
+//     preview: 'Hi team, I wanted to share an update...'
+//   },
+//   // Add more drafts...
+// ];
+
+
 export const mockInboxEmails = [
   {
     id: 1,
@@ -19,7 +93,66 @@ export const mockInboxEmails = [
     body: 'Hi team,\n\nJust a reminder about our meeting...',
     hasAttachment: true
   },
-  // Add more inbox emails...
+  {
+    id: 2,
+    sender: 'Marketing Team',
+    senderInitials: 'MT',
+    subject: 'New Campaign Launch',
+    preview: 'Exciting news! Our new campaign goes live next week.',
+    time: '9:15 AM',
+    date: new Date().toISOString(),
+    label: 'Marketing',
+    isFavorite: true,
+    isRead: false,
+    isSpam: false,
+    isTrash: false,
+    isArchived: false,
+    isSent: false,
+    isDraft: false,
+    fromMe: false,
+    body: 'Hey team,\n\nWe are launching a new campaign...',
+    hasAttachment: true
+  },
+  {
+    id: 3,
+    sender: 'HR Department',
+    senderInitials: 'HR',
+    subject: 'Policy Updates',
+    preview: 'Please review the attached HR policy updates.',
+    time: '2:45 PM',
+    date: new Date().toISOString(),
+    label: 'HR',
+    isFavorite: false,
+    isRead: true,
+    isSpam: false,
+    isTrash: false,
+    isArchived: false,
+    isSent: false,
+    isDraft: false,
+    fromMe: false,
+    body: 'Dear employee,\n\nPlease find the updated policies...',
+    hasAttachment: true
+  },
+  {
+    id: 4,
+    sender: 'Alice Smith',
+    senderInitials: 'AS',
+    subject: 'Lunch Plans?',
+    preview: 'Hey, want to grab lunch tomorrow?',
+    time: '4:30 PM',
+    date: new Date().toISOString(),
+    label: 'Personal',
+    isFavorite: false,
+    isRead: false,
+    isSpam: false,
+    isTrash: false,
+    isArchived: false,
+    isSent: false,
+    isDraft: false,
+    fromMe: false,
+    body: 'Hey!\n\nAre you free for lunch tomorrow at 1?',
+    hasAttachment: false
+  }
 ];
 
 export const mockSentEmails = [
@@ -43,7 +176,46 @@ export const mockSentEmails = [
     body: 'Hello team,\n\nHere are the updates...',
     hasAttachment: false
   },
-  // Add more sent emails...
+  {
+    id: 102,
+    sender: 'Me',
+    senderInitials: 'ME',
+    subject: 'Invoice for March',
+    preview: 'Please find attached invoice for March',
+    time: '3:00 PM',
+    date: new Date(Date.now() - 2 * 86400000).toISOString(),
+    label: 'Finance',
+    isFavorite: false,
+    isRead: true,
+    isSpam: false,
+    isTrash: false,
+    isArchived: false,
+    isSent: true,
+    isDraft: false,
+    fromMe: true,
+    body: 'Hi,\n\nPlease find attached the invoice...',
+    hasAttachment: true
+  },
+  {
+    id: 103,
+    sender: 'Me',
+    senderInitials: 'ME',
+    subject: 'Re: Client Feedback',
+    preview: 'Thanks for the feedback, we will work on this.',
+    time: '11:45 AM',
+    date: new Date(Date.now() - 3 * 86400000).toISOString(),
+    label: 'Client',
+    isFavorite: false,
+    isRead: true,
+    isSpam: false,
+    isTrash: false,
+    isArchived: false,
+    isSent: true,
+    isDraft: false,
+    fromMe: true,
+    body: 'Thanks for sharing the feedback...',
+    hasAttachment: false
+  }
 ];
 
 export const mockDrafts = [
@@ -68,5 +240,46 @@ export const mockDrafts = [
     hasAttachment: false,
     preview: 'Hi team, I wanted to share an update...'
   },
-  // Add more drafts...
+  {
+    id: 202,
+    sender: 'Me',
+    senderInitials: 'ME',
+    to: 'ceo@company.com',
+    subject: 'Draft: Q2 Goals',
+    body: 'Dear CEO,\n\nHere are the proposed Q2 goals...',
+    label: 'Strategy',
+    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+    date: new Date().toISOString(),
+    isDraft: true,
+    isFavorite: true,
+    isRead: false,
+    isSpam: false,
+    isTrash: false,
+    isArchived: false,
+    isSent: false,
+    fromMe: true,
+    hasAttachment: true,
+    preview: 'Dear CEO, Here are the proposed Q2 goals...'
+  },
+  {
+    id: 203,
+    sender: 'Me',
+    senderInitials: 'ME',
+    to: 'hr@company.com',
+    subject: 'Draft: Leave Request',
+    body: 'Hello,\n\nI am planning to take leave...',
+    label: 'HR',
+    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+    date: new Date().toISOString(),
+    isDraft: true,
+    isFavorite: false,
+    isRead: true,
+    isSpam: false,
+    isTrash: false,
+    isArchived: false,
+    isSent: false,
+    fromMe: true,
+    hasAttachment: false,
+    preview: 'Hello, I am planning to take leave...'
+  }
 ];

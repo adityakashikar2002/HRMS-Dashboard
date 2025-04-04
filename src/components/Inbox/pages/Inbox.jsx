@@ -87,15 +87,26 @@ const Inbox = ({
   const navigate = useNavigate();
   const [filteredInbox, setFilteredInbox] = useState([]);
 
-  useEffect(() => {
-    const filtered = inboxEmails.filter(email => 
-      !email.isSpam && 
-      !email.isTrash && 
-      !email.isArchived &&
-      !email.isSent
-    );
-    setFilteredInbox(filtered);
-  }, [inboxEmails]);
+  // useEffect(() => {
+  //   const filtered = inboxEmails.filter(email => 
+  //     !email.isSpam && 
+  //     !email.isTrash && 
+  //     !email.isArchived &&
+  //     !email.isSent
+  //   );
+  //   setFilteredInbox(filtered);
+  // }, [inboxEmails]);
+  // In your Inbox.js file
+useEffect(() => {
+  const filtered = inboxEmails.filter(email => 
+    !email.isSpam && 
+    !email.isTrash && 
+    !email.isArchived &&
+    !email.isSent && // Make sure to exclude sent emails
+    !email.fromMe // Only show emails not from me
+  );
+  setFilteredInbox(filtered);
+}, [inboxEmails]);
 
   const handleBack = () => {
     navigate('/inbox');

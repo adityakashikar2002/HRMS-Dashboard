@@ -423,14 +423,68 @@ function Inbox_Main() {
     localStorage.setItem('sentEmails', JSON.stringify(sentEmails));
     localStorage.setItem('drafts', JSON.stringify(drafts));
   }, [inboxEmails, sentEmails, drafts]);
+  useEffect(() => {
+    if (inboxEmails.length === 0 && sentEmails.length === 0 && drafts.length === 0) {
+      console.log("Loading mock data...");
+      setInboxEmails(mockInboxEmails);
+      setSentEmails(mockSentEmails);
+      setDrafts(mockDrafts);
+    }
+  }, []);
 
   const ensureArray = (ids) => Array.isArray(ids) ? ids : [ids];
 
+  // const handleSendEmail = (newEmail) => {
+  //   const sentEmail = {
+  //     ...newEmail,
+  //     id: Date.now(),
+  //     fromMe: true,
+  //     sender: 'Me',
+  //     senderInitials: 'ME',
+  //     time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+  //     date: new Date().toISOString(),
+  //     isFavorite: false,
+  //     isSpam: false,
+  //     isTrash: false,
+  //     isArchived: false,
+  //     isSent: true,
+  //     isDraft: false,
+  //     isRead: true,
+  //     preview: newEmail.body.substring(0, 50) + '...'
+  //   };
+    
+  //   // Add to sent emails
+  //   setSentEmails(prev => [sentEmail, ...prev]);
+    
+  //   // If sending to yourself, add to inbox as well
+  //   if (newEmail.to.includes('viperdogde07@gmail.com')) {
+  //     const receivedEmail = {
+  //       ...newEmail,
+  //       id: Date.now() + 1, // Different ID to avoid duplicates
+  //       fromMe: false,
+  //       sender: newEmail.to,
+  //       senderInitials: newEmail.to.charAt(0).toUpperCase(),
+  //       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+  //       date: new Date().toISOString(),
+  //       isFavorite: false,
+  //       isSpam: false,
+  //       isTrash: false,
+  //       isArchived: false,
+  //       isSent: false,
+  //       isDraft: false,
+  //       isRead: false,
+  //       preview: newEmail.body.substring(0, 50) + '...'
+  //     };
+  //     setInboxEmails(prev => [receivedEmail, ...prev]);
+  //   }
+  // };
+
   const handleSendEmail = (newEmail) => {
+    console.log('Creating sent email:', newEmail);
     const sentEmail = {
       ...newEmail,
       id: Date.now(),
-      fromMe: true,
+      fromMe: true, // Mark as from me
       sender: 'Me',
       senderInitials: 'ME',
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
@@ -439,38 +493,52 @@ function Inbox_Main() {
       isSpam: false,
       isTrash: false,
       isArchived: false,
-      isSent: true,
+      isSent: true, // Mark as sent
       isDraft: false,
       isRead: true,
       preview: newEmail.body.substring(0, 50) + '...'
     };
+
+    console.log('Sent email created:', sentEmail);
     
     // Add to sent emails
-    setSentEmails(prev => [sentEmail, ...prev]);
     
-    // If sending to yourself, add to inbox as well
-    if (newEmail.to.includes('viperdogde07@gmail.com')) {
+    // setSentEmails(prev => [sentEmail, ...prev]);
+
+    setSentEmails(prev => {
+      console.log('Previous sent emails:', prev);
+      return [sentEmail, ...prev];
+    });
+
+    // Check if the email is being sent to viperdogde07@gmail.com
+    const recipients = newEmail.to.split(',').map(email => email.trim());
+    if (recipients.includes('viperdogde07@gmail.com')) {
       const receivedEmail = {
         ...newEmail,
-        id: Date.now() + 1, // Different ID to avoid duplicates
-        fromMe: false,
-        sender: newEmail.to,
-        senderInitials: newEmail.to.charAt(0).toUpperCase(),
+        id: Date.now() + 1, // Different ID
+        fromMe: false, // Not from me (even though it is, we want it to appear as received)
+        sender: newEmail.from || 'Me',
+        senderInitials: (newEmail.from || 'Me').charAt(0).toUpperCase(),
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         date: new Date().toISOString(),
         isFavorite: false,
         isSpam: false,
         isTrash: false,
         isArchived: false,
-        isSent: false,
+        isSent: false, // Not a sent email
         isDraft: false,
-        isRead: false,
+        isRead: false, // Unread in inbox
         preview: newEmail.body.substring(0, 50) + '...'
       };
-      setInboxEmails(prev => [receivedEmail, ...prev]);
+      console.log('Received email created:', receivedEmail);
+      // setInboxEmails(prev => [receivedEmail, ...prev]);
+      setInboxEmails(prev => {
+        console.log('Previous inbox emails:', prev);
+        return [receivedEmail, ...prev];
+      });
     }
   };
-
+  
   const handleSaveDraft = (draft) => {
     const newDraft = {
       ...draft,
