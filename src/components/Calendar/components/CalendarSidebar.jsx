@@ -62,14 +62,14 @@ const CalendarSidebar = ({ currentDate, selectedDate, onDateClick, events, setSh
 
   return (
     <div className="w-64 bg-white border-r p-4 flex flex-col">
-      <button 
+      {/* <button 
         onClick={() => setShowEventForm(true)}
         className="bg-blue-600 text-white px-4 py-2 rounded mb-6 hover:bg-blue-700 transition"
       >
         New Event
-      </button>
+      </button> */}
       
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-4 mt-10">
         <h2 className="text-lg font-semibold">
           {format(currentMonth, 'MMMM yyyy')}
         </h2>
@@ -100,36 +100,29 @@ const CalendarSidebar = ({ currentDate, selectedDate, onDateClick, events, setSh
       </div>
       
       {rows}
-      
-      {/* <div className="mt-6">
-        <button className="text-blue-600 hover:text-blue-800 flex items-center space-x-2">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd" />
-          </svg>
-          <span>Add calendar</span>
-        </button>
-        <button className="text-blue-600 hover:text-blue-800 mt-2 flex items-center space-x-2">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clipRule="evenodd" />
-          </svg>
-          <span>Go to my booking page</span>
-        </button>
-      </div>
-      
-      <div className="mt-6">
-        <h3 className="text-lg font-semibold">My calendars</h3>
-        <div className="mt-2 flex items-center">
-          <input 
-            type="checkbox" 
-            defaultChecked 
-            className="h-4 w-4 text-blue-600 rounded"
-          />
-          <span className="ml-2">Calendar</span>
+
+      <div className="p-5 mt-10">
+        <h4 className="font-semibold text-gray-700 mb-2">Labels</h4>
+        <div className="space-y-2">
+          <div className="flex items-center space-x-2">
+            <span className="w-3 h-3 rounded-full" style={{ backgroundColor: "#3b82f6" }}></span>
+            <span className="text-gray-800">Meeting</span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <span className="w-3 h-3 rounded-full" style={{ backgroundColor: "#10b981" }}></span>
+            <span className="text-gray-800">Client Interaction</span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <span className="w-3 h-3 rounded-full" style={{ backgroundColor: "#f59e0b" }}></span>
+            <span className="text-gray-800">Interview</span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <span className="w-3 h-3 rounded-full" style={{ backgroundColor: "#ef4444" }}></span>
+            <span className="text-gray-800">Project</span>
+          </div>
         </div>
-        <button className="text-blue-600 hover:text-blue-800 mt-2">
-          Show all
-        </button>
-      </div> */}
+      </div>
+
     </div>
   );
 };

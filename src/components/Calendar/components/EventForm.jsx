@@ -43,26 +43,6 @@ const EventForm = ({ event, onSave, onClose }) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-    
-  //   if (!validate()) return;
-    
-  //   const startDateTime = new Date(`${startDate}T${startTime}`);
-  //   const endDateTime = new Date(`${endDate}T${endTime}`);
-    
-  //   const eventData = {
-  //     id: event?.id || Date.now(),
-  //     title,
-  //     description,
-  //     start: startDateTime,
-  //     end: endDateTime,
-  //     color
-  //   };
-    
-  //   onSave(eventData);
-  // };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     
@@ -82,14 +62,6 @@ const EventForm = ({ event, onSave, onClose }) => {
     onSave(eventData);
   };
 
-  // const colorOptions = [
-  //   { value: '#3b82f6', name: 'Blue' },
-  //   { value: '#ef4444', name: 'Red' },
-  //   { value: '#10b981', name: 'Green' },
-  //   { value: '#f59e0b', name: 'Yellow' },
-  //   { value: '#8b5cf6', name: 'Purple' },
-  // ];
-  // Replace the colorOptions array and color selection UI with:
   const colorOptions = [
     { value: '#3b82f6', name: 'Meeting', category: 'predefined' },
     { value: '#10b981', name: 'Client Interaction', category: 'predefined' },
@@ -213,28 +185,7 @@ const EventForm = ({ event, onSave, onClose }) => {
             </div>
           </div>
         )}
-          {/* <div className="mb-6">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Color
-            </label>
-            <div className="flex space-x-2">
-              {colorOptions.map((option) => (
-                <div 
-                  key={option.value}
-                  onClick={() => setColor(option.value)}
-                  className={`w-8 h-8 rounded-full cursor-pointer flex items-center justify-center ${color === option.value ? 'ring-2 ring-offset-2 ring-gray-400' : ''}`}
-                  style={{ backgroundColor: option.value }}
-                >
-                  {color === option.value && (
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div> */}
-          
+        
           <div className="mb-6">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Event Type

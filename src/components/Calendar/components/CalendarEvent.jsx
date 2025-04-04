@@ -1,27 +1,3 @@
-// import { format } from 'date-fns';
-
-// const CalendarEvent = ({ event, onClick }) => {
-//   return (
-//     <div 
-//       onClick={() => onClick(event)}
-//       className={`p-2 mb-1 text-xs rounded cursor-pointer truncate`}
-//       style={{ 
-//         backgroundColor: `${event.color}20`,
-//         borderLeft: `3px solid ${event.color}`
-//       }}
-//     >
-//       <div className="font-medium" style={{ color: event.color }}>
-//         {format(event.start, 'h:mm a')} - {event.title}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default CalendarEvent;
-
-
-
-
 import { format } from 'date-fns';
 
 const CalendarEvent = ({ event, onClick, compact = false }) => {

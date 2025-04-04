@@ -184,7 +184,7 @@ function Inbox_Main() {
   
       // Check if email is being sent to specific address (simulating received email)
       const recipients = newEmail.to.split(',').map(email => email.trim());
-      if (recipients.includes('viperdogde07@gmail.com')) {
+      if (recipients.includes('adityakashikar02@gmail.com')) {
         const receivedEmail = {
           ...sentEmail,
           id: Date.now() + 1,

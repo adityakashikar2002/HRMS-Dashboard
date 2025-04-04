@@ -1,51 +1,3 @@
-// export const generateRecurringEvents = () => {
-//   const recurringEvents = [];
-//   const startDate = new Date(2025, 0, 1); // Start from Jan 1, 2025
-//   const endDate = new Date(2025, 11, 31); // Until Dec 31, 2025
-  
-//   // Generate Morning Scrums (Mon-Fri)
-//   for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
-//     if (d.getDay() >= 1 && d.getDay() <= 5) { // Monday to Friday
-//       const morningScrum = {
-//         id: `morning-${d.toISOString().split('T')[0]}`,
-//         title: 'Intern Morning Scrum',
-//         description: 'Daily standup meeting',
-//         start: new Date(d.setHours(9, 30, 0, 0)),
-//         end: new Date(d.setHours(10, 0, 0, 0)),
-//         color: '#3b82f6',
-//         isRecurring: true,
-//         originalId: 'morning-scrum'
-//       };
-//       recurringEvents.push(morningScrum);
-      
-//       // Reset date after modification
-//       d.setHours(0, 0, 0, 0);
-//     }
-//   }
-
-//   // Generate Evening Scrums (Mon-Fri)
-//   for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
-//     if (d.getDay() >= 1 && d.getDay() <= 5) { // Monday to Friday
-//       const eveningScrum = {
-//         id: `evening-${d.toISOString().split('T')[0]}`,
-//         title: 'Intern Evening Scrum',
-//         description: 'End-of-day sync',
-//         start: new Date(d.setHours(18, 30, 0, 0)),
-//         end: new Date(d.setHours(19, 0, 0, 0)),
-//         color: '#3b82f6',
-//         isRecurring: true,
-//         originalId: 'evening-scrum'
-//       };
-//       recurringEvents.push(eveningScrum);
-      
-//       // Reset date after modification
-//       d.setHours(0, 0, 0, 0);
-//     }
-//   }
-
-//   return recurringEvents;
-// };
-
 export const generateRecurringEvents = () => {
   const recurringEvents = [];
   const startDate = new Date();
@@ -92,16 +44,16 @@ export const generateRecurringEvents = () => {
 
 export const mockEvents = [
   ...generateRecurringEvents(),
+    // {
+    //   id: 1,
+    //   title: 'Team Meeting',
+    //   description: 'Weekly team sync',
+    //   start: new Date(2025, 3, 1, 10, 0),
+    //   end: new Date(2025, 3, 1, 11, 0),
+    //   color: '#3b82f6'
+    // },
     {
       id: 1,
-      title: 'Team Meeting',
-      description: 'Weekly team sync',
-      start: new Date(2025, 3, 1, 10, 0),
-      end: new Date(2025, 3, 1, 11, 0),
-      color: '#3b82f6'
-    },
-    {
-      id: 2,
       title: 'Lunch with Client',
       description: 'Discuss project requirements',
       start: new Date(2025, 3, 2, 12, 0),
@@ -109,23 +61,23 @@ export const mockEvents = [
       color: '#10b981'
     },
     {
-      id: 3,
+      id: 2,
       title: 'Code Review',
       description: 'Review pull requests',
       start: new Date(2025, 3, 3, 14, 0),
       end: new Date(2025, 3, 3, 15, 0),
       color: '#8b5cf6'
     },
+    // {
+    //   id: 4,
+    //   title: 'Intern Morning Scrum',
+    //   description: 'Daily standup with interns',
+    //   start: new Date(2025, 3, 4, 9, 30),
+    //   end: new Date(2025, 3, 4, 10, 0),
+    //   color: '#3b82f6'
+    // },
     {
-      id: 4,
-      title: 'Intern Morning Scrum',
-      description: 'Daily standup with interns',
-      start: new Date(2025, 3, 4, 9, 30),
-      end: new Date(2025, 3, 4, 10, 0),
-      color: '#3b82f6'
-    },
-    {
-      id: 5,
+      id: 3,
       title: 'Project Deadline',
       description: 'Submit final deliverables',
       start: new Date(2025, 3, 5, 17, 0),
@@ -133,7 +85,7 @@ export const mockEvents = [
       color: '#ef4444'
     },
     {
-      id: 6,
+      id: 4,
       title: 'Interview',
       description: 'Candidate for frontend position',
       start: new Date(2025, 3, 8, 15, 0),

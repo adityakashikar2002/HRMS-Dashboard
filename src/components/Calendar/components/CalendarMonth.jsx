@@ -49,11 +49,11 @@ const CalendarMonth = ({ currentDate, selectedDate, events, onDateClick, onEvent
                 compact
               />
             ))}
-            {dayEvents.length > 2 && (
+            {/* {dayEvents.length > 2 && (
               <div className="text-xs text-gray-500 pl-2">
                 +{dayEvents.length - 2} more
               </div>
-            )}
+            )} */}
           </div>
         </div>
       );
