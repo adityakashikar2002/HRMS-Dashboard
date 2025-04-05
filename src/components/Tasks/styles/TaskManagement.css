@@ -1,4 +1,4 @@
-/* src/styles/TaskManagement.css */
+/* 
 .tasks-page {
     background-color: #f8fafc;
   }
@@ -31,7 +31,7 @@
     box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3), 0 4px 6px -2px rgba(59, 130, 246, 0.1);
   }
   
-  /* Animation for task cards */
+
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -41,7 +41,7 @@
     animation: fadeIn 0.3s ease-out forwards;
   }
   
-  /* Responsive adjustments */
+
   @media (max-width: 768px) {
     .task-board {
       grid-template-columns: 1fr !important;
@@ -54,4 +54,125 @@
     .chart-container {
       height: 250px !important;
     }
+  } */
+
+
+  /* src/styles/TaskManagement.css */
+.tasks-page {
+  background-color: #f8fafc;
+  background-image: radial-gradient(at top right, #e0f2fe 0%, #f0fdf4 50%, #fef2f2 100%);
+}
+
+.task-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border-radius: 0.75rem;
+  background: white;
+  overflow: hidden;
+}
+
+.task-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.task-column {
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+}
+
+.task-column:hover {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.create-task-btn {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3), 0 2px 4px -1px rgba(59, 130, 246, 0.2);
+  background-image: linear-gradient(to right, #3b82f6, #6366f1);
+}
+
+.create-task-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4), 0 4px 6px -2px rgba(59, 130, 246, 0.3);
+}
+
+/* Enhanced chart containers */
+.chart-container {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
+}
+
+.chart-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Attachment styles */
+.attachment-item {
+  transition: all 0.2s ease;
+}
+
+.attachment-item:hover {
+  transform: translateX(2px);
+  background: #f3f4f6;
+}
+
+/* Animation for task cards */
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(10px);
   }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-card {
+  animation: cardEntrance 0.5s ease-out forwards;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .task-board {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .chart-container {
+    height: 300px !important;
+  }
+  
+  .task-card {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}

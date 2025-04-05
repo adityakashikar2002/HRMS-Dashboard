@@ -66,6 +66,8 @@ const TaskForm = ({ onClose, onSubmit, mode, task }) => {
     }
   };
 
+  emailjs.init(process.env.REACT_APP_EMAILJS_USER_ID);
+  
   const sendEmailNotification = (task) => {
     const emailParams = {
       to_email: task.assigneeEmail,
