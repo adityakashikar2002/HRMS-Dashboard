@@ -12,7 +12,8 @@ const Inbox = ({
   onDelete = () => {},
   onMarkAsSpam = () => {},
   onToggleFavorite = () => {},
-  onMarkAsRead = () => {}
+  onMarkAsRead = () => {},
+  searchTerm
 }) => {
   const { emailId } = useParams();
   const navigate = useNavigate();
@@ -51,7 +52,7 @@ useEffect(() => {
 
   return (
     <div className="flex-1 flex flex-col">
-      <EmailList 
+      {/* <EmailList 
         emails={filteredInbox}
         drafts={[]}
         setEmails={setInboxEmails}
@@ -63,6 +64,20 @@ useEffect(() => {
         onToggleFavorite={onToggleFavorite}
         onMarkAsRead={onMarkAsRead}
         showAllActions={true}
+      /> */}
+      <EmailList 
+        emails={inboxEmails}
+        drafts={[]}
+        setEmails={setInboxEmails}
+        selectedEmails={selectedEmails}
+        setSelectedEmails={setSelectedEmails}
+        onArchive={onArchive}
+        onDelete={onDelete}
+        onMarkAsSpam={onMarkAsSpam}
+        onToggleFavorite={onToggleFavorite}
+        onMarkAsRead={onMarkAsRead}
+        showAllActions={true}
+        searchTerm={searchTerm}
       />
     </div>
   );
