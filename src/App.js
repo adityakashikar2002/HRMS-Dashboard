@@ -69,7 +69,7 @@ import './App.css';
 import Sidebar from './components/Sidebar/Sidebar';
 import Header from './components/Header/Header';
 import Dashboard from './components/Dashboard/Dashboard';
-import TasksPage from './components/Dashboard/TasksPage';
+import TasksPage from './components/Tasks/pages/TasksPage';
 import Inbox_Main from './components/Inbox/Inbox_Main';
 import CalenderMain from './components/Calendar/CalendarMain';
 import { ToastContainer } from 'react-toastify';
