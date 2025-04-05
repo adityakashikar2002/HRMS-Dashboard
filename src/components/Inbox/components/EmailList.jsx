@@ -61,6 +61,7 @@ const EmailList = ({
 
   return (
     <div className="flex-1 overflow-y-auto">
+
       <table className="min-w-full bg-white">
         <tbody>
           {allItems.map((item) => (
@@ -229,6 +230,7 @@ const EmailList = ({
           ))}
         </tbody>
       </table>
+
     </div>
   );
 };
