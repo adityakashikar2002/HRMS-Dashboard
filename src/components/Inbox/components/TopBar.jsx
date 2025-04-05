@@ -94,49 +94,6 @@ const TopBar = ({
         </button>
       </div>
       <div className="flex items-center space-x-4">
-        {/* <button className="text-gray-600 hover:text-gray-900" title="Search">
-          <FaSearch />
-        </button> */}
-        {/* {isSearching ? (
-          <form onSubmit={handleSearch} className="flex items-center">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search emails..."
-              className="border rounded px-2 py-1 text-sm"
-              autoFocus
-            />
-            <button 
-              type="submit" 
-              className="ml-2 text-gray-600 hover:text-gray-900"
-            >
-              <FaSearch />
-            </button>
-            <button 
-              type="button" 
-              onClick={() => {
-                setIsSearching(false);
-                setSearchQuery('');
-                onSearch('');
-              }}
-              className="ml-2 text-gray-600 hover:text-gray-900"
-            >
-              <FaTimes />
-            </button>
-          </form>
-        ) : (
-          <button 
-            onClick={() => setIsSearching(true)}
-            className="text-gray-600 hover:text-gray-900" 
-            title="Search"
-          >
-            <FaSearch />
-          </button>
-        )}
-        <button className="text-gray-600 hover:text-gray-900" title="More options">
-          <FaEllipsisV />
-        </button> */}
         {isSearching ? (
           <form onSubmit={handleSearch} className="flex items-center">
             <input

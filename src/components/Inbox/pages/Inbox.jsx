@@ -66,20 +66,6 @@ useEffect(() => {
         showAllActions={true}
         searchTerm={searchTerm}
       />
-      {/* <EmailList 
-        emails={inboxEmails}
-        drafts={[]}
-        setEmails={setInboxEmails}
-        selectedEmails={selectedEmails}
-        setSelectedEmails={setSelectedEmails}
-        onArchive={onArchive}
-        onDelete={onDelete}
-        onMarkAsSpam={onMarkAsSpam}
-        onToggleFavorite={onToggleFavorite}
-        onMarkAsRead={onMarkAsRead}
-        showAllActions={true}
-        searchTerm={searchTerm}
-      /> */}
     </div>
   );
 };

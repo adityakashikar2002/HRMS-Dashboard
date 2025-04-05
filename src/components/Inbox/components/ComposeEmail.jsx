@@ -1,5 +1,6 @@
-// import React, { useState } from 'react';
-// import { FaTimes, FaPaperclip } from 'react-icons/fa';
+// // WORKS 99 BUT GIVES ERROR FOR ATTACHMENT
+// import React, { useState, useRef } from 'react';
+// import { FaTimes, FaPaperclip, FaTrash } from 'react-icons/fa';
 // import LabelSelector from './LabelSelector';
 
 // const ComposeEmail = ({ setComposeOpen, onSend, onSaveDraft }) => {
@@ -8,8 +9,10 @@
 //     subject: '',
 //     body: '',
 //     label: '',
-//     isDraft: false
+//     isDraft: false,
+//     attachments: []
 //   });
+//   const fileInputRef = useRef(null);
 
 //   const handleChange = (e) => {
 //     const { name, value } = e.target;
@@ -20,11 +23,44 @@
 //     setEmail(prev => ({ ...prev, label }));
 //   };
 
+//   const handleFileChange = (e) => {
+//     const files = Array.from(e.target.files);
+//     const newAttachments = files.map(file => ({
+//       name: file.name,
+//       size: formatFileSize(file.size),
+//       type: file.type,
+//       file // store the actual file object
+//     }));
+    
+//     setEmail(prev => ({
+//       ...prev,
+//       attachments: [...prev.attachments, ...newAttachments]
+//     }));
+    
+//     // Reset file input
+//     e.target.value = null;
+//   };
+
+//   const removeAttachment = (index) => {
+//     setEmail(prev => ({
+//       ...prev,
+//       attachments: prev.attachments.filter((_, i) => i !== index)
+//     }));
+//   };
+
+//   const formatFileSize = (bytes) => {
+//     if (bytes === 0) return '0 Bytes';
+//     const k = 1024;
+//     const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+//     const i = Math.floor(Math.log(bytes) / Math.log(k));
+//     return parseFloat((bytes / Math.pow(k, i)).toFixed(1) + ' ' + sizes[i]);
+//   };
+
 //   const handleSubmit = (e) => {
 //     e.preventDefault();
 //     const emailToSubmit = { 
 //       ...email,
-//       from: 'Me', // Add your default from address here
+//       from: 'Me',
 //       sender: 'me',
 //       date: new Date().toISOString(),
 //       isRead: true,
@@ -33,7 +69,7 @@
     
 //     onSend(emailToSubmit);
 //     setComposeOpen(false);
-//     setEmail({ to: '', subject: '', body: '', label: '', isDraft: false });
+//     setEmail({ to: '', subject: '', body: '', label: '', isDraft: false, attachments: [] });
 //   };
   
 //   const saveAsDraft = (e) => {
@@ -45,7 +81,7 @@
 //     };
 //     onSaveDraft(draftEmail);
 //     setComposeOpen(false);
-//     setEmail({ to: '', subject: '', body: '', label: '', isDraft: false });
+//     setEmail({ to: '', subject: '', body: '', label: '', isDraft: false, attachments: [] });
 //   };
 
 //   return (
@@ -97,6 +133,32 @@
 //             rows="10"
 //           />
 //         </div>
+        
+//         {/* Attachments preview */}
+//         {email.attachments.length > 0 && (
+//           <div className="mb-4 p-3 bg-gray-50 rounded border border-gray-200">
+//             <h4 className="text-sm font-medium text-gray-700 mb-2">Attachments ({email.attachments.length})</h4>
+//             <div className="space-y-2">
+//               {email.attachments.map((attachment, index) => (
+//                 <div key={index} className="flex items-center justify-between p-2 bg-white rounded border border-gray-200">
+//                   <div className="flex items-center">
+//                     <FaPaperclip className="text-gray-500 mr-2" />
+//                     <span className="text-sm">{attachment.name}</span>
+//                     <span className="text-xs text-gray-500 ml-2">({attachment.size})</span>
+//                   </div>
+//                   <button 
+//                     type="button"
+//                     onClick={() => removeAttachment(index)}
+//                     className="text-gray-500 hover:text-red-500"
+//                   >
+//                     <FaTrash size={14} />
+//                   </button>
+//                 </div>
+//               ))}
+//             </div>
+//           </div>
+//         )}
+        
 //         <div className="flex justify-between items-center">
 //           <div className="flex space-x-2">
 //             <button
@@ -114,10 +176,19 @@
 //             </button>
 //             <button
 //               type="button"
+//               onClick={() => fileInputRef.current.click()}
 //               className="text-gray-600 hover:text-gray-800 p-2"
+//               title="Attach files"
 //             >
 //               <FaPaperclip />
 //             </button>
+//             <input
+//               type="file"
+//               ref={fileInputRef}
+//               onChange={handleFileChange}
+//               className="hidden"
+//               multiple
+//             />
 //           </div>
 //           <button
 //             type="button"
@@ -136,8 +207,8 @@
 
 
 
-
-import React, { useState, useRef } from 'react';
+// WORKS 99
+import React, { useState, useRef, useEffect } from 'react';
 import { FaTimes, FaPaperclip, FaTrash } from 'react-icons/fa';
 import LabelSelector from './LabelSelector';
 
@@ -163,19 +234,25 @@ const ComposeEmail = ({ setComposeOpen, onSend, onSaveDraft }) => {
 
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
-    const newAttachments = files.map(file => ({
-      name: file.name,
-      size: formatFileSize(file.size),
-      type: file.type,
-      file // store the actual file object
-    }));
+    const newAttachments = files.map(file => {
+      // Create a preview URL for images
+      const previewUrl = file.type.startsWith('image/') ? URL.createObjectURL(file) : null;
+      
+      return {
+        name: file.name,
+        size: formatFileSize(file.size),
+        type: file.type,
+        previewUrl, // For image previews
+        lastModified: file.lastModified,
+        file // Keep the file reference
+      };
+    });
     
     setEmail(prev => ({
       ...prev,
       attachments: [...prev.attachments, ...newAttachments]
     }));
     
-    // Reset file input
     e.target.value = null;
   };
 
@@ -221,6 +298,17 @@ const ComposeEmail = ({ setComposeOpen, onSend, onSaveDraft }) => {
     setComposeOpen(false);
     setEmail({ to: '', subject: '', body: '', label: '', isDraft: false, attachments: [] });
   };
+
+  useEffect(() => {
+    return () => {
+      // Clean up object URLs when component unmounts
+      email.attachments?.forEach(att => {
+        if (att.previewUrl) {
+          URL.revokeObjectURL(att.previewUrl);
+        }
+      });
+    };
+  }, [email.attachments]);
 
   return (
     <div className="fixed bottom-0 right-0 w-full max-w-xl bg-white shadow-xl rounded-t-lg border border-gray-300 z-10">

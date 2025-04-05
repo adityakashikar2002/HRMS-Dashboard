@@ -1,3 +1,4 @@
+// // WORKS 99 BUT GIVES ERROR FOR ATTACHMENT
 // import React, { useState, useEffect } from 'react';
 // import { Routes, Route, useNavigate } from 'react-router-dom';
 // import Sidebar from './components/Sidebar';
@@ -29,17 +30,17 @@
 //   const [searchTerm, setSearchTerm] = useState('');
 
 //   const handleSearch = (term) => {
-//     setSearchTerm(term.toLowerCase());
+//     setSearchTerm(term);
 //   };
 
-//   const filteredEmails = (emails) => {
+//   const filterEmailsBySearch = (emails) => {
 //     if (!searchTerm) return emails;
     
 //     return emails.filter(email => 
-//       email.subject.toLowerCase().includes(searchTerm) ||
-//       email.body.toLowerCase().includes(searchTerm) ||
-//       email.sender.toLowerCase().includes(searchTerm) ||
-//       (email.to && email.to.toLowerCase().includes(searchTerm))
+//       (email.subject && email.subject.toLowerCase().includes(searchTerm.toLowerCase())) ||
+//       (email.body && email.body.toLowerCase().includes(searchTerm.toLowerCase())) ||
+//       (email.sender && email.sender.toLowerCase().includes(searchTerm.toLowerCase())) ||
+//       (email.to && email.to.toLowerCase().includes(searchTerm.toLowerCase()))
 //     );
 //   };
 
@@ -359,11 +360,12 @@
 //           onMarkAsReadSelected={() => handleMarkAsRead(selectedEmails)}
 //           onMarkAsUnreadSelected={() => handleMarkAsUnread(selectedEmails)}
 //           onToggleFavoriteSelected={(isFavorite) => handleToggleFavorite(selectedEmails, isFavorite)}
+//           onSearch={handleSearch}
 //         />
 //         <Routes>
 //           <Route index element={
 //             <Inbox 
-//               inboxEmails={filteredEmails(inboxEmails)} 
+//               inboxEmails={filterEmailsBySearch(inboxEmails)} 
 //               setInboxEmails={setInboxEmails}
 //               selectedEmails={selectedEmails}
 //               setSelectedEmails={setSelectedEmails}
@@ -375,7 +377,7 @@
 //           } />
 //           <Route path="drafts" element={
 //             <Drafts 
-//               drafts={drafts} 
+//               drafts={filterEmailsBySearch(drafts)} 
 //               setDrafts={setDrafts}
 //               selectedEmails={selectedEmails}
 //               setSelectedEmails={setSelectedEmails}
@@ -389,7 +391,7 @@
 //           } />
 //            <Route path="sent" element={
 //             <Sent 
-//               sentEmails={sentEmails}
+//               sentEmails={filterEmailsBySearch(sentEmails)}
 //               setSentEmails={setSentEmails}
 //               selectedEmails={selectedEmails}
 //               setSelectedEmails={setSelectedEmails}
@@ -400,7 +402,7 @@
 //           } />
 //           <Route path="favorites" element={
 //             <Favorites 
-//               emails={getAllEmails().filter(e => e.isFavorite)} 
+//               emails={filterEmailsBySearch(getAllEmails().filter(e => e.isFavorite))} 
 //               drafts={drafts.filter(d => d.isFavorite)}
 //               setInboxEmails={setInboxEmails}
 //               setSentEmails={setSentEmails}
@@ -414,7 +416,7 @@
 //           } />
 //           <Route path="spam" element={
 //             <Spam 
-//               emails={getAllEmails().filter(e => e.isSpam)} 
+//               emails={filterEmailsBySearch(getAllEmails().filter(e => e.isSpam))} 
 //               setInboxEmails={setInboxEmails}
 //               setSentEmails={setSentEmails}
 //               onNotSpam={handleRestoreFromSpam}
@@ -426,7 +428,7 @@
 //           } />
 //           <Route path="trash" element={
 //             <Trash 
-//               emails={getAllEmails().filter(e => e.isTrash)} 
+//               emails={filterEmailsBySearch(getAllEmails().filter(e => e.isTrash))} 
 //               setInboxEmails={setInboxEmails}
 //               setSentEmails={setSentEmails}
 //               onRestore={handleRestoreFromTrash}
@@ -438,7 +440,7 @@
 //           } />
 //           <Route path="archive" element={
 //             <Archive 
-//               emails={getAllEmails().filter(e => e.isArchived)} 
+//               emails={filterEmailsBySearch(getAllEmails().filter(e => e.isArchived))} 
 //               setInboxEmails={setInboxEmails}
 //               setSentEmails={setSentEmails}
 //               onUnarchive={handleUnarchiveEmail}
@@ -450,8 +452,8 @@
 //           } />
 //           <Route path="all" element={
 //             <AllEmails
-//               emails={getAllEmails()} 
-//               drafts={drafts}
+//               emails={filterEmailsBySearch(getAllEmails())} 
+//               drafts={filterEmailsBySearch(drafts)}
 //               setInboxEmails={setInboxEmails}
 //               setSentEmails={setSentEmails}
 //               setDrafts={setDrafts}
@@ -515,8 +517,7 @@
 
 
 
-
-
+//WORKS 99
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
@@ -588,13 +589,23 @@ function Inbox_Main() {
       }
   
       // Process attachments
-      const processedAttachments = newEmail.attachments?.map(att => ({
-        name: att.name,
-        size: att.size,
-        type: att.type,
-        file: att.file, // Keep file reference for immediate viewing
-        // In production: url: await uploadFile(att.file) 
-      })) || [];
+      const processedAttachments = newEmail.attachments?.map(att => {
+        // If it's a new attachment (from file input)
+        if (att.file) {
+          return {
+            name: att.name,
+            size: att.size,
+            type: att.type,
+            lastModified: att.lastModified || Date.now(),
+            // In a real app, you would upload the file here and get a URL
+            // For demo purposes, we'll just store some metadata
+            isLocal: true,
+            previewUrl: att.previewUrl
+          };
+        }
+        // If it's an existing attachment
+        return att;
+      }) || [];
   
       // Create sent email object
       const sentEmail = {
@@ -654,12 +665,19 @@ function Inbox_Main() {
       }
   
       // Process attachments
-      const processedAttachments = draft.attachments?.map(att => ({
-        name: att.name,
-        size: att.size,
-        type: att.type,
-        file: att.file, // Keep file reference
-      })) || [];
+      const processedAttachments = draft.attachments?.map(att => {
+        if (att.file) {
+          return {
+            name: att.name,
+            size: att.size,
+            type: att.type,
+            lastModified: att.lastModified || Date.now(),
+            isLocal: true,
+            previewUrl: att.previewUrl
+          };
+        }
+        return att;
+      }) || [];
   
       // Create draft object
       const newDraft = {
@@ -868,17 +886,6 @@ function Inbox_Main() {
         trashCount={getTrashCount()}
       />
       <div className="flex-1 flex flex-col">
-        {/* <TopBar 
-          selectedEmails={selectedEmails} 
-          setSelectedEmails={setSelectedEmails} 
-          emails={getAllEmails()}
-          onArchiveSelected={() => handleArchiveEmail(selectedEmails)}
-          onDeleteSelected={() => handleDelete(selectedEmails)}
-          onMarkAsSpamSelected={() => handleMarkAsSpam(selectedEmails)}
-          onMarkAsReadSelected={() => handleMarkAsRead(selectedEmails)}
-          onMarkAsUnreadSelected={() => handleMarkAsUnread(selectedEmails)}
-          onToggleFavoriteSelected={(isFavorite) => handleToggleFavorite(selectedEmails, isFavorite)}
-        /> */}
         <TopBar 
           selectedEmails={selectedEmails} 
           setSelectedEmails={setSelectedEmails} 
@@ -1042,15 +1049,3 @@ function Inbox_Main() {
 }
 
 export default Inbox_Main;
-
-
-
-
-
-
-
-
-
-
-
-
