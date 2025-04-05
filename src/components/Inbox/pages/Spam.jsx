@@ -8,7 +8,8 @@ const Spam = ({
   setSelectedEmails,
   onNotSpam, 
   onDeletePermanently,
-  onToggleFavorite
+  onToggleFavorite,
+  searchTerm
 }) => {
   const [spamEmails, setSpamEmails] = useState([]);
 
@@ -28,6 +29,7 @@ const Spam = ({
         onDeletePermanently={onDeletePermanently}
         onToggleFavorite={onToggleFavorite}
         showSpamActions={true}
+        searchTerm={searchTerm}
       />
     </div>
   );

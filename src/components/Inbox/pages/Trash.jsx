@@ -8,7 +8,8 @@ const Trash = ({
   setSelectedEmails,
   onRestore, 
   onDeletePermanently,
-  onToggleFavorite
+  onToggleFavorite,
+  searchTerm
 }) => {
   const [trashEmails, setTrashEmails] = useState([]);
 
@@ -28,6 +29,7 @@ const Trash = ({
         onDeletePermanently={onDeletePermanently}
         onToggleFavorite={onToggleFavorite}
         showTrashActions={true}
+        searchTerm={searchTerm}
       />
     </div>
   );

@@ -9,7 +9,8 @@ const AllEmails = ({
   onArchive,
   onDelete,
   onMarkAsSpam,
-  onToggleFavorite
+  onToggleFavorite,
+  searchTerm
 }) => {
   return (
     <div className="flex-1 overflow-y-auto">
@@ -23,6 +24,7 @@ const AllEmails = ({
         onMarkAsSpam={onMarkAsSpam}
         onToggleFavorite={onToggleFavorite}
         showAllActions={true}
+        searchTerm={searchTerm}
       />
     </div>
   );

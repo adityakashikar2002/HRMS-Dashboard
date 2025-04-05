@@ -10,7 +10,8 @@ const Favorites = ({
   setSelectedEmails,
   onToggleFavorite,
   onDelete,
-  onDeleteDraft
+  onDeleteDraft,
+  searchTerm
 }) => {
   const allFavorites = [...emails.filter(e => e.isFavorite), ...drafts.filter(d => d.isFavorite)];
 
@@ -31,6 +32,7 @@ const Favorites = ({
         setSelectedEmails={setSelectedEmails}
         onToggleFavorite={onToggleFavorite}
         onDelete={handleDelete}
+        searchTerm={searchTerm}
       />
     </div>
   );

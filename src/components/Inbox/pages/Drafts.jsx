@@ -9,6 +9,7 @@ const Drafts = ({
   onSendDraft,
   onDeleteDraft,
   onToggleFavorite,
+  searchTerm
 }) => {
   // Filter drafts that aren't trashed
   const filteredDrafts = drafts.filter(d => !d.isTrash && d.isDraft);
@@ -26,6 +27,7 @@ const Drafts = ({
         onDeleteDraft={onDeleteDraft}
         onToggleFavorite={onToggleFavorite}
         showDraftActions={true}
+        searchTerm={searchTerm}
       />
     </div>
   );

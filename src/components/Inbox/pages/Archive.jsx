@@ -8,7 +8,8 @@ const Archive = ({
   setSelectedEmails,
   onUnarchive,
   onDelete,
-  onToggleFavorite
+  onToggleFavorite,
+  searchTerm
 }) => {
   const [archivedEmails, setArchivedEmails] = useState([]);
 
@@ -28,6 +29,7 @@ const Archive = ({
         onDelete={onDelete}
         onToggleFavorite={onToggleFavorite}
         showArchiveActions={true}
+        searchTerm={searchTerm}
       />
     </div>
   );

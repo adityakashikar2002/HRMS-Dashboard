@@ -906,7 +906,7 @@ function Inbox_Main() {
           } />
           <Route path="drafts" element={
             <Drafts 
-              drafts={drafts} 
+              drafts={filterEmailsBySearch(drafts)} 
               setDrafts={setDrafts}
               selectedEmails={selectedEmails}
               setSelectedEmails={setSelectedEmails}
@@ -920,7 +920,7 @@ function Inbox_Main() {
           } />
            <Route path="sent" element={
             <Sent 
-              sentEmails={sentEmails}
+              sentEmails={filterEmailsBySearch(sentEmails)}
               setSentEmails={setSentEmails}
               selectedEmails={selectedEmails}
               setSelectedEmails={setSelectedEmails}
@@ -931,7 +931,7 @@ function Inbox_Main() {
           } />
           <Route path="favorites" element={
             <Favorites 
-              emails={getAllEmails().filter(e => e.isFavorite)} 
+              emails={filterEmailsBySearch(getAllEmails().filter(e => e.isFavorite))} 
               drafts={drafts.filter(d => d.isFavorite)}
               setInboxEmails={setInboxEmails}
               setSentEmails={setSentEmails}
@@ -945,7 +945,7 @@ function Inbox_Main() {
           } />
           <Route path="spam" element={
             <Spam 
-              emails={getAllEmails().filter(e => e.isSpam)} 
+              emails={filterEmailsBySearch(getAllEmails().filter(e => e.isSpam))} 
               setInboxEmails={setInboxEmails}
               setSentEmails={setSentEmails}
               onNotSpam={handleRestoreFromSpam}
@@ -957,7 +957,7 @@ function Inbox_Main() {
           } />
           <Route path="trash" element={
             <Trash 
-              emails={getAllEmails().filter(e => e.isTrash)} 
+              emails={filterEmailsBySearch(getAllEmails().filter(e => e.isTrash))} 
               setInboxEmails={setInboxEmails}
               setSentEmails={setSentEmails}
               onRestore={handleRestoreFromTrash}
@@ -969,7 +969,7 @@ function Inbox_Main() {
           } />
           <Route path="archive" element={
             <Archive 
-              emails={getAllEmails().filter(e => e.isArchived)} 
+              emails={filterEmailsBySearch(getAllEmails().filter(e => e.isArchived))} 
               setInboxEmails={setInboxEmails}
               setSentEmails={setSentEmails}
               onUnarchive={handleUnarchiveEmail}
@@ -981,8 +981,8 @@ function Inbox_Main() {
           } />
           <Route path="all" element={
             <AllEmails
-              emails={getAllEmails()} 
-              drafts={drafts}
+              emails={filterEmailsBySearch(getAllEmails())} 
+              drafts={filterEmailsBySearch(drafts)}
               setInboxEmails={setInboxEmails}
               setSentEmails={setSentEmails}
               setDrafts={setDrafts}

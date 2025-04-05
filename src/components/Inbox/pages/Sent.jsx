@@ -8,7 +8,8 @@ const Sent = ({
   setSelectedEmails = () => {}, 
   onDelete = () => {},
   onArchive = () => {},
-  onToggleFavorite = () => {}
+  onToggleFavorite = () => {},
+  searchTerm
 }) => {
   const [filteredSent, setFilteredSent] = useState([]);
 
@@ -33,6 +34,7 @@ const Sent = ({
         onArchive={onArchive}
         onToggleFavorite={onToggleFavorite}
         showSentActions={true}
+        searchTerm={searchTerm}
       />
     </div>
   );
