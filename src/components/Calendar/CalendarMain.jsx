@@ -386,51 +386,86 @@ const CalendarMain = () => {
   };
 
   // Load events from localStorage on initial render
+  // useEffect(() => {
+  //   const loadEvents = async () => {
+  //     console.log('[DEBUG] Loading events from localStorage...');
+      
+  //     try {
+  //       // 1. Get recurring events
+  //       const recurringEvents = generateRecurringEvents();
+        
+  //       // 2. Try to load saved events from localStorage
+  //       const savedEventsJSON = localStorage.getItem('calendarEvents');
+  //       let savedEvents = [];
+        
+  //       if (savedEventsJSON) {
+  //         try {
+  //           savedEvents = JSON.parse(savedEventsJSON).map(event => ({
+  //             ...event,
+  //             start: parseDateSafe(event.start),
+  //             end: parseDateSafe(event.end)
+  //           }));
+  //         } catch (parseError) {
+  //           console.error('[ERROR] Failed to parse saved events:', parseError);
+  //         }
+  //       }
+        
+  //       // 3. Load mock events (only if they don't exist in savedEvents)
+  //       const mockEventsToAdd = mockEvents.filter(
+  //         mockEvent => !savedEvents.some(savedEvent => savedEvent.id === mockEvent.id)
+  //       );
+        
+  //       // 4. Fetch holidays
+  //       const currentYear = new Date().getFullYear();
+  //       const holidaysData = await fetchHolidays(currentYear);
+        
+  //       // 5. Combine all events with proper deduplication
+  //       const allEvents = [
+  //         ...recurringEvents,
+  //         ...savedEvents,
+  //         ...mockEventsToAdd,
+  //         ...holidaysData
+  //       ];
+        
+  //       setEvents(allEvents);
+  //     } catch (error) {
+  //       console.error('[ERROR] Failed to load events:', error);
+  //       // Fallback to just recurring and mock events
+  //       setEvents([...generateRecurringEvents(), ...mockEvents]);
+  //     }
+  //   };
+  
+  //   loadEvents();
+  // }, []);
   useEffect(() => {
     const loadEvents = async () => {
-      console.log('[DEBUG] Loading events from localStorage...');
-      
       try {
-        // 1. Get recurring events
-        const recurringEvents = generateRecurringEvents();
+        // 1. Get base events
+        const baseEvents = [...generateRecurringEvents(), ...mockEvents];
         
-        // 2. Try to load saved events from localStorage
-        const savedEventsJSON = localStorage.getItem('calendarEvents');
-        let savedEvents = [];
+        // 2. Load saved events
+        const savedEvents = JSON.parse(localStorage.getItem('calendarEvents') || []);
+        const parsedSavedEvents = savedEvents.map(event => ({
+          ...event,
+          start: parseDateSafe(event.start),
+          end: parseDateSafe(event.end)
+        }));
         
-        if (savedEventsJSON) {
-          try {
-            savedEvents = JSON.parse(savedEventsJSON).map(event => ({
-              ...event,
-              start: parseDateSafe(event.start),
-              end: parseDateSafe(event.end)
-            }));
-          } catch (parseError) {
-            console.error('[ERROR] Failed to parse saved events:', parseError);
-          }
-        }
+        // 3. Get holidays (only once)
+        const holidays = await fetchHolidays(new Date().getFullYear());
         
-        // 3. Load mock events (only if they don't exist in savedEvents)
-        const mockEventsToAdd = mockEvents.filter(
-          mockEvent => !savedEvents.some(savedEvent => savedEvent.id === mockEvent.id)
-        );
-        
-        // 4. Fetch holidays
-        const currentYear = new Date().getFullYear();
-        const holidaysData = await fetchHolidays(currentYear);
-        
-        // 5. Combine all events with proper deduplication
+        // 4. Combine with deduplication
         const allEvents = [
-          ...recurringEvents,
-          ...savedEvents,
-          ...mockEventsToAdd,
-          ...holidaysData
+          ...baseEvents,
+          ...parsedSavedEvents.filter(
+            savedEvent => !baseEvents.some(baseEvent => baseEvent.id === savedEvent.id)
+          ),
+          ...holidays
         ];
         
         setEvents(allEvents);
       } catch (error) {
-        console.error('[ERROR] Failed to load events:', error);
-        // Fallback to just recurring and mock events
+        console.error('Error loading events:', error);
         setEvents([...generateRecurringEvents(), ...mockEvents]);
       }
     };
