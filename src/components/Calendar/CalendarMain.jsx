@@ -11,6 +11,8 @@
 // import EventForm from './components/EventForm';
 // import EventDetails from './components/EventDetails';
 // import { generateRecurringEvents, mockEvents } from './mockEvents';
+// import { fetchHolidays } from './utils/holidays';
+// import HolidaysView from './components/HolidaysView';
 
 // const CalendarMain = () => {
 //   // State for calendar date and view management
@@ -23,6 +25,16 @@
 //   const [showEventForm, setShowEventForm] = useState(false);
 //   const [selectedEvent, setSelectedEvent] = useState(null);
 //   const [showEventDetails, setShowEventDetails] = useState(false);
+
+//   const [holidays, setHolidays] = useState([]);
+//   const [showHolidaysView, setShowHolidaysView] = useState(false);
+
+//   useEffect(() => {
+//     const currentYear = new Date().getFullYear();
+//     fetchHolidays(currentYear).then(holidays => {
+//       setHolidays(holidays);
+//     });
+//   }, []);
 
 //   // Helper function to safely parse dates from localStorage
 //   const parseDateSafe = (dateString) => {
@@ -69,7 +81,8 @@
 //         const allEvents = [
 //           ...recurringEvents,
 //           ...savedEvents,
-//           ...mockEventsToAdd
+//           ...mockEventsToAdd,
+//           ...holidays
 //         ];
         
 //         console.log('[DEBUG] Setting combined events:', allEvents);
@@ -233,6 +246,7 @@
 //         onDateClick={onDateClick}
 //         events={events}
 //         setShowEventForm={setShowEventForm}
+//         setShowHolidaysView={setShowHolidaysView} // Add this line
 //       />
       
 //       {/* Main Content Area */}
@@ -280,6 +294,7 @@
 //               onDateClick={onDateClick}
 //               openEventForm={openEventForm}
 //               openExistingEvent={openExistingEvent}
+//               setShowHolidaysView={setShowHolidaysView} // Add this line
 //             />
 //           )}
 //         </div>
@@ -306,15 +321,25 @@
 //           onClose={() => setShowEventDetails(false)}
 //         />
 //       )}
+//       {showHolidaysView && (
+//         <HolidaysView 
+//           holidays={holidays}
+//           onClose={() => setShowHolidaysView(false)}
+//         />
+//       )}
 //     </div>
 //   );
 // };
 
 // export default CalendarMain;
 
+
+
+
+
 // Import required React hooks and date-fns functions
 import { useState, useEffect } from 'react';
-import { format, startOfWeek, addDays, startOfMonth, endOfMonth, endOfWeek, isSameMonth, isSameDay } from 'date-fns';
+import { startOfWeek, addDays, startOfMonth} from 'date-fns';
 
 // Import all components and utilities
 import CalendarHeader from './components/CalendarHeader';
@@ -362,11 +387,11 @@ const CalendarMain = () => {
 
   // Load events from localStorage on initial render
   useEffect(() => {
-    const loadEvents = () => {
+    const loadEvents = async () => {
       console.log('[DEBUG] Loading events from localStorage...');
       
       try {
-        // 1. Get recurring events (these are generated, not stored)
+        // 1. Get recurring events
         const recurringEvents = generateRecurringEvents();
         
         // 2. Try to load saved events from localStorage
@@ -380,7 +405,6 @@ const CalendarMain = () => {
               start: parseDateSafe(event.start),
               end: parseDateSafe(event.end)
             }));
-            console.log('[DEBUG] Successfully parsed saved events:', savedEvents);
           } catch (parseError) {
             console.error('[ERROR] Failed to parse saved events:', parseError);
           }
@@ -391,15 +415,18 @@ const CalendarMain = () => {
           mockEvent => !savedEvents.some(savedEvent => savedEvent.id === mockEvent.id)
         );
         
-        // 4. Combine all events with proper deduplication
+        // 4. Fetch holidays
+        const currentYear = new Date().getFullYear();
+        const holidaysData = await fetchHolidays(currentYear);
+        
+        // 5. Combine all events with proper deduplication
         const allEvents = [
           ...recurringEvents,
           ...savedEvents,
           ...mockEventsToAdd,
-          ...holidays
+          ...holidaysData
         ];
         
-        console.log('[DEBUG] Setting combined events:', allEvents);
         setEvents(allEvents);
       } catch (error) {
         console.error('[ERROR] Failed to load events:', error);
@@ -407,15 +434,8 @@ const CalendarMain = () => {
         setEvents([...generateRecurringEvents(), ...mockEvents]);
       }
     };
-
+  
     loadEvents();
-    
-    // Add debug function to window for testing
-    window.debugCalendarStorage = () => {
-      console.log('=== Storage Debug ===');
-      console.log('Current localStorage:', localStorage.getItem('calendarEvents'));
-      console.log('Current events state:', events);
-    };
   }, []);
 
   // Save events to localStorage whenever they change
