@@ -72,6 +72,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import TasksPage from './components/Tasks/pages/TasksPage';
 import Inbox_Main from './components/Inbox/Inbox_Main';
 import CalenderMain from './components/Calendar/CalendarMain';
+import Projects from './components/Projects/Projects';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -88,6 +89,7 @@ function App() {
             <Route path="/tasks" element={<TasksPage />} />
             <Route path="/inbox/*" element={<Inbox_Main />} />
             <Route path="/calendar/*" element={<CalenderMain/>} />
+            <Route path="/projects/*" element={<Projects/>} />
           </Routes>
         </div>
       </div>
