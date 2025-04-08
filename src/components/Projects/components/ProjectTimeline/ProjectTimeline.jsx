@@ -617,7 +617,7 @@ const ProjectTimeline = ({ projects }) => {
 
                     {/* Train indicator */}
                     <div
-                      className="absolute top-1/2 transform -translate-y-1/2 -translate-x-1/2 w-16 h-16 group"
+                      className="absolute top-1/2 transform -translate-y-1/2 -translate-x-1/2 w-20 h-20 group"
                       style={{
                         left: `${currentProgress}%`,
                         transition: 'left 0.3s ease'
