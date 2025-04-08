@@ -1,4 +1,14 @@
 // // helpers.js
+// export const getProgressByStatus = (status) => {
+//   switch (status) {
+//     case 'Not Started': return 0;
+//     case 'Planning': return 10;
+//     case 'In Progress': return 30;
+//     case 'Completed': return 100;
+//     case 'On Hold': return 5;
+//     default: return 0;
+//   }
+// };
 // export const generateId = () => {
 //   return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 // };
@@ -43,13 +53,13 @@
 
 
 // helpers.js
-export const getProgressByStatus = (status) => {
+export const getProgressByStatus = (status, currentProgress = 0) => {
   switch (status) {
     case 'Not Started': return 0;
     case 'Planning': return 10;
-    case 'In Progress': return 30;
+    case 'In Progress': return currentProgress; // Keep current progress when changing to In Progress
     case 'Completed': return 100;
-    case 'On Hold': return 5;
+    case 'On Hold': return currentProgress || 5; // Use current progress if available, otherwise 5 for new projects
     default: return 0;
   }
 };
@@ -60,6 +70,18 @@ export const generateId = () => {
 
 export const formatDate = (dateString) => {
   const options = { year: 'numeric', month: 'short', day: 'numeric' };
+  return new Date(dateString).toLocaleDateString(undefined, options);
+};
+
+export const formatDateTime = (dateString) => {
+  const options = { 
+    year: 'numeric', 
+    month: 'short', 
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true
+  };
   return new Date(dateString).toLocaleDateString(undefined, options);
 };
 

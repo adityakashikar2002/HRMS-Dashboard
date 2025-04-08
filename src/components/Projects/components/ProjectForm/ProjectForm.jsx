@@ -1,9 +1,8 @@
 // // ProjectForm.jsx
-// // components/ProjectForm/ProjectForm.jsx
 // import React, { useState, useEffect, useRef } from 'react';
 // import { saveProject, getProjectById } from '../../utils/projectStorage';
 // import { getTeams } from '../../utils/teamStorage';
-// import { generateId } from '../../utils/helpers';
+// import { generateId, getProgressByStatus } from '../../utils/helpers';
 // import MembersSelect from '../MembersSelect/MembersSelect';
 
 // const ProjectForm = ({ projectId, onSave, onCancel }) => {
@@ -41,6 +40,17 @@
 //       setProject(prev => ({ ...prev, id: generateId() }));
 //     }
 //   }, [projectId]);
+
+//   const handleStatusChange = (e) => {
+//     const { name, value } = e.target;
+//     const newProgress = getProgressByStatus(value);
+//     setProject(prev => ({ 
+//       ...prev, 
+//       [name]: value,
+//       progress: value === 'In Progress' ? prev.progress : newProgress
+//     }));
+//   };
+  
 
 //   const handleChange = (e) => {
 //     const { name, value } = e.target;
@@ -131,7 +141,7 @@
 //             <select
 //               name="status"
 //               value={project.status}
-//               onChange={handleChange}
+//               onChange={handleStatusChange}
 //               className="w-full bg-white border border-gray-300 rounded-lg p-2 text-gray-800"
 //             >
 //               <option value="Not Started">Not Started</option>
@@ -231,12 +241,13 @@
 //           </div>
           
 //         </div>
-//         <div className='mb-6'>
+//         {project.status === 'In Progress' && (
+//           <div className='mb-6'>
 //             <label className="block text-gray-700 mb-2">Progress (%)</label>
 //             <div className="flex items-center gap-4">
 //               <input
 //                 type="range"
-//                 min="0"
+//                 min="30"
 //                 max="100"
 //                 value={project.progress}
 //                 onChange={handleProgressChange}
@@ -244,14 +255,15 @@
 //               />
 //               <input
 //                 type="number"
-//                 min="0"
+//                 min="30"
 //                 max="100"
 //                 value={project.progress}
 //                 onChange={handleProgressChange}
 //                 className="w-20 bg-white border border-gray-300 rounded-lg p-2 text-gray-800"
 //               />
 //             </div>
-//         </div>
+//           </div>
+//         )}
         
 //         <div className="mb-6">
 //           <label className="block text-gray-700 mb-2">Attachments</label>
@@ -340,10 +352,7 @@
 // export default ProjectForm;
 
 
-
-
 // ProjectForm.jsx
-// components/ProjectForm/ProjectForm.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import { saveProject, getProjectById } from '../../utils/projectStorage';
 import { getTeams } from '../../utils/teamStorage';
@@ -388,13 +397,14 @@ const ProjectForm = ({ projectId, onSave, onCancel }) => {
 
   const handleStatusChange = (e) => {
     const { name, value } = e.target;
-    const newProgress = getProgressByStatus(value);
+    const newProgress = getProgressByStatus(value, project.progress); // Pass current progress
     setProject(prev => ({ 
       ...prev, 
       [name]: value,
       progress: value === 'In Progress' ? prev.progress : newProgress
     }));
   };
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
