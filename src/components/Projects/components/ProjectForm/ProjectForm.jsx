@@ -43,7 +43,7 @@
 
 //   const handleStatusChange = (e) => {
 //     const { name, value } = e.target;
-//     const newProgress = getProgressByStatus(value);
+//     const newProgress = getProgressByStatus(value, project.progress); // Pass current progress
 //     setProject(prev => ({ 
 //       ...prev, 
 //       [name]: value,
@@ -356,7 +356,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { saveProject, getProjectById } from '../../utils/projectStorage';
 import { getTeams } from '../../utils/teamStorage';
-import { generateId, getProgressByStatus } from '../../utils/helpers';
+import { generateId, getProgressByStatus, formatTime} from '../../utils/helpers';
 import MembersSelect from '../MembersSelect/MembersSelect';
 
 const ProjectForm = ({ projectId, onSave, onCancel }) => {
@@ -364,8 +364,8 @@ const ProjectForm = ({ projectId, onSave, onCancel }) => {
     id: '',
     name: '',
     description: '',
-    startDate: new Date().toISOString().split('T')[0],
-    endDate: '',
+    startDate: new Date().toISOString(),
+    endDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
     status: 'Not Started',
     priority: 'Medium',
     teams: [],
@@ -470,6 +470,24 @@ const ProjectForm = ({ projectId, onSave, onCancel }) => {
     };
   }, [project.attachments]);
 
+  const handleDateTimeChange = (e, field) => {
+    const { value } = e.target;
+    const date = new Date(project[field]);
+    const [time, modifier] = value.split(' ');
+    let [hours, minutes] = time.split(':');
+    
+    if (modifier === 'PM' && hours !== '12') {
+      hours = parseInt(hours, 10) + 12;
+    } else if (modifier === 'AM' && hours === '12') {
+      hours = '00';
+    }
+    
+    date.setHours(hours);
+    date.setMinutes(minutes);
+    
+    setProject(prev => ({ ...prev, [field]: date.toISOString() }));
+  };
+
   return (
     <div className="bg-white rounded-lg p-6 shadow-lg border border-gray-200">
       <h2 className="text-xl font-bold text-gray-800 mb-6">
@@ -506,28 +524,52 @@ const ProjectForm = ({ projectId, onSave, onCancel }) => {
             </select>
           </div>
           
-          <div>
-            <label className="block text-gray-700 mb-2">Start Date</label>
-            <input
-              type="date"
-              name="startDate"
-              value={project.startDate}
-              onChange={handleChange}
-              className="w-full bg-white border border-gray-300 rounded-lg p-2 text-gray-800"
-              required
-            />
-          </div>
-          
-          <div>
-            <label className="block text-gray-700 mb-2">End Date</label>
-            <input
-              type="date"
-              name="endDate"
-              value={project.endDate}
-              onChange={handleChange}
-              className="w-full bg-white border border-gray-300 rounded-lg p-2 text-gray-800"
-              required
-            />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div>
+              <label className="block text-gray-700 mb-2">Start Date</label>
+              <input
+                type="date"
+                value={project.startDate.split('T')[0]}
+                onChange={(e) => {
+                  const date = new Date(project.startDate);
+                  const [year, month, day] = e.target.value.split('-');
+                  date.setFullYear(year, month - 1, day);
+                  setProject(prev => ({ ...prev, startDate: date.toISOString() }));
+                }}
+                className="w-full bg-white border border-gray-300 rounded-lg p-2 text-gray-800"
+                required
+              />
+              <input
+                type="time"
+                value={formatTime(project.startDate).split(' ')[0]}
+                onChange={(e) => handleDateTimeChange(e, 'startDate')}
+                className="w-full bg-white border border-gray-300 rounded-lg p-2 text-gray-800 mt-2"
+                required
+              />
+            </div>
+            
+            <div>
+              <label className="block text-gray-700 mb-2">End Date</label>
+              <input
+                type="date"
+                value={project.endDate.split('T')[0]}
+                onChange={(e) => {
+                  const date = new Date(project.endDate);
+                  const [year, month, day] = e.target.value.split('-');
+                  date.setFullYear(year, month - 1, day);
+                  setProject(prev => ({ ...prev, endDate: date.toISOString() }));
+                }}
+                className="w-full bg-white border border-gray-300 rounded-lg p-2 text-gray-800"
+                required
+              />
+              <input
+                type="time"
+                value={formatTime(project.endDate).split(' ')[0]}
+                onChange={(e) => handleDateTimeChange(e, 'endDate')}
+                className="w-full bg-white border border-gray-300 rounded-lg p-2 text-gray-800 mt-2"
+                required
+              />
+            </div>
           </div>
           
           <div>
