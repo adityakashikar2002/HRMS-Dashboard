@@ -1,0 +1,36 @@
+/* styles/tree.css */
+.tree-node {
+    transition: all 0.3s ease;
+  }
+  
+  .tree-node:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+  
+  .tree-connector {
+    position: relative;
+  }
+  
+  .tree-connector::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    width: 2px;
+    height: 20px;
+    background-color: #d1d5db;
+    transform: translateX(-50%);
+  }
+  
+  .tree-connector-horizontal::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #d1d5db;
+    transform: translateY(-50%);
+    z-index: -1;
+  }

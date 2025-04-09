@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles */
+.org-node {
+  transition: all 0.3s ease;
+}
+
+.org-node:hover {
+  transform: translateY(-2px);
+}
+
+.tree-connector {
+  border-left: 2px solid #e5e7eb;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .tree-container {
+    padding: 1rem;
+  }
+}
