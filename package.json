@@ -41,6 +41,8 @@
     "recharts": "^2.15.2",
     "redux": "^5.0.1",
     "remark-gfm": "^4.0.1",
+    "shadcn-ui": "^0.9.5",
+    "styled-components": "^6.1.17",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

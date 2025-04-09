@@ -61,7 +61,7 @@ const ProjectsList = () => {
         <h1 className="text-2xl font-bold text-gray-800">Projects</h1>
         
         <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
-          <input
+          {/* <input
             type="text"
             placeholder="Search projects..."
             value={searchTerm}
@@ -80,7 +80,7 @@ const ProjectsList = () => {
             <option value="In Progress">In Progress</option>
             <option value="Completed">Completed</option>
             <option value="On Hold">On Hold</option>
-          </select>
+          </select> */}
           
           <button
             onClick={() => {
@@ -115,6 +115,30 @@ const ProjectsList = () => {
       <ProjectStats projects={projects} />
       <ProjectTimeline projects={projects} />
       
+      <div className="flex flex-row gap-4 justify-end w-full"> {/* Changed to flex-row and added justify-end */}
+        <input
+          type="text"
+          placeholder="Search projects..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="bg-white border border-gray-300 rounded-lg p-2 text-gray-800 shadow-sm w-64"
+        />
+
+        <select
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+          className="bg-white border border-gray-300 rounded-lg p-2 text-gray-800 shadow-sm"
+        >
+          <option value="All">All Status</option>
+          <option value="Not Started">Not Started</option>
+          <option value="Planning">Planning</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Completed">Completed</option>
+          <option value="On Hold">On Hold</option>
+        </select>
+      </div>
+      
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredProjects.map(project => (
           <ProjectCard
