@@ -3,7 +3,7 @@ import EmployeeForm from './EmployeeForm';
 import Modal from '../UI/Modal';
 import ProgressSteps from '../UI/ProgressSteps';
 
-const AddEmployee = ({ employees, onSave, onCancel }) => {
+const AddEmployee = ({ employees, onSave, onCancel, positions = [] }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [employeeData, setEmployeeData] = useState({
     firstName: '',
@@ -55,6 +55,7 @@ const AddEmployee = ({ employees, onSave, onCancel }) => {
         onChange={handleChange}
         currentStep={currentStep}
         employees={employees}
+        positions={positions}
       />
 
       <div className="flex justify-between mt-8">

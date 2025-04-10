@@ -69,10 +69,10 @@ import './App.css';
 import Sidebar from './components/Sidebar/Sidebar';
 import Header from './components/Header/Header';
 import Dashboard from './components/Dashboard/Dashboard';
-import TasksPage from './components/Tasks/pages/TasksPage';
-import Inbox_Main from './components/Inbox/Inbox_Main';
-import CalenderMain from './components/Calendar/CalendarMain';
-import Projects from './components/Projects/Projects';
+// import TasksPage from './components/Tasks/pages/TasksPage';
+// import Inbox_Main from './components/Inbox/Inbox_Main';
+// import CalenderMain from './components/Calendar/CalendarMain';
+// import Projects from './components/Projects/Projects';
 import EmployeePage from './components/Employee/pages/EmployeePage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -87,10 +87,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/tasks" element={<TasksPage />} />
-            <Route path="/inbox/*" element={<Inbox_Main />} />
-            <Route path="/calendar/*" element={<CalenderMain/>} />
-            <Route path="/projects/*" element={<Projects/>} />
+            {/* <Route path="/tasks" element={<TasksPage />} /> */}
+            {/* <Route path="/inbox/*" element={<Inbox_Main />} /> */}
+            {/* <Route path="/calendar/*" element={<CalenderMain/>} /> */}
+            {/* <Route path="/projects/*" element={<Projects/>} /> */}
             <Route path="/employees/*" element={<EmployeePage/>} />
           </Routes>
         </div>
