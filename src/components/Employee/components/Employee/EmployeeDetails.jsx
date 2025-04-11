@@ -49,6 +49,9 @@ const EmployeeDetails = ({
   // Safe manager lookup
   const getManagerName = () => {
     if (!employeeData.managerId) return 'None';
+    if (employeeData.managerId.startsWith('dept-')) {
+      return employeeData.managerId.replace('dept-', '') + ' (Department)';
+    }
     const manager = Array.isArray(employees) 
       ? employees.find(e => e?.id === employeeData.managerId)
       : null;
@@ -165,10 +168,18 @@ const EmployeeDetails = ({
             </div>
 
             <div className="md:col-span-2">
+              <div>
+                <h4 className="text-sm font-medium text-gray-500">Department</h4>
+                <p className="text-gray-800">{employee.department || 'None'}</p>
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <h4 className="text-sm font-medium text-gray-500">Manager</h4>
-                  <p className="text-gray-800">{getManagerName()}</p>
+                    <h4 className="text-sm font-medium text-gray-500">Manager</h4>
+                    <p className="text-gray-800">
+                      {employee.managerId 
+                        ? employees.find(e => e.id === employee.managerId)?.fullName 
+                        : 'None'}
+                    </p>
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-gray-500">Phone</h4>
@@ -188,14 +199,7 @@ const EmployeeDetails = ({
                         : `Rs.${employee.salary}/yr`}
                   </p>
                 </div>
-                <div>
-                  <h4 className="text-sm font-medium text-gray-500">Manager</h4>
-                  <p className="text-gray-800">
-                    {employee.managerId 
-                      ? employees.find(e => e.id === employee.managerId)?.fullName 
-                      : 'None'}
-                  </p>
-                </div>
+                
               </div>
 
               {employee.skills?.length > 0 && (

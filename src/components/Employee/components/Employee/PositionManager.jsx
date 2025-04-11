@@ -1,4 +1,4 @@
-// PositionManager.jsx
+// src/components/Employee/PositionManager.jsx
 import { useState } from 'react';
 import { Button, Modal } from '../UI';
 
@@ -77,7 +77,7 @@ const PositionManager = ({
                   <h3 className="font-semibold text-gray-800">{position.title}</h3>
                   <div className="flex justify-between mt-2">
                     <span className="text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded-full">
-                      {position.department}
+                      {position.department || 'No Department'}
                     </span>
                     <span className="text-xs px-2 py-1 bg-green-100 text-green-800 rounded-full">
                       {position.level}
@@ -118,15 +118,14 @@ const PositionManager = ({
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Department*</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Department</label>
                       <select
                         name="department"
                         value={positionData.department}
                         onChange={handleChange}
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg"
-                        required
                       >
-                        <option value="">Select Department</option>
+                        <option value="">No Department</option>
                         {departments.map(dept => (
                           <option key={dept.id} value={dept.name}>{dept.name}</option>
                         ))}
@@ -168,7 +167,7 @@ const PositionManager = ({
                     <Button 
                       variant="primary"
                       onClick={handleSavePosition}
-                      disabled={!positionData.title.trim() || !positionData.department || !positionData.level}
+                      disabled={!positionData.title.trim() || !positionData.level}
                     >
                       Save Changes
                     </Button>
@@ -195,15 +194,14 @@ const PositionManager = ({
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Department*</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Department</label>
                 <select
                   name="department"
                   value={positionData.department}
                   onChange={handleChange}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg"
-                  required
                 >
-                  <option value="">Select Department</option>
+                  <option value="">No Department</option>
                   {departments.map(dept => (
                     <option key={dept.id} value={dept.name}>{dept.name}</option>
                   ))}
@@ -245,7 +243,7 @@ const PositionManager = ({
               <Button 
                 variant="primary"
                 onClick={handleSavePosition}
-                disabled={!positionData.title.trim() || !positionData.department || !positionData.level}
+                disabled={!positionData.title.trim() || !positionData.level}
               >
                 Add Position
               </Button>

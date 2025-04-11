@@ -1,3 +1,4 @@
+
 // EmployeeTree.jsx
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { Button } from '../UI';
@@ -19,13 +20,7 @@ const TreeNode = ({ node = {}, onEmployeeClick = () => {} }) => {
 
   return (
     <div className="flex flex-col items-center relative tree-node">
-      <div
-        className={`p-4 rounded-xl text-white text-center min-w-[150px] shadow-lg ${getPositionColor(
-          node.position,
-          node.type
-        )}`}
-        onClick={() => node.type === 'employee' && onEmployeeClick(node.id)}
-      >
+      <div className={`p-4 rounded-xl text-white text-center min-w-[150px] shadow-lg ${getPositionColor(node.position, node.type)}`}>
         {node.type === 'department' ? (
           <div className="w-12 h-12 rounded-full bg-white/20 mx-auto mb-2 flex items-center justify-center">
             <span className="text-lg font-semibold">

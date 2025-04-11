@@ -5,3 +5,4 @@ export { default as EmployeeForm } from './EmployeeForm';
 export { default as EmployeeTree } from './EmployeeTree';
 export { default as EmployeesList } from './EmployeesList';
 export { default as PositionManager } from './PositionManager';
+export { default as DepartmentManager } from './DepartmentManager';
