@@ -252,7 +252,91 @@
 // };
 
 
-// src/utils/treeUtils.js
+// // src/utils/treeUtils.js WORKS 99
+// export const buildTree = (employees, departments) => {
+//   // Create CEO node
+//   const ceo = employees.find(e => e.position?.toLowerCase().includes('ceo'));
+//   const ceoNode = ceo ? {
+//     ...ceo,
+//     id: 'ceo-root',
+//     name: `${ceo.firstName} ${ceo.lastName}`,
+//     type: 'employee',
+//     position: 'CEO',
+//     children: []
+//   } : null;
+
+//   // Build department hierarchy
+//   const departmentMap = {};
+//   departments?.forEach(dept => {
+//     departmentMap[dept.id] = {
+//       ...dept,
+//       type: 'department',
+//       children: []
+//     };
+//   });
+
+//   // Build department tree structure under CEO
+//   if (ceoNode && departments) {
+//     departments.forEach(dept => {
+//       if (!dept.isSubDepartment) {
+//         ceoNode.children.push(departmentMap[dept.id]);
+//       } else if (dept.parentId && departmentMap[dept.parentId]) {
+//         departmentMap[dept.parentId].children.push(departmentMap[dept.id]);
+//       }
+//     });
+//   }
+
+//   // Add employees to their departments
+//   employees?.forEach(employee => {
+//     if (employee.position?.toLowerCase().includes('ceo')) return; // Skip CEO
+
+//     const employeeNode = {
+//       ...employee,
+//       type: 'employee',
+//       name: `${employee.firstName} ${employee.lastName}`,
+//       children: []
+//     };
+
+//     // Find the department this employee belongs to
+//     let foundDepartment = null;
+//     const traverse = (nodes) => {
+//       if (!nodes) return false;
+//       for (const node of nodes) {
+//         if (node.name === employee.department && node.type === 'department') {
+//           foundDepartment = node;
+//           return true;
+//         }
+//         if (node.children && traverse(node.children)) {
+//           return true;
+//         }
+//       }
+//       return false;
+//     };
+
+//     if (ceoNode) {
+//       traverse(ceoNode.children);
+//     }
+
+//     if (foundDepartment) {
+//       foundDepartment.children.push(employeeNode);
+//     } else if (ceoNode) {
+//       // If no department found, add directly under CEO
+//       ceoNode.children.push(employeeNode);
+//     }
+//   });
+
+//   return ceoNode ? [ceoNode] : [];
+// };
+
+// export const updateTree = (currentTree, employees, departments, newEmployee) => {
+//   return buildTree([...employees, newEmployee], departments);
+// };
+
+
+
+
+
+
 export const buildTree = (employees, departments) => {
   // Create CEO node
   const ceo = employees.find(e => e.position?.toLowerCase().includes('ceo'));
@@ -278,11 +362,7 @@ export const buildTree = (employees, departments) => {
   // Build department tree structure under CEO
   if (ceoNode && departments) {
     departments.forEach(dept => {
-      if (!dept.isSubDepartment) {
-        ceoNode.children.push(departmentMap[dept.id]);
-      } else if (dept.parentId && departmentMap[dept.parentId]) {
-        departmentMap[dept.parentId].children.push(departmentMap[dept.id]);
-      }
+      ceoNode.children.push(departmentMap[dept.id]);
     });
   }
 
