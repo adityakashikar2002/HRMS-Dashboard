@@ -37,6 +37,7 @@ export const buildTree = (employees, departments) => {
       ...employee,
       type: 'employee',
       name: `${employee.firstName} ${employee.lastName}`,
+      position: `${employee.position}`,
       children: []
     };
 
