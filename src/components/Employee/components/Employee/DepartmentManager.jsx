@@ -260,17 +260,6 @@ const DepartmentManager = ({
                           required
                         />
                       </div>
-                      {/* <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Salary*</label>
-                        <input
-                          type="number"
-                          name="salary"
-                          value={departmentData.head.salary}
-                          onChange={handleHeadChange}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg"
-                          required
-                        />
-                      </div> */}
                     </div>
                   </div>
                   
@@ -435,17 +424,6 @@ const DepartmentManager = ({
                     required
                   />
                 </div>
-                {/* <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Salary*</label>
-                  <input
-                    type="number"
-                    name="salary"
-                    value={departmentData.head.salary}
-                    onChange={handleHeadChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg"
-                    required
-                  />
-                </div> */}
               </div>
             </div>
             

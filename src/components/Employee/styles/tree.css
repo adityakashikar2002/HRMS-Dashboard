@@ -1,68 +1,17 @@
-
 .tree-node {
-    transition: all 0.3s ease;
-  }
-  
-  .tree-node:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  }
-  
-  .tree-connector {
-    position: relative;
-  }
-  
-  .tree-connector::before {
-    content: '';
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    width: 2px;
-    height: 20px;
-    background-color: #d1d5db;
-    transform: translateX(-50%);
-  }
-  
-  .tree-connector-horizontal::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background-color: #d1d5db;
-    transform: translateY(-50%);
-    z-index: -1;
-  }
-
-
-
-/* .org-tree {
   transition: all 0.3s ease;
 }
 
-.org-node {
-  transition: all 0.2s ease;
-}
-
-.org-node:hover {
+.tree-node:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.12), 0 6px 6px rgba(0, 0, 0, 0.1);
 }
 
-.department-node {
-  border-left: 4px solid transparent;
-}
-
-.department-node:hover {
-  border-left-color: var(--department-color);
-}
-
-.connector-line {
+.tree-connector {
   position: relative;
 }
 
-.connector-line::before {
+.tree-connector::before {
   content: '';
   position: absolute;
   top: -20px;
@@ -73,7 +22,7 @@
   transform: translateX(-50%);
 }
 
-.horizontal-connector::after {
+.tree-connector-horizontal::after {
   content: '';
   position: absolute;
   top: 50%;
@@ -84,18 +33,3 @@
   transform: translateY(-50%);
   z-index: -1;
 }
-
-.position-badge {
-  font-size: 0.65rem;
-  padding: 0.15rem 0.5rem;
-  border-radius: 9999px;
-}
-
-.employee-avatar {
-  transition: all 0.2s ease;
-}
-
-.employee-avatar:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
-} */
