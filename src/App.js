@@ -73,8 +73,8 @@ import Dashboard from './components/Dashboard/Dashboard';
 // import Inbox_Main from './components/Inbox/Inbox_Main';
 // import CalenderMain from './components/Calendar/CalendarMain';
 // import Projects from './components/Projects/Projects';
-import EmployeePage from './components/Employee/pages/EmployeePage';
-// import Attendance from './components/Attendance/Attendance';
+// import EmployeePage from './components/Employee/pages/EmployeePage';
+import Attendance from './components/Attendance-3/Attendance';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -92,8 +92,8 @@ function App() {
             {/* <Route path="/inbox/*" element={<Inbox_Main />} /> */}
             {/* <Route path="/calendar/*" element={<CalenderMain/>} /> */}
             {/* <Route path="/projects/*" element={<Projects/>} /> */}
-            <Route path="/employees/*" element={<EmployeePage/>} />
-            {/* <Route path="/attendance/*" element={<Attendance/>} /> */}
+            {/* <Route path="/employees/*" element={<EmployeePage/>} /> */}
+            <Route path="/attendance/*" element={<Attendance/>} />
           </Routes>
         </div>
       </div>

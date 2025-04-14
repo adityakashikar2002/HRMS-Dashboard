@@ -1,0 +1,21 @@
+import React from 'react';
+import { timeFilters } from '../utils/data';
+
+const TimeFilters = ({ activeFilter, setActiveFilter, onTodayClick }) => {
+  return (
+    <div className="time-filters">
+      {timeFilters.map((filter) => (
+        <button
+          key={filter}
+          className={`filter-btn ${activeFilter === filter ? 'active' : ''}`}
+          onClick={() => setActiveFilter(filter)}
+        >
+          {filter}
+        </button>
+      ))}
+      <button className="today-btn" onClick={onTodayClick}>Today</button>
+    </div>
+  );
+};
+
+export default TimeFilters;
