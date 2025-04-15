@@ -47,7 +47,6 @@
   height: 100vh;
 }
 
-/* Header Styles */
 header {
   display: flex;
   justify-content: space-between;
@@ -98,7 +97,6 @@ label {
   font-weight: 500;
 }
 
-/* Time Filters */
 .time-filters {
   display: flex;
   margin-bottom: 24px;
@@ -157,7 +155,6 @@ label {
   font-size: 16px;
 }
 
-/* Dashboard Layout */
 .dashboard {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -171,7 +168,7 @@ label {
   }
 }
 
-/* Card Styles */
+
 .status-cards, .attendance-stats, 
 .leave-requests, .team-leaves, 
 .overtime-history, .attendance-overview {
@@ -214,7 +211,6 @@ label {
   color: var(--white);
 }
 
-/* Status Cards */
 .cards-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -275,7 +271,6 @@ label {
   font-size: 16px;
 }
 
-/* Attendance Stats */
 .attendance-stats {
   display: flex;
   flex-direction: column;
@@ -301,7 +296,7 @@ label {
 }
 
 .stat-card {
-  background-color: var(--white);
+  background-color: var(--primary-light);
   border-radius: var(--radius-sm);
   padding: 16px;
   border: 1px solid var(--border);
@@ -364,7 +359,6 @@ label {
   color: var(--primary-dark);
 }
 
-/* Chart Containers */
 .chart-container {
   background-color: var(--white);
   border-radius: var(--radius-sm);
@@ -476,7 +470,6 @@ label {
   background-color: var(--danger);
 }
 
-/* Right Panel Components */
 .right-panel {
   display: flex;
   flex-direction: column;
@@ -497,7 +490,6 @@ label {
   padding-right: 8px;
 }
 
-/* Scrollbar styling */
 .requests-list::-webkit-scrollbar,
 .leaves-list::-webkit-scrollbar,
 .history-list::-webkit-scrollbar,
@@ -603,7 +595,6 @@ label {
   font-weight: 600;
 }
 
-/* Details sections */
 .request-details, .leave-details, .overtime-details, .row-details {
   padding: 12px;
   background-color: var(--gray-lighter);
@@ -648,7 +639,7 @@ label {
   font-weight: 600;
 }
 
-/* Attendance Overview */
+
 .attendance-overview {
   transition: var(--transition);
 }
@@ -666,7 +657,7 @@ label {
 .overview-header-row {
   display: grid;
   grid-template-columns: 80px 150px 120px 100px 100px 100px 100px 100px 100px;
-  gap: 12px;
+  gap: 60px;
   padding: 12px 16px;
   background-color: var(--gray-light);
   font-size: 12px;
@@ -682,7 +673,7 @@ label {
 .overview-row {
   display: grid;
   grid-template-columns: 80px 150px 120px 100px 100px 100px 100px 100px 100px;
-  gap: 12px;
+  gap: 60px;
   padding: 12px 16px;
   font-size: 13px;
   color: var(--text);
@@ -705,7 +696,6 @@ label {
   font-weight: 600;
 }
 
-/* Loading state */
 @keyframes pulse {
   0% { opacity: 0.6; }
   50% { opacity: 1; }
@@ -736,7 +726,7 @@ label {
   100% { transform: translateX(100%); }
 }
 
-/* Animations */
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
@@ -746,8 +736,19 @@ label {
   animation: fadeIn 0.3s ease-out forwards;
 }
 
-/* Stagger animations */
+
 .status-card:nth-child(1) { animation-delay: 0.1s; }
 .status-card:nth-child(2) { animation-delay: 0.2s; }
 .status-card:nth-child(3) { animation-delay: 0.3s; }
 .status-card:nth-child(4) { animation-delay: 0.4s; }
+.status-card:nth-child(5) { animation-delay: 0.5s; }
+.status-card:nth-child(6) { animation-delay: 0.6s; }
+.status-card:nth-child(7) { animation-delay: 0.7s; }
+.status-card:nth-child(8) { animation-delay: 0.8s; }
+
+.overview-header {
+  display: flex;
+  justify-content: space-between; /* Aligns items to the ends */
+  align-items: center; /* Centers items vertically */
+  margin-bottom: 16px; /* Adjust as needed */
+}

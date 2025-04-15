@@ -111,11 +111,11 @@ const Attendance = () => {
             selectedDepartment={selectedDepartment}
             onChange={handleDepartmentChange}
           />
-          <YearFilter 
+          {/* <YearFilter 
             years={data.years}
             selectedYear={selectedYear}
             onChange={handleYearChange}
-          />
+          /> */}
         </div>
       </header>
 

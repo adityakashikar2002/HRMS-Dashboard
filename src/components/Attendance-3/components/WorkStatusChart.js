@@ -72,14 +72,14 @@ const WorkStatusChart = ({ atWork, idle, offline, timeRange }) => {
   };
 
   return (
-    <div className="chart-container">
+    <div className="chart-container ml-10 ">
       <div className="chart-header">
         <h3>Work Hour</h3>
         <button className="export-btn" onClick={handleExport}>
           Export CSV
         </button>
       </div>
-      <div className="chart-wrapper" style={{ height: '200px' }}>
+      <div className="chart-wrapper" style={{ height: '200px', width: '850px'}}>
         <Bar data={chartData} options={options} />
       </div>
       <div className="chart-stats">

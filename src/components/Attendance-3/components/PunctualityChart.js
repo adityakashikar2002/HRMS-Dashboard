@@ -50,12 +50,12 @@ const PunctualityChart = ({ onTime, late, timeRange, stats }) => {
           Export CSV
         </button>
       </div>
-      <div className="chart-wrapper">
+      <div className="chart-wrapper" style={{ height: '200px', width: '400px'}}>
         <Doughnut data={chartData} options={options} />
       </div>
       <div className="chart-center-text">
-        <span className="percentage">{onTime}%</span>
-        <span className="label">On Time</span>
+        <span className="percentage mb-32 ml-2">{onTime}%</span>
+        {/* <span className="label">On Time</span> */}
       </div>
       <div className="chart-footer">
         <div className="footer-item">

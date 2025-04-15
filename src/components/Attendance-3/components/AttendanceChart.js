@@ -63,8 +63,8 @@ const AttendanceChart = ({ attendanceSource, timeRange }) => {
           Export CSV
         </button>
       </div>
-      <div className="chart-wrapper">
-        <Pie data={chartData} options={options} />
+      <div className="chart-wrapper" style={{ height: '200px', width: '400px'}}>
+        <Pie data={chartData} options={options}/>
       </div>
       <div className="chart-stats">
         <div className="stat-item">

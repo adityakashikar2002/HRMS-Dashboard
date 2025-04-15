@@ -34,11 +34,11 @@ const AttendanceStats = ({ stats, timeRange }) => {
       </div>
 
       <div className="stats-section">
-        <div className="stat-card large">
+        {/* <div className="stat-card large">
           <div className="stat-title">Worked</div>
           <div className="stat-value">{stats.workedPercentage || '0%'}</div>
           <div className="stat-subtext">of {timeRange} hours</div>
-        </div>
+        </div> */}
         
         <div className="stat-card chart-card">
           <WorkStatusChart 
@@ -51,7 +51,7 @@ const AttendanceStats = ({ stats, timeRange }) => {
       </div>
 
       <div className="stats-section">
-        <div className="stat-card chart-card">
+        <div className="stat-card chart-card ml-10">
           <PunctualityChart 
             onTime={stats.punctuality?.onTime || 0}
             late={stats.punctuality?.late || 0}
