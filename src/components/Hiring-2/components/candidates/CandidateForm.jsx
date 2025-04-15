@@ -9,7 +9,7 @@ const CandidateForm = ({ candidate, jobs, onSubmit, onCancel }) => {
     resume: '',
     jobId: '',
     source: 'LinkedIn',
-    status: 'applied',
+    status: 'Applied',
     currentStage: 'Application Review'
   });
 
@@ -85,7 +85,7 @@ const CandidateForm = ({ candidate, jobs, onSubmit, onCancel }) => {
             </div>
           </div>
           
-          <div className="form-group">
+          {/* <div className="form-group">
             <label>Resume (File Name)</label>
             <input
               type="text"
@@ -93,7 +93,7 @@ const CandidateForm = ({ candidate, jobs, onSubmit, onCancel }) => {
               value={formData.resume}
               onChange={handleChange}
             />
-          </div>
+          </div> */}
           
           <div className="form-row">
             <div className="form-group">
@@ -135,11 +135,11 @@ const CandidateForm = ({ candidate, jobs, onSubmit, onCancel }) => {
                 value={formData.status}
                 onChange={handleChange}
               >
-                <option value="applied">Applied</option>
-                <option value="interview">Interview</option>
-                <option value="offer">Offer</option>
-                <option value="hired">Hired</option>
-                <option value="rejected">Rejected</option>
+                <option value="Applied">Applied</option>
+                <option value="Interview">Interview</option>
+                <option value="Offer">Offer</option>
+                <option value="Hired">Hired</option>
+                <option value="Rejected">Rejected</option>
               </select>
             </div>
             

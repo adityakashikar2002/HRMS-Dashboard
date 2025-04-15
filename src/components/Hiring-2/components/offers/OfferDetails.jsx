@@ -54,8 +54,8 @@ const OfferDetails = () => {
         </div>
         {offer.salary && (
           <div className="info-row">
-            <span className="label">Salary: Rs.</span>
-            <span className="value">{offer.salary}</span>
+            <span className="label">Salary:</span>
+            <span className="value">Rs. {offer.salary}</span>
           </div>
         )}
         {offer.onboardingDate && (

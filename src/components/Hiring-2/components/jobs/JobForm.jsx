@@ -88,11 +88,11 @@ const JobForm = ({ job, onSubmit, onCancel }) => {
                 value={formData.type}
                 onChange={handleChange}
               >
-                <option value="full-time">Full-time</option>
-                <option value="part-time">Part-time</option>
-                <option value="contract">Contract</option>
-                <option value="internship">Internship</option>
-                <option value="remote">Remote</option>
+                <option value="Full-time">Full-time</option>
+                <option value="Part-time">Part-time</option>
+                <option value="Contract">Contract</option>
+                <option value="Internship">Internship</option>
+                <option value="Remote">Remote</option>
               </select>
             </div>
           </div>

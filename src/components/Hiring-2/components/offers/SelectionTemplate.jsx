@@ -31,7 +31,7 @@ const SelectionTemplate = ({ candidate, job, salary, onboardingDate }) => {
         
         <ul>
           <li><strong>Position:</strong> {job ? job.title : 'Position'}</li>
-          <li><strong>Salary: Rs.</strong> {salary || 'To be discussed'}</li>
+          <li><strong>Salary:</strong> Rs. {salary || 'To be discussed'}</li>
           {onboardingDate && (
             <li><strong>Start Date:</strong> {formatDate(onboardingDate)}</li>
           )}
@@ -48,9 +48,9 @@ const SelectionTemplate = ({ candidate, job, salary, onboardingDate }) => {
         
         <p className="closing">
           Sincerely,<br />
-          [Your Name]<br />
-          [Your Position]<br />
-          [Company Name]
+          Deepali Raut<br />
+          HR Manager (Recruitment)<br />
+          Qloron
         </p>
       </div>
     </div>

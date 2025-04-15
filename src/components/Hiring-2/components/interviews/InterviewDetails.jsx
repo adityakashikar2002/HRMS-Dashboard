@@ -14,7 +14,7 @@ const InterviewDetails = () => {
       <div className="interview-details-container">
         <div className="interview-not-found">
           <h2>Interview not found</h2>
-          <Link to="/interviews" className="back-button">
+          <Link to="/hiring/interviews" className="back-button">
             Back to Interviews
           </Link>
         </div>
@@ -26,7 +26,7 @@ const InterviewDetails = () => {
     <div className="interview-details-container">
       <div className="interview-header">
         <h2>Interview Details</h2>
-        <Link to="/interviews" className="back-button">
+        <Link to="/hiring/interviews" className="back-button">
           Back to Interviews
         </Link>
       </div>

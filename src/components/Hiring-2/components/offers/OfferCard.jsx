@@ -38,8 +38,8 @@ const OfferCard = ({ offer, onEdit, onDelete }) => {
           <span className="value">{offer.offerType}</span>
         </div>
         <div className="detail-item">
-          <span className="label">Salary: Rs.</span>
-          <span className="value">{offer.salary}</span>
+          <span className="label">Salary:</span>
+          <span className="value">Rs. {offer.salary}</span>
         </div>
         <div className="detail-item">
           <span className="label">Created:</span>

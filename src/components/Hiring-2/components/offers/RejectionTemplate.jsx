@@ -20,7 +20,7 @@ const RejectionTemplate = ({ candidate, job }) => {
         <p className="salutation">Dear {candidate ? candidate.name : 'Candidate'},</p>
         
         <p>
-          Thank you for taking the time to apply for the <strong>{job ? job.title : 'position'}</strong> 
+          Thank you for taking the time to apply for the <strong>{job ? `${job.title} `: 'position '}</strong>
           role at our company. We appreciate the opportunity to learn about your skills and accomplishments.
         </p>
         
@@ -41,9 +41,9 @@ const RejectionTemplate = ({ candidate, job }) => {
         
         <p className="closing">
           Sincerely,<br />
-          [Your Name]<br />
-          [Your Position]<br />
-          [Company Name]
+          Deepali Raut<br />
+          HR Manager (Recruitment)<br />
+          Qloron
         </p>
       </div>
     </div>

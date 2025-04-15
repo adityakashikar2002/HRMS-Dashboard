@@ -23,7 +23,7 @@ const JobDetails = () => {
   }
 
   return (
-    <div className="job-details-container">
+    <div className="job-details-page">
       <div className="job-header">
         <h2>Job Details</h2>
         <Link to="/hiring/jobs" className="back-button">

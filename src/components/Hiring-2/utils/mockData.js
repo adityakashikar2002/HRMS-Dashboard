@@ -11,18 +11,31 @@ export const jobTitles = [
     'Digital Marketing Specialist'
   ];
   
+  // export const locations = [
+  //   'New York',
+  //   'San Francisco',
+  //   'Remote',
+  //   'Chicago',
+  //   'Austin',
+  //   'Boston',
+  //   'Seattle',
+  //   'London',
+  //   'Bangalore',
+  //   'Tokyo'
+  // ];
   export const locations = [
-    'New York',
-    'San Francisco',
-    'Remote',
-    'Chicago',
-    'Austin',
-    'Boston',
-    'Seattle',
-    'London',
     'Bangalore',
-    'Tokyo'
+    'Mumbai',
+    'Delhi',
+    'Hyderabad',
+    'Chennai',
+    'Pune',
+    'Kolkata',
+    'Ahmedabad',
+    'Noida',
+    'Gurgaon'
   ];
+  
   
   export const skills = [
     'React',
@@ -45,28 +58,55 @@ export const jobTitles = [
     'Project Management'
   ];
   
+  // export const candidateNames = [
+  //   'John Doe',
+  //   'Jane Smith',
+  //   'Robert Johnson',
+  //   'Emily Davis',
+  //   'Michael Wilson',
+  //   'Sarah Brown',
+  //   'David Taylor',
+  //   'Jessica Anderson',
+  //   'Thomas Martinez',
+  //   'Jennifer Lee'
+  // ];
+  
+  // export const interviewerNames = [
+  //   'Alex Johnson',
+  //   'Sam Wilson',
+  //   'Taylor Smith',
+  //   'Jordan Brown',
+  //   'Casey Davis',
+  //   'Riley Miller',
+  //   'Morgan Taylor',
+  //   'Jamie Anderson',
+  //   'Cameron Martinez',
+  //   'Drew Lee'
+  // ];
+
   export const candidateNames = [
-    'John Doe',
-    'Jane Smith',
-    'Robert Johnson',
-    'Emily Davis',
-    'Michael Wilson',
-    'Sarah Brown',
-    'David Taylor',
-    'Jessica Anderson',
-    'Thomas Martinez',
-    'Jennifer Lee'
+    'Rohit Sharma',
+    'Ananya Iyer',
+    'Vikram Mehta',
+    'Priya Nair',
+    'Aarav Kapoor',
+    'Ishita Reddy',
+    'Kunal Verma',
+    'Sneha Desai',
+    'Raj Malhotra',
+    'Megha Joshi'
   ];
   
   export const interviewerNames = [
-    'Alex Johnson',
-    'Sam Wilson',
-    'Taylor Smith',
-    'Jordan Brown',
-    'Casey Davis',
-    'Riley Miller',
-    'Morgan Taylor',
-    'Jamie Anderson',
-    'Cameron Martinez',
-    'Drew Lee'
+    'Meera Desai',
+    'Karan Sinha',
+    'Neha Bhatia',
+    'Amit Trivedi',
+    'Riya Sharma',
+    'Siddharth Rao',
+    'Divya Kapoor',
+    'Manish Mehta',
+    'Pooja Menon',
+    'Abhinav Jain'
   ];
+  
