@@ -1,0 +1,60 @@
+import React from 'react';
+import { formatDate } from '../../utils/helpers';
+import './SelectionTemplate.css';
+
+const SelectionTemplate = ({ candidate, job, salary, onboardingDate }) => {
+  return (
+    <div className="selection-template">
+      <div className="letter-header">
+        <h3>Offer Letter</h3>
+        <p>{formatDate(new Date().toISOString())}</p>
+      </div>
+      
+      {/* <div className="candidate-address">
+        {candidate && <p>{candidate.name}</p>}
+        {candidate && <p>{candidate.email}</p>}
+        {candidate && candidate.phone && <p>{candidate.phone}</p>}
+      </div> */}
+      
+      <div className="letter-content">
+        <p className="salutation">Dear {candidate ? candidate.name : 'Candidate'},</p>
+        
+        <p>
+          We are pleased to offer you the position of <strong>{job ? job.title : 'Position'}</strong> 
+          {job && job.type && ` (${job.type})`} at our company. After careful consideration of your 
+          qualifications and experience, we believe you will be a valuable addition to our team.
+        </p>
+        
+        <p>
+          The details of your offer are as follows:
+        </p>
+        
+        <ul>
+          <li><strong>Position:</strong> {job ? job.title : 'Position'}</li>
+          <li><strong>Salary: Rs.</strong> {salary || 'To be discussed'}</li>
+          {onboardingDate && (
+            <li><strong>Start Date:</strong> {formatDate(onboardingDate)}</li>
+          )}
+          {job && job.location && (
+            <li><strong>Location:</strong> {job.location}</li>
+          )}
+        </ul>
+        
+        <p>
+          We are excited about the prospect of you joining our team and look forward to your 
+          positive response. Please sign and return a copy of this letter to indicate your 
+          acceptance of this offer.
+        </p>
+        
+        <p className="closing">
+          Sincerely,<br />
+          [Your Name]<br />
+          [Your Position]<br />
+          [Company Name]
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default SelectionTemplate;

@@ -1,0 +1,115 @@
+.candidate-details-container {
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .candidate-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .candidate-header h2 {
+    margin: 0;
+    color: #2c3e50;
+  }
+  
+  .back-button {
+    padding: 8px 16px;
+    background: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s;
+  }
+  
+  .back-button:hover {
+    background: #2980b9;
+  }
+  
+  .candidate-info {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .info-row {
+    display: flex;
+    margin-bottom: 10px;
+  }
+  
+  .info-row .label {
+    font-weight: 500;
+    color: #34495e;
+    min-width: 150px;
+  }
+  
+  .info-row .value {
+    color: #7f8c8d;
+  }
+  
+  .resume-link {
+    color: #3498db;
+    text-decoration: none;
+  }
+  
+  .resume-link:hover {
+    text-decoration: underline;
+  }
+  
+  .candidate-notes {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .candidate-notes h3 {
+    margin-top: 0;
+    color: #2c3e50;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .notes-textarea {
+    width: 100%;
+    min-height: 150px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: inherit;
+    margin-bottom: 15px;
+    resize: vertical;
+  }
+  
+  .save-notes-button {
+    padding: 8px 16px;
+    background: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .save-notes-button:hover {
+    background: #27ae60;
+  }
+  
+  .candidate-not-found {
+    text-align: center;
+    padding: 40px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .candidate-not-found h2 {
+    color: #e74c3c;
+    margin-bottom: 20px;
+  }
