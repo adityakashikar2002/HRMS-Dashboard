@@ -6,16 +6,16 @@ import './CandidateCard.css';
 const CandidateCard = ({ candidate, onEdit, onDelete }) => {
   const getStatusColor = () => {
     switch (candidate.status) {
-      case 'hired':
+      case 'Hired':
         return '#2ecc71';
-      case 'rejected':
+      case 'Rejected':
         return '#e74c3c';
-      case 'interview':
+      case 'Interview':
         return '#f39c12';
-      case 'offer':
-        return '#3498db';
+      case 'Offer':
+        return '#f312ef';
       default:
-        return '#7f8c8d';
+        return '#3498db';
     }
   };
 

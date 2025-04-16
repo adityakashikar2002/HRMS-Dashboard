@@ -8,7 +8,7 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 const InterviewStats = ({ interviews }) => {
   const getStats = () => {
     const types = ['Technical', 'Technical Advanced', 'HR', 'Managerial', 'Cultural Fit'];
-    const statuses = ['scheduled', 'completed', 'cancelled'];
+    const statuses = ['Scheduled', 'Completed', 'Cancelled'];
     
     const typeCounts = {};
     const statusCounts = {};

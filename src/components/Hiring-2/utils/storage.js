@@ -33,14 +33,20 @@ export const getJobs = () => {
     return candidates ? JSON.parse(candidates) : [];
   };
   
+  // export const addCandidate = (candidate) => {
+  //   const candidates = getCandidates();
+  //   const newCandidate = {
+  //     ...candidate,
+  //     id: Date.now().toString(),
+  //     appliedAt: new Date().toISOString(),
+  //     status: 'Applied',
+  //     currentStage: 'Application Review'
   export const addCandidate = (candidate) => {
     const candidates = getCandidates();
     const newCandidate = {
-      ...candidate,
+      ...candidate, // Spread all form data first
       id: Date.now().toString(),
-      appliedAt: new Date().toISOString(),
-      status: 'Applied',
-      currentStage: 'Application Review'
+      appliedAt: new Date().toISOString()
     };
     localStorage.setItem('candidates', JSON.stringify([...candidates, newCandidate]));
   };
@@ -69,8 +75,8 @@ export const getJobs = () => {
     const newInterview = {
       ...interview,
       id: Date.now().toString(),
-      createdAt: new Date().toISOString(),
-      status: 'scheduled'
+      createdAt: new Date().toISOString()
+      // status: 'Scheduled'
     };
     localStorage.setItem('interviews', JSON.stringify([...interviews, newInterview]));
   };
@@ -99,8 +105,8 @@ export const getJobs = () => {
     const newOffer = {
       ...offer,
       id: Date.now().toString(),
-      createdAt: new Date().toISOString(),
-      status: 'pending'
+      createdAt: new Date().toISOString()
+      // status: 'Pending'
     };
     localStorage.setItem('offers', JSON.stringify([...offers, newOffer]));
   };
@@ -202,7 +208,7 @@ export const getJobs = () => {
           description: 'Analyze data trends to support business decisions.',
           location: 'Hyderabad',
           type: 'Full-time',
-          status: 'Active',
+          status: 'Closed',
           openings: 2,
           skills: 'SQL, Python, Power BI',
           experience: '4+ years',
@@ -295,6 +301,19 @@ export const getJobs = () => {
           source: 'Referral',
           status: 'Applied',
           currentStage: 'Application Review',
+          appliedAt: '2025-03-04T11:45:00Z'
+        },
+        {
+          id: '5',
+          name: 'Priya Wagh',
+          email: 'priya.Wagh@example.com',
+          phone: '9988776855',
+          resume: 'priya_wagh_resume.pdf',
+          jobId: '4',
+          jobTitle: 'Data Analyst',
+          source: 'Referral',
+          status: 'Hired',
+          currentStage: 'Offer Discussion',
           appliedAt: '2025-03-04T11:45:00Z'
         }
       ];

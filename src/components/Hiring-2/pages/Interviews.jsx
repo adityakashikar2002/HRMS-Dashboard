@@ -67,19 +67,19 @@ const Interviews = () => {
             </button>
             <button 
               className={filter === 'scheduled' ? 'active' : ''} 
-              onClick={() => setFilter('scheduled')}
+              onClick={() => setFilter('Scheduled')}
             >
               Scheduled
             </button>
             <button 
               className={filter === 'completed' ? 'active' : ''} 
-              onClick={() => setFilter('completed')}
+              onClick={() => setFilter('Completed')}
             >
               Completed
             </button>
             <button 
               className={filter === 'cancelled' ? 'active' : ''} 
-              onClick={() => setFilter('cancelled')}
+              onClick={() => setFilter('Cancelled')}
             >
               Cancelled
             </button>

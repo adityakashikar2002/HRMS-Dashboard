@@ -38,7 +38,7 @@ const JobDetails = () => {
         </div>
         <div className="info-row">
           <span className="label">Status:</span>
-          <span className="value" style={{ color: job.status === 'active' ? '#2ecc71' : '#e74c3c' }}>
+          <span className="value" style={{ color: job.status === 'Active' ? '#2ecc71' : '#e74c3c' }}>
             {job.status}
           </span>
         </div>

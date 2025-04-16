@@ -16,7 +16,7 @@ const OfferDetails = () => {
       <div className="offer-details-container">
         <div className="offer-not-found">
           <h2>Offer not found</h2>
-          <Link to="/offers" className="back-button">
+          <Link to="/hiring/offers" className="back-button">
             Back to Offers
           </Link>
         </div>
@@ -28,7 +28,7 @@ const OfferDetails = () => {
     <div className="offer-details-container">
       <div className="offer-header">
         <h2>Offer Details</h2>
-        <Link to="/offers" className="back-button">
+        <Link to="/hiring/offers" className="back-button">
           Back to Offers
         </Link>
       </div>
@@ -48,7 +48,7 @@ const OfferDetails = () => {
         </div>
         <div className="info-row">
           <span className="label">Status:</span>
-          <span className="value" style={{ color: offer.status === 'accepted' ? '#2ecc71' : offer.status === 'rejected' ? '#e74c3c' : '#f39c12' }}>
+          <span className="value" style={{ color: offer.status === 'Accepted' ? '#2ecc71' : offer.status === 'Rejected' ? '#e74c3c' : '#f39c12' }}>
             {offer.status}
           </span>
         </div>

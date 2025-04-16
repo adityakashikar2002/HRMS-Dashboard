@@ -55,8 +55,8 @@ const InterviewDetails = () => {
         <div className="info-row">
           <span className="label">Status:</span>
           <span className="value" style={{ 
-            color: interview.status === 'completed' ? '#2ecc71' : 
-                  interview.status === 'cancelled' ? '#e74c3c' : '#f39c12'
+            color: interview.status === 'Completed' ? '#2ecc71' : 
+                  interview.status === 'Cancelled' ? '#e74c3c' : '#f39c12'
           }}>
             {interview.status}
           </span>

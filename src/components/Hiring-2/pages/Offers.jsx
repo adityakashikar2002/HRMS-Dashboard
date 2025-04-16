@@ -66,19 +66,19 @@ const Offers = () => {
             </button>
             <button 
               className={filter === 'pending' ? 'active' : ''} 
-              onClick={() => setFilter('pending')}
+              onClick={() => setFilter('Pending')}
             >
               Pending
             </button>
             <button 
               className={filter === 'accepted' ? 'active' : ''} 
-              onClick={() => setFilter('accepted')}
+              onClick={() => setFilter('Accepted')}
             >
               Accepted
             </button>
             <button 
               className={filter === 'rejected' ? 'active' : ''} 
-              onClick={() => setFilter('rejected')}
+              onClick={() => setFilter('Rejected')}
             >
               Rejected
             </button>

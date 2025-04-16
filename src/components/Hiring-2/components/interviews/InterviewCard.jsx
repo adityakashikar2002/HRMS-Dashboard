@@ -6,11 +6,11 @@ import './InterviewCard.css';
 const InterviewCard = ({ interview, onEdit, onDelete }) => {
   const getStatusColor = () => {
     switch (interview.status) {
-      case 'scheduled':
+      case 'Scheduled':
         return '#f39c12';
-      case 'completed':
+      case 'Completed':
         return '#2ecc71';
-      case 'cancelled':
+      case 'Cancelled':
         return '#e74c3c';
       default:
         return '#7f8c8d';

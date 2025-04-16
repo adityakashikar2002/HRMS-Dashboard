@@ -10,7 +10,7 @@ const OfferForm = ({ offer, candidates, jobs, onSubmit, onCancel }) => {
     offerType: 'selection',
     salary: '',
     onboardingDate: '',
-    status: 'pending'
+    status: 'Pending'
   });
 
   const [selectedCandidate, setSelectedCandidate] = useState(null);
@@ -130,9 +130,9 @@ const OfferForm = ({ offer, candidates, jobs, onSubmit, onCancel }) => {
                 onChange={handleChange}
                 required
               >
-                <option value="pending">Pending</option>
-                <option value="accepted">Accepted</option>
-                <option value="rejected">Rejected</option>
+                <option value="Pending">Pending</option>
+                <option value="Accepted">Accepted</option>
+                <option value="Rejected">Rejected</option>
               </select>
             </div>
           </div>

@@ -6,14 +6,14 @@ import './OfferCard.css';
 const OfferCard = ({ offer, onEdit, onDelete }) => {
   const getStatusColor = () => {
     switch (offer.status) {
-      case 'accepted':
+      case 'Accepted':
         return '#2ecc71';
-      case 'rejected':
+      case 'Rejected':
         return '#e74c3c';
-      case 'pending':
+      case 'Pending':
         return '#f39c12';
       default:
-        return '#7f8c8d';
+        return '#3498db';
     }
   };
 

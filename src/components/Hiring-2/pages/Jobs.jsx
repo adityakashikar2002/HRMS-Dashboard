@@ -60,13 +60,13 @@ const Jobs = () => {
             </button>
             <button 
               className={filter === 'active' ? 'active' : ''} 
-              onClick={() => setFilter('active')}
+              onClick={() => setFilter('Active')}
             >
               Active
             </button>
             <button 
               className={filter === 'closed' ? 'active' : ''} 
-              onClick={() => setFilter('closed')}
+              onClick={() => setFilter('Closed')}
             >
               Closed
             </button>

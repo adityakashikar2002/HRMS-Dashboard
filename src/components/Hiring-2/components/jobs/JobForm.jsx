@@ -6,8 +6,8 @@ const JobForm = ({ job, onSubmit, onCancel }) => {
     title: '',
     description: '',
     location: '',
-    type: 'full-time',
-    status: 'active',
+    type: 'Full-time',
+    status: 'Active',
     openings: 1,
     skills: '',
     experience: '',
@@ -105,8 +105,8 @@ const JobForm = ({ job, onSubmit, onCancel }) => {
                 value={formData.status}
                 onChange={handleChange}
               >
-                <option value="active">Active</option>
-                <option value="closed">Closed</option>
+                <option value="Active">Active</option>
+                <option value="Closed">Closed</option>
               </select>
             </div>
             

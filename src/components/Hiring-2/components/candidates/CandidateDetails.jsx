@@ -58,9 +58,10 @@ const CandidateDetails = () => {
         <div className="info-row">
           <span className="label">Status:</span>
           <span className="value" style={{ 
-            color: candidate.status === 'hired' ? '#2ecc71' : 
-                  candidate.status === 'rejected' ? '#e74c3c' : 
-                  candidate.status === 'interview' ? '#f39c12' : '#3498db'
+            color: candidate.status === 'Hired' ? '#2ecc71' : 
+                  candidate.status === 'Rejected' ? '#e74c3c' :
+                  candidate.status === 'Offer' ? '#f312ef': 
+                  candidate.status === 'Interview' ? '#f39c12' : '#3498db'
           }}>
             {candidate.status}
           </span>

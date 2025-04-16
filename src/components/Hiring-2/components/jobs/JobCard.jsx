@@ -5,9 +5,9 @@ import './JobCard.css';
 const JobCard = ({ job, onEdit, onDelete }) => {
   const getStatusColor = () => {
     switch (job.status) {
-      case 'active':
+      case 'Active':
         return '#2ecc71';
-      case 'closed':
+      case 'Closed':
         return '#e74c3c';
       default:
         return '#7f8c8d';

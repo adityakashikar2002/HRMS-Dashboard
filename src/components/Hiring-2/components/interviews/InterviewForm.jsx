@@ -8,7 +8,7 @@ const InterviewForm = ({ interview, candidates, jobs, onSubmit, onCancel }) => {
     interviewer: '',
     interviewType: 'Technical',
     scheduledDate: '',
-    status: 'scheduled',
+    status: 'Scheduled',
     feedback: ''
   });
 
@@ -134,9 +134,9 @@ const InterviewForm = ({ interview, candidates, jobs, onSubmit, onCancel }) => {
                 onChange={handleChange}
                 required
               >
-                <option value="scheduled">Scheduled</option>
-                <option value="completed">Completed</option>
-                <option value="cancelled">Cancelled</option>
+                <option value="Scheduled">Scheduled</option>
+                <option value="Completed">Completed</option>
+                <option value="Cancelled">Cancelled</option>
               </select>
             </div>
           </div>
