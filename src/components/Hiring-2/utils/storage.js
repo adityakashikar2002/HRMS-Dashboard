@@ -33,6 +33,20 @@ export const getJobs = () => {
     return candidates ? JSON.parse(candidates) : [];
   };
   
+  export const incrementJobApplicants = (jobId) => {
+    const jobs = getJobs();
+    const updatedJobs = jobs.map(job => {
+      if (job.id === jobId) {
+        return {
+          ...job,
+          applicants: (job.applicants || 0) + 1
+        };
+      }
+      return job;
+    });
+    localStorage.setItem('jobs', JSON.stringify(updatedJobs));
+  };
+
   // export const addCandidate = (candidate) => {
   //   const candidates = getCandidates();
   //   const newCandidate = {
@@ -41,13 +55,27 @@ export const getJobs = () => {
   //     appliedAt: new Date().toISOString(),
   //     status: 'Applied',
   //     currentStage: 'Application Review'
+  //WORKS100
+  // export const addCandidate = (candidate) => {
+  //   const candidates = getCandidates();
+  //   const newCandidate = {
+  //     ...candidate, // Spread all form data first
+  //     id: Date.now().toString(),
+  //     appliedAt: new Date().toISOString()
+  //   };
+  //   localStorage.setItem('candidates', JSON.stringify([...candidates, newCandidate]));
+  // };
   export const addCandidate = (candidate) => {
     const candidates = getCandidates();
     const newCandidate = {
-      ...candidate, // Spread all form data first
+      ...candidate,
       id: Date.now().toString(),
       appliedAt: new Date().toISOString()
     };
+    
+    // Increment applicants count for the job
+    incrementJobApplicants(candidate.jobId);
+    
     localStorage.setItem('candidates', JSON.stringify([...candidates, newCandidate]));
   };
   
@@ -172,7 +200,7 @@ export const getJobs = () => {
           experience: '3+ years',
           salary: 'Rs.80,000 - Rs.100,000',
           createdAt: '2025-01-10T10:00:00Z',
-          applicants: 12
+          applicants: 1
         },
         {
           id: '2',
@@ -186,7 +214,7 @@ export const getJobs = () => {
           experience: '5+ years',
           salary: 'Rs.90,000 - Rs.120,000',
           createdAt: '2025-01-25T11:00:00Z',
-          applicants: 8
+          applicants: 1
         },
         {
           id: '3',
@@ -200,7 +228,7 @@ export const getJobs = () => {
           experience: '2+ years',
           salary: 'Rs.50,000 - Rs.70,000',
           createdAt: '2025-02-05T09:30:00Z',
-          applicants: 5
+          applicants: 1
         },
         {
           id: '4',
@@ -214,7 +242,7 @@ export const getJobs = () => {
           experience: '4+ years',
           salary: 'Rs.75,000 - Rs.95,000',
           createdAt: '2025-03-02T08:00:00Z',
-          applicants: 10
+          applicants: 2
         }
       ];
       localStorage.setItem('jobs', JSON.stringify(mockJobs));
