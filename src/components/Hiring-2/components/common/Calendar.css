@@ -1,4 +1,4 @@
-  .calendar {
+  /* .calendar {
     background: white;
     border-radius: 8px;
     padding: 20px;
@@ -82,4 +82,156 @@
     font-style: italic;
   }
 
+ */
 
+
+
+
+/* Calendar.css */
+.calendar {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.calendar-header h3 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.2rem;
+}
+
+.month-navigation {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+}
+
+.nav-arrows {
+  display: flex;
+  gap: 5px;
+}
+
+.nav-arrows button {
+  background: none;
+  border: 1px solid #ddd;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.nav-arrows button:hover {
+  background: #f5f5f5;
+  border-color: #ccc;
+}
+
+.calendar table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.calendar th {
+  text-align: center;
+  padding: 10px; /* Increased padding for header cells */
+  border: 1px solid #eee;
+  font-weight: normal;
+  color: #7f8c8d;
+}
+
+.calendar th.time-column {
+  width: 100px; /* Slightly increased width for time column */
+  background: #f9f9f9;
+}
+
+.calendar td {
+  height: 120px; /* Increased default height for data cells */
+  border: 1px solid #eee;
+  vertical-align: top;
+  padding: 5px; /* Added default padding for data cells */
+  position: relative;
+}
+
+.calendar td.time-cell {
+  font-size: 0.9rem; /* Slightly increased font size for time */
+  color: #7f8c8d;
+  text-align: right;
+  padding-right: 10px; /* Increased right padding */
+  background: #f9f9f9;
+}
+
+.calendar-event {
+  background-color: #e3f2fd;
+  border-left: 3px solid #2196F3;
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 0.9rem; /* Slightly increased font size for event details */
+  color: #1976d2;
+  height: calc(100% - 4px); /* Adjust height to account for border */
+  overflow: hidden;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: all 0.2s;
+}
+
+.calendar-event:hover {
+  background-color: #d0e4f7;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+.event-title {
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 5px; /* Slightly increased margin */
+}
+
+.event-time {
+  font-size: 0.8rem; /* Adjusted font size */
+  color: #0d47a1;
+  margin-bottom: 4px; /* Adjusted margin */
+}
+
+.event-type {
+  font-size: 0.8rem; /* Adjusted font size */
+  font-style: italic;
+  margin-bottom: 4px; /* Adjusted margin */
+}
+
+.event-interviewer {
+  font-size: 0.8rem; /* Adjusted font size */
+  color: #555;
+}
+
+/* Highlight today's date */
+.calendar th.today {
+  color: #2196F3;
+  font-weight: bold;
+}
+
+.calendar th.today span {
+  display: inline-block;
+  background: #2196F3;
+  color: white;
+  width: 26px; /* Slightly increased size */
+  height: 26px; /* Slightly increased size */
+  line-height: 26px; /* Match height for vertical centering */
+  border-radius: 50%;
+}

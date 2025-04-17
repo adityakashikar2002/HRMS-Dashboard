@@ -80,13 +80,31 @@ export const getJobs = () => {
     return interviews ? JSON.parse(interviews) : [];
   };
   
+  // export const addInterview = (interview) => {
+  //   const interviews = getInterviews();
+  //   const newInterview = {
+  //     ...interview,
+  //     id: Date.now().toString(),
+  //     createdAt: new Date().toISOString()
+  //     // status: 'Scheduled'
+  //   };
+  //   localStorage.setItem('interviews', JSON.stringify([...interviews, newInterview]));
+  // };
+  
+  // export const updateInterview = (id, updatedInterview) => {
+  //   const interviews = getInterviews();
+  //   const updatedInterviews = interviews.map(interview => 
+  //     interview.id === id ? { ...interview, ...updatedInterview } : interview
+  //   );
+  //   localStorage.setItem('interviews', JSON.stringify(updatedInterviews));
+  // };
+
   export const addInterview = (interview) => {
     const interviews = getInterviews();
     const newInterview = {
       ...interview,
       id: Date.now().toString(),
       createdAt: new Date().toISOString()
-      // status: 'Scheduled'
     };
     localStorage.setItem('interviews', JSON.stringify([...interviews, newInterview]));
   };
@@ -94,7 +112,12 @@ export const getJobs = () => {
   export const updateInterview = (id, updatedInterview) => {
     const interviews = getInterviews();
     const updatedInterviews = interviews.map(interview => 
-      interview.id === id ? { ...interview, ...updatedInterview } : interview
+      interview.id === id ? { 
+        ...interview, 
+        ...updatedInterview,
+        // Preserve the original createdAt if not being updated
+        createdAt: updatedInterview.createdAt || interview.createdAt
+      } : interview
     );
     localStorage.setItem('interviews', JSON.stringify(updatedInterviews));
   };
@@ -270,6 +293,39 @@ export const getJobs = () => {
       localStorage.setItem('candidates', JSON.stringify(mockCandidates));
     }
   
+    // if (!localStorage.getItem('interviews') || JSON.parse(localStorage.getItem('interviews')).length === 0) {
+    //   const mockInterviews = [
+    //     {
+    //       id: '1',
+    //       candidateId: '1',
+    //       candidateName: 'Rohit Sharma',
+    //       jobId: '1',
+    //       jobTitle: 'Frontend Developer',
+    //       interviewer: 'Meera Desai',
+    //       interviewType: 'Technical',
+    //       scheduledDate: '2025-01-20T14:00:00Z',
+    //       status: 'Scheduled',
+    //       feedback: '',
+    //       createdAt: '2025-01-17T09:00:00Z'
+    //     },
+    //     {
+    //       id: '2',
+    //       candidateId: '3',
+    //       candidateName: 'Vikram Mehta',
+    //       jobId: '3',
+    //       jobTitle: 'UI/UX Designer',
+    //       interviewer: 'Karan Sinha',
+    //       interviewType: 'Portfolio Review',
+    //       scheduledDate: '2025-02-12T16:00:00Z',
+    //       status: 'Scheduled',
+    //       feedback: '',
+    //       createdAt: '2025-02-10T10:00:00Z'
+    //     }
+    //   ];
+    //   localStorage.setItem('interviews', JSON.stringify(mockInterviews));
+    // }
+
+    //New 17-4-25
     if (!localStorage.getItem('interviews') || JSON.parse(localStorage.getItem('interviews')).length === 0) {
       const mockInterviews = [
         {
@@ -280,10 +336,13 @@ export const getJobs = () => {
           jobTitle: 'Frontend Developer',
           interviewer: 'Meera Desai',
           interviewType: 'Technical',
-          scheduledDate: '2025-01-20T14:00:00Z',
+          scheduledDate: '2025-01-20', // Date only (YYYY-MM-DD)
+          startTime: '14:00', // 24-hour format
+          endTime: '15:00',   // 24-hour format
+          timeSlot: '2:00 PM - 3:00 PM', // Display format
           status: 'Scheduled',
           feedback: '',
-          createdAt: '2025-01-17T09:00:00Z'
+          createdAt: new Date().toISOString()
         },
         {
           id: '2',
@@ -293,10 +352,13 @@ export const getJobs = () => {
           jobTitle: 'UI/UX Designer',
           interviewer: 'Karan Sinha',
           interviewType: 'Portfolio Review',
-          scheduledDate: '2025-02-12T16:00:00Z',
+          scheduledDate: '2025-02-12',
+          startTime: '16:00',
+          endTime: '17:00',
+          timeSlot: '4:00 PM - 5:00 PM',
           status: 'Scheduled',
           feedback: '',
-          createdAt: '2025-02-10T10:00:00Z'
+          createdAt: new Date().toISOString()
         }
       ];
       localStorage.setItem('interviews', JSON.stringify(mockInterviews));
