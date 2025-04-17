@@ -79,3 +79,19 @@
     color: #e74c3c;
     margin-bottom: 20px;
   }
+
+  /* Add this to OfferDetails.css */
+.download-button {
+  padding: 8px 16px;
+  background: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.download-button:hover {
+  background: #219653;
+}
