@@ -76,6 +76,8 @@ import Dashboard from './components/Dashboard/Dashboard';
 // import EmployeePage from './components/Employee/pages/EmployeePage';
 // import Attendance from './components/Attendance-3/Attendance';
 // import Hiring from './components/Hiring-2/Hiring'
+// import Payroll from './components/Payroll/Payroll';
+import PayrollDashboard from './components/Payroll-2/pages/PayrollDashboard';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -96,7 +98,8 @@ function App() {
             <Route path="/employees/*" element={<EmployeePage/>} />
             <Route path="/attendance/*" element={<Attendance/>} />
             <Route path="/hiring/*" element={<Hiring />} /> */}
-            
+            {/* <Route path="/payroll/*" element={<Payroll/>}/> */}
+            <Route path="/payroll/*" element={<PayrollDashboard/>}/>
           </Routes>
         </div>
       </div>
