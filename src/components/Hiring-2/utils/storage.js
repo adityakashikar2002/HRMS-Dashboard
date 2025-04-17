@@ -351,7 +351,7 @@ export const getJobs = () => {
           jobId: '3',
           jobTitle: 'UI/UX Designer',
           interviewer: 'Karan Sinha',
-          interviewType: 'Portfolio Review',
+          interviewType: 'Technical',
           scheduledDate: '2025-02-12',
           startTime: '16:00',
           endTime: '17:00',
