@@ -1,10 +1,10 @@
-  .dashboard {
+  .dashboard-hiring {
     padding: 24px;
     max-width: 1400px;
     margin: 0 auto;
   }
   
-  .dashboard h1 {
+  .dashboard-hiring  h1 {
     margin-bottom: 24px;
     color: #2c3e50;
     font-size: 28px;

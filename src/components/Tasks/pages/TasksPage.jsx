@@ -156,15 +156,15 @@ const TasksPage = () => {
           <h1 className="text-3xl font-bold text-gray-800 mb-4 md:mb-0">Task Management Dashboard</h1>
           
           <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
-            <div className="view-toggle flex bg-white rounded-lg shadow-sm p-1">
+            <div className="view-toggle flex bg-blue rounded-lg shadow-sm p-1">
               {['kanban', 'list', 'table'].map(view => (
                 <button
                   key={view}
                   onClick={() => setViewMode(view)}
                   className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
                     viewMode === view 
-                      ? 'bg-blue-600 text-white' 
-                      : 'text-gray-600 hover:bg-gray-100'
+                      ? 'bg-blue-700 text-black ' 
+                      : 'text-gray-600 hover:bg-blue-700'
                   }`}
                 >
                   {view.charAt(0).toUpperCase() + view.slice(1)}

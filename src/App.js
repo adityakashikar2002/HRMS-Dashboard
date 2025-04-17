@@ -75,7 +75,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 // import Projects from './components/Projects/Projects';
 // import EmployeePage from './components/Employee/pages/EmployeePage';
 // import Attendance from './components/Attendance-3/Attendance';
-import Hiring from './components/Hiring-2/Hiring'
+// import Hiring from './components/Hiring-2/Hiring'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -89,13 +89,13 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            {/* <Route path="/tasks" element={<TasksPage />} /> */}
-            {/* <Route path="/inbox/*" element={<Inbox_Main />} /> */}
-            {/* <Route path="/calendar/*" element={<CalenderMain/>} /> */}
-            {/* <Route path="/projects/*" element={<Projects/>} /> */}
-            {/* <Route path="/employees/*" element={<EmployeePage/>} /> */}
-            {/* <Route path="/attendance/*" element={<Attendance/>} /> */}
-            <Route path="/hiring/*" element={<Hiring />} />
+            {/* <Route path="/tasks" element={<TasksPage />} />
+            <Route path="/inbox/*" element={<Inbox_Main />} />
+            <Route path="/calendar/*" element={<CalenderMain/>} />
+            <Route path="/projects/*" element={<Projects/>} />
+            <Route path="/employees/*" element={<EmployeePage/>} />
+            <Route path="/attendance/*" element={<Attendance/>} />
+            <Route path="/hiring/*" element={<Hiring />} /> */}
             
           </Routes>
         </div>

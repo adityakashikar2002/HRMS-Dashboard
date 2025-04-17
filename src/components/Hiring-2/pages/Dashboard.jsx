@@ -301,7 +301,7 @@ const Dashboard = () => {
     };
 
     return (
-        <div className="dashboard"> {/* Main container for the dashboard */}
+        <div className="dashboard-hiring"> {/* Main container for the dashboard */}
             <h1>Overview</h1> {/* Dashboard heading */}
 
             <div className="stats-grid"> {/* Grid layout for displaying statistics cards */}
