@@ -112,7 +112,7 @@ const SelectionTemplate = ({ candidate, job, salary, onboardingDate }) => {
         <p className="closing">
           <strong>
             Sincerely,<br />
-            Deepali Raut<br />
+            Raksha Rai<br />
             HR Manager (Recruitment)<br />
             Qloron
           </strong>

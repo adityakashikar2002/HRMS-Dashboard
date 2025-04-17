@@ -228,10 +228,11 @@ const Dashboard = () => {
         // Calculate offer acceptance
         const acceptedOffers = offers.filter(o => o.status === 'Accepted').length; // Filters offers with 'Accepted' status and gets the count
         const rejectedOffers = offers.filter(o => o.status === 'Rejected').length; // Filters offers with 'Rejected' status and gets the count
+        const pendingOffers = offers.filter(o => o.status === 'Pending').length; 
         const totalOffers = offers.length; // Gets the total number of offers
         const acceptanceRate = totalOffers > 0 ? Math.round((acceptedOffers / totalOffers) * 100) : 0; // Calculates the offer acceptance rate as a percentage
         const rejectionRate = totalOffers > 0 ? Math.round((rejectedOffers / totalOffers) * 100) : 0; // Calculates the offer rejection rate as a percentage
-
+        const pendingRate = totalOffers > 0 ? Math.round((pendingOffers / totalOffers) * 100) : 0;
         // Calculate hires by source
         const sourceCounts = candidates.reduce((acc, candidate) => {
             if (candidate.status === 'Hired') {
@@ -283,7 +284,8 @@ const Dashboard = () => {
 
         setOfferData({
             accepted: acceptanceRate,
-            rejected: rejectionRate
+            rejected: rejectionRate,
+            pending : pendingRate
         }); // Updates the offerData state with acceptance and rejection rates
 
         setHiresBySource(sourceCounts); // Updates the hiresBySource state with the counts of hires per source
@@ -312,10 +314,11 @@ const Dashboard = () => {
                 <div className="chart-container"> {/* Container for the Offer Acceptance chart */}
                     <h3>Offer Acceptance</h3> {/* Chart title */}
                     <div className="pie-chart-wrapper"> {/* Wrapper for the pie chart and its labels */}
-                        <PieChart data={offerData} colors={['#4CAF50', '#F44336']} /> {/* Renders the PieChart component for offer data */}
+                        <PieChart data={offerData} colors={['#4CAF50', '#F44336', '#FFA500']} /> {/* Renders the PieChart component for offer data */}
                         <div className="pie-chart-labels"> {/* Container for the offer acceptance labels */}
                             <div><span className="accepted-dot"></span> Accepted: {offerData.accepted || 0}%</div>
                             <div><span className="rejected-dot"></span> Rejected: {offerData.rejected || 0}%</div>
+                            <div><span className="pending-dot"></span> Pending: {offerData.pending || 0}%</div>
                         </div>
                     </div>
                 </div>

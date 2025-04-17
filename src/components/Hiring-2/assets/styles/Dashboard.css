@@ -99,6 +99,10 @@
   .rejected-dot {
     background-color: #F44336;
   }
+
+  .pending-dot {
+    background-color: #FFA500;
+  }
   
   /* Responsive adjustments */
   @media (max-width: 1200px) {

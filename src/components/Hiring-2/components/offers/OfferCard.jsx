@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { formatDate } from '../../utils/helpers';
+import { formatDate, capitalize } from '../../utils/helpers';
 import './OfferCard.css';
 
 const OfferCard = ({ offer, onEdit, onDelete }) => {
@@ -35,7 +35,8 @@ const OfferCard = ({ offer, onEdit, onDelete }) => {
         </div>
         <div className="detail-item">
           <span className="label">Offer Type:</span>
-          <span className="value">{offer.offerType}</span>
+          {/* <span className="value">{offer.offerType}</span> */}
+          <span className="value">{capitalize(offer.offerType)}</span>
         </div>
         <div className="detail-item">
           <span className="label">Salary:</span>

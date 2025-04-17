@@ -100,7 +100,7 @@
 import React, { useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getOffers } from '../../utils/storage';
-import { formatDate } from '../../utils/helpers';
+import { formatDate, capitalize } from '../../utils/helpers';
 import SelectionTemplate from './SelectionTemplate';
 import RejectionTemplate from './RejectionTemplate';
 import html2canvas from 'html2canvas';
@@ -181,7 +181,8 @@ const OfferDetails = () => {
         </div>
         <div className="info-row">
           <span className="label">Offer Type:</span>
-          <span className="value">{offer.offerType}</span>
+          {/* <span className="value">{offer.offerType}</span> */}
+          <span className="value">{capitalize(offer.offerType)}</span>
         </div>
         <div className="info-row">
           <span className="label">Status:</span>
