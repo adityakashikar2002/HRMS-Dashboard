@@ -47,24 +47,6 @@ export const getJobs = () => {
     localStorage.setItem('jobs', JSON.stringify(updatedJobs));
   };
 
-  // export const addCandidate = (candidate) => {
-  //   const candidates = getCandidates();
-  //   const newCandidate = {
-  //     ...candidate,
-  //     id: Date.now().toString(),
-  //     appliedAt: new Date().toISOString(),
-  //     status: 'Applied',
-  //     currentStage: 'Application Review'
-  //WORKS100
-  // export const addCandidate = (candidate) => {
-  //   const candidates = getCandidates();
-  //   const newCandidate = {
-  //     ...candidate, // Spread all form data first
-  //     id: Date.now().toString(),
-  //     appliedAt: new Date().toISOString()
-  //   };
-  //   localStorage.setItem('candidates', JSON.stringify([...candidates, newCandidate]));
-  // };
   export const addCandidate = (candidate) => {
     const candidates = getCandidates();
     const newCandidate = {
@@ -156,37 +138,6 @@ export const getJobs = () => {
   // Initialize mock data if empty
   export const initializeMockData = () => {
     if (!localStorage.getItem('jobs') || JSON.parse(localStorage.getItem('jobs')).length === 0) {
-      // const mockJobs = [
-      //   {
-      //     id: '1',
-      //     title: 'Frontend Developer',
-      //     description: 'We are looking for a skilled Frontend Developer to join our team.',
-      //     location: 'New York',
-      //     type: 'full-time',
-      //     status: 'active',
-      //     openings: 3,
-      //     skills: 'React, JavaScript, CSS',
-      //     experience: '3+ years',
-      //     salary: 'Rs.80,000 - Rs.100,000',
-      //     createdAt: '2023-01-15T10:00:00Z',
-      //     applicants: 12
-      //   },
-      //   {
-      //     id: '2',
-      //     title: 'Backend Developer',
-      //     description: 'Join our backend team to build scalable APIs and services.',
-      //     location: 'Remote',
-      //     type: 'full-time',
-      //     status: 'active',
-      //     openings: 2,
-      //     skills: 'Node.js, Python, SQL',
-      //     experience: '5+ years',
-      //     salary: 'Rs.90,000 - Rs.120,000',
-      //     createdAt: '2023-02-20T10:00:00Z',
-      //     applicants: 8
-      //   }
-      // ];
-      // localStorage.setItem('jobs', JSON.stringify(mockJobs));
       const mockJobs = [
         {
           id: '1',
@@ -249,35 +200,6 @@ export const getJobs = () => {
     }
   
     if (!localStorage.getItem('candidates') || JSON.parse(localStorage.getItem('candidates')).length === 0) {
-      // const mockCandidates = [
-      //   {
-      //     id: '1',
-      //     name: 'John Doe',
-      //     email: 'john.doe@example.com',
-      //     phone: '123-456-7890',
-      //     resume: 'john_doe_resume.pdf',
-      //     jobId: '1',
-      //     jobTitle: 'Frontend Developer',
-      //     source: 'LinkedIn',
-      //     status: 'interview',
-      //     currentStage: 'Technical Interview',
-      //     appliedAt: '2023-03-01T10:00:00Z'
-      //   },
-      //   {
-      //     id: '2',
-      //     name: 'Jane Smith',
-      //     email: 'jane.smith@example.com',
-      //     phone: '987-654-3210',
-      //     resume: 'jane_smith_resume.pdf',
-      //     jobId: '2',
-      //     jobTitle: 'Backend Developer',
-      //     source: 'Naukri',
-      //     status: 'applied',
-      //     currentStage: 'Application Review',
-      //     appliedAt: '2023-03-05T14:30:00Z'
-      //   }
-      // ];
-      // localStorage.setItem('candidates', JSON.stringify(mockCandidates));
       const mockCandidates = [
         {
           id: '1',
@@ -349,22 +271,6 @@ export const getJobs = () => {
     }
   
     if (!localStorage.getItem('interviews') || JSON.parse(localStorage.getItem('interviews')).length === 0) {
-      // const mockInterviews = [
-      //   {
-      //     id: '1',
-      //     candidateId: '1',
-      //     candidateName: 'John Doe',
-      //     jobId: '1',
-      //     jobTitle: 'Frontend Developer',
-      //     interviewer: 'Sarah Johnson',
-      //     interviewType: 'Technical',
-      //     scheduledDate: '2023-03-15T14:00:00Z',
-      //     status: 'scheduled',
-      //     feedback: '',
-      //     createdAt: '2023-03-10T09:00:00Z'
-      //   }
-      // ];
-      // localStorage.setItem('interviews', JSON.stringify(mockInterviews));
       const mockInterviews = [
         {
           id: '1',

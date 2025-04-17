@@ -10,19 +10,7 @@ export const jobTitles = [
     'Technical Writer',
     'Digital Marketing Specialist'
   ];
-  
-  // export const locations = [
-  //   'New York',
-  //   'San Francisco',
-  //   'Remote',
-  //   'Chicago',
-  //   'Austin',
-  //   'Boston',
-  //   'Seattle',
-  //   'London',
-  //   'Bangalore',
-  //   'Tokyo'
-  // ];
+
   export const locations = [
     'Bangalore',
     'Mumbai',
@@ -58,32 +46,6 @@ export const jobTitles = [
     'Project Management'
   ];
   
-  // export const candidateNames = [
-  //   'John Doe',
-  //   'Jane Smith',
-  //   'Robert Johnson',
-  //   'Emily Davis',
-  //   'Michael Wilson',
-  //   'Sarah Brown',
-  //   'David Taylor',
-  //   'Jessica Anderson',
-  //   'Thomas Martinez',
-  //   'Jennifer Lee'
-  // ];
-  
-  // export const interviewerNames = [
-  //   'Alex Johnson',
-  //   'Sam Wilson',
-  //   'Taylor Smith',
-  //   'Jordan Brown',
-  //   'Casey Davis',
-  //   'Riley Miller',
-  //   'Morgan Taylor',
-  //   'Jamie Anderson',
-  //   'Cameron Martinez',
-  //   'Drew Lee'
-  // ];
-
   export const candidateNames = [
     'Rohit Sharma',
     'Ananya Iyer',
