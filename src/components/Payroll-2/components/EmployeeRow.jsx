@@ -1,8 +1,15 @@
 // // src/components/EmployeeRow.jsx
 // import React, { useState } from 'react';
-// import { generatePayslip } from '../utils';
+// import { generatePayslip, formatIndianCurrency } from '../utils';
 
-// const EmployeeRow = ({ employee, onEdit, onDelete, onViewPayslip }) => {
+// const EmployeeRow = ({ 
+//   employee, 
+//   onEdit, 
+//   onDelete, 
+//   onViewPayslip,
+//   isSelected,
+//   onSelect
+// }) => {
 //   const [showDetails, setShowDetails] = useState(false);
 //   const statusClass = employee.status === 'Completed' 
 //     ? 'bg-green-100 text-green-600' 
@@ -12,13 +19,21 @@
 //     setShowDetails(!showDetails);
 //   };
 
+//   const handleCheckboxChange = () => {
+//     onSelect(employee.id);
+//   };
+
 //   const payslip = generatePayslip(employee);
 
 //   return (
 //     <>
 //       <tr className="hover:bg-gray-50">
 //         <td className="p-3">
-//           <input type="checkbox" />
+//           <input 
+//             type="checkbox" 
+//             checked={isSelected}
+//             onChange={handleCheckboxChange}
+//           />
 //         </td>
 //         <td className="p-3 font-semibold text-gray-700">
 //           {employee.id}
@@ -40,10 +55,10 @@
 //           {employee.date}
 //         </td>
 //         <td className="p-3 whitespace-nowrap">
-//           ₹ {employee.salary.toLocaleString('en-IN')}
+//           {formatIndianCurrency(employee.salary)}
 //         </td>
 //         <td className="p-3 whitespace-nowrap">
-//           ₹ {employee.reimbursement.toLocaleString('en-IN')}
+//           {formatIndianCurrency(employee.reimbursement)}
 //         </td>
 //         <td className="p-3">
 //           <span className={`inline-block px-2 py-0.5 text-xs font-semibold rounded-md ${statusClass}`}>
@@ -54,18 +69,21 @@
 //           <button 
 //             className="text-gray-400 hover:text-gray-600" 
 //             onClick={() => onViewPayslip(payslip)}
+//             title="View Payslip"
 //           >
 //             <i className="fas fa-eye"></i>
 //           </button>
 //           <button 
 //             className="text-gray-400 hover:text-gray-600" 
 //             onClick={() => onEdit(employee)}
+//             title="Edit Employee"
 //           >
 //             <i className="fas fa-edit"></i>
 //           </button>
 //           <button 
 //             className="text-gray-400 hover:text-gray-600" 
 //             onClick={() => onDelete(employee.id)}
+//             title="Delete Employee"
 //           >
 //             <i className="fas fa-trash"></i>
 //           </button>
@@ -80,19 +98,19 @@
 //                 <div className="space-y-1">
 //                   <div className="flex justify-between">
 //                     <span>Basic Salary:</span>
-//                     <span>₹ {payslip.basic.toLocaleString('en-IN')}</span>
+//                     <span>{formatIndianCurrency(payslip.basic)}</span>
 //                   </div>
 //                   <div className="flex justify-between">
 //                     <span>HRA:</span>
-//                     <span>₹ {payslip.hra.toLocaleString('en-IN')}</span>
+//                     <span>{formatIndianCurrency(payslip.hra)}</span>
 //                   </div>
 //                   <div className="flex justify-between">
 //                     <span>DA:</span>
-//                     <span>₹ {payslip.da.toLocaleString('en-IN')}</span>
+//                     <span>{formatIndianCurrency(payslip.da)}</span>
 //                   </div>
 //                   <div className="flex justify-between">
 //                     <span>Reimbursements:</span>
-//                     <span>₹ {payslip.reimbursement.toLocaleString('en-IN')}</span>
+//                     <span>{formatIndianCurrency(payslip.reimbursement)}</span>
 //                   </div>
 //                 </div>
 //               </div>
@@ -101,19 +119,19 @@
 //                 <div className="space-y-1">
 //                   <div className="flex justify-between">
 //                     <span>Income Tax:</span>
-//                     <span>₹ {payslip.tax.toLocaleString('en-IN')}</span>
+//                     <span>{formatIndianCurrency(payslip.tax)}</span>
 //                   </div>
 //                   <div className="flex justify-between">
 //                     <span>PF Contribution:</span>
-//                     <span>₹ {payslip.pf.toLocaleString('en-IN')}</span>
+//                     <span>{formatIndianCurrency(payslip.pf)}</span>
 //                   </div>
 //                   <div className="flex justify-between">
 //                     <span>ESIC:</span>
-//                     <span>₹ {payslip.esic.toLocaleString('en-IN')}</span>
+//                     <span>{formatIndianCurrency(payslip.esic)}</span>
 //                   </div>
 //                   <div className="flex justify-between font-semibold">
 //                     <span>Total Deductions:</span>
-//                     <span>₹ {payslip.deductions.toLocaleString('en-IN')}</span>
+//                     <span>{formatIndianCurrency(payslip.deductions)}</span>
 //                   </div>
 //                 </div>
 //               </div>
@@ -122,7 +140,7 @@
 //                 <div className="bg-blue-50 p-3 rounded-md">
 //                   <div className="flex justify-between font-semibold text-lg">
 //                     <span>Net Pay:</span>
-//                     <span>₹ {payslip.netSalary.toLocaleString('en-IN')}</span>
+//                     <span>{formatIndianCurrency(payslip.netSalary)}</span>
 //                   </div>
 //                   <div className="text-xs text-gray-500 mt-2">
 //                     Payment Date: {payslip.paymentDate}
@@ -144,8 +162,6 @@
 // };
 
 // export default EmployeeRow;
-
-
 
 // src/components/EmployeeRow.jsx
 import React, { useState } from 'react';
@@ -271,12 +287,17 @@ const EmployeeRow = ({
                     <span>{formatIndianCurrency(payslip.tax)}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>PF Contribution:</span>
+                    <span>PF Contribution (12%):</span>
                     <span>{formatIndianCurrency(payslip.pf)}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>ESIC:</span>
-                    <span>{formatIndianCurrency(payslip.esic)}</span>
+                    <span>ESIC {payslip.grossSalary <= 21000 ? '(0.75%)' : ''}:</span>
+                    <span>
+                      {formatIndianCurrency(payslip.esic)}
+                      {payslip.grossSalary > 21000 && (
+                        <span className="text-xs text-gray-500 ml-1">(Not applicable)</span>
+                      )}
+                    </span>
                   </div>
                   <div className="flex justify-between font-semibold">
                     <span>Total Deductions:</span>
