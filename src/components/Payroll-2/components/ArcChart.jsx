@@ -1,3 +1,4 @@
+// // src/components/ArcChart.jsx
 // import React from 'react';
 
 // const ArcChart = ({ total, bonuses, incentives }) => {
@@ -41,17 +42,17 @@
 //         </svg>
 //         <div className="arc-total">
 //           <span>Totals</span>
-//           <span>${total.toLocaleString()}</span>
+//           <span>₹{total.toLocaleString('en-IN')}</span>
 //         </div>
 //       </div>
 //       <div className="arc-chart-legend w-full mb-3">
 //         <div>
 //           <div className="bonuses-color"></div>
-//           <span>${bonuses.toLocaleString()} Bonuses</span>
+//           <span>₹{bonuses.toLocaleString('en-IN')} Bonuses</span>
 //         </div>
 //         <div>
 //           <div className="incentives-color"></div>
-//           <span>${incentives.toLocaleString()} Incentives</span>
+//           <span>₹{incentives.toLocaleString('en-IN')} Incentives</span>
 //         </div>
 //       </div>
 //       <button className="w-full border border-gray-200 rounded-md text-center text-xs text-gray-600 py-1 cursor-pointer hover:bg-gray-50">
@@ -66,15 +67,20 @@
 
 
 
-
 // src/components/ArcChart.jsx
 import React from 'react';
+import { formatIndianCurrency } from '../utils';
 
 const ArcChart = ({ total, bonuses, incentives }) => {
   const circumference = 2 * Math.PI * 40;
-  // Calculate offsets based on percentages
-  const bonusesPercentage = (bonuses / total) * 100;
-  const incentivesPercentage = (incentives / total) * 100;
+  
+  // Calculate percentages with checks for zero values
+  const bonusesValue = bonuses || 0;
+  const incentivesValue = incentives || 0;
+  const totalValue = total || 1; // Prevent division by zero
+  
+  const bonusesPercentage = (bonusesValue / totalValue) * 100;
+  const incentivesPercentage = (incentivesValue / totalValue) * 100;
   
   const bonusesOffset = circumference - (circumference * bonusesPercentage / 100);
   const incentivesOffset = circumference - (circumference * incentivesPercentage / 100);
@@ -98,6 +104,7 @@ const ArcChart = ({ total, bonuses, incentives }) => {
             fill="none" 
             strokeDasharray={circumference} 
             strokeDashoffset={bonusesOffset}
+            transform="rotate(-90 64 64)"
           />
           <circle 
             className="arc-incentives" 
@@ -107,21 +114,22 @@ const ArcChart = ({ total, bonuses, incentives }) => {
             fill="none" 
             strokeDasharray={circumference} 
             strokeDashoffset={incentivesOffset}
+            transform="rotate(-90 64 64)"
           />
         </svg>
         <div className="arc-total">
           <span>Totals</span>
-          <span>₹{total.toLocaleString('en-IN')}</span>
+          <span>{formatIndianCurrency(total)}</span>
         </div>
       </div>
       <div className="arc-chart-legend w-full mb-3">
         <div>
           <div className="bonuses-color"></div>
-          <span>₹{bonuses.toLocaleString('en-IN')} Bonuses</span>
+          <span>{formatIndianCurrency(bonuses)} Bonuses</span>
         </div>
         <div>
           <div className="incentives-color"></div>
-          <span>₹{incentives.toLocaleString('en-IN')} Incentives</span>
+          <span>{formatIndianCurrency(incentives)} Incentives</span>
         </div>
       </div>
       <button className="w-full border border-gray-200 rounded-md text-center text-xs text-gray-600 py-1 cursor-pointer hover:bg-gray-50">
