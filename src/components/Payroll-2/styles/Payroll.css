@@ -250,3 +250,156 @@ body {
   gap: 8px;
   overflow: visible;
 }
+
+
+/* src/styles/Payroll.css */
+/* Add these new styles to your existing CSS */
+
+/* Indian currency formatting */
+.rupee-symbol:before {
+  content: "₹";
+}
+
+/* Form styles */
+.form-input {
+  transition: all 0.2s ease;
+}
+
+.form-input:focus {
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* Payslip print styles */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .payslip-modal, .payslip-modal * {
+    visibility: visible;
+  }
+  .payslip-modal {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    box-shadow: none;
+    margin: 0;
+    padding: 20px;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* Tooltip styles */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Responsive table styles */
+@media (max-width: 768px) {
+  .responsive-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+
+
+/* src/styles/Payroll.css */
+/* Add these to your existing CSS */
+
+/* Indian currency formatting */
+.rupee:before {
+  content: "₹";
+  margin-right: 1px;
+}
+
+/* Tax calculation highlights */
+.tax-highlight {
+  background-color: #fff9db;
+  border-left: 3px solid #ffd43b;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+/* Statutory deduction styles */
+.statutory-deduction {
+  border-bottom: 1px dashed #e9ecef;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Form 16 section */
+.form-16-section {
+  background-color: #f8f9fa;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  margin-top: 1rem;
+  border: 1px solid #dee2e6;
+}
+
+/* Responsive table for payslip */
+@media (max-width: 768px) {
+  .payslip-table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Print-specific styles for Indian payslips */
+@media print {
+  .payslip-print {
+    font-family: 'Arial', sans-serif;
+    font-size: 12pt;
+  }
+  .payslip-header {
+    border-bottom: 2px solid #000;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+  }
+  .payslip-company-logo {
+    max-width: 150px;
+    max-height: 80px;
+  }
+  .payslip-watermark {
+    opacity: 0.1;
+    position: absolute;
+    z-index: -1;
+    font-size: 72pt;
+    transform: rotate(-45deg);
+  }
+}
+
+/* Indian date formatting */
+.indian-date {
+  font-family: 'Noto Sans', sans-serif;
+}
