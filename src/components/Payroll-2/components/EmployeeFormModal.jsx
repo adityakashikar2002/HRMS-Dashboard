@@ -19,8 +19,8 @@
 //         name: employee.name,
 //         role: employee.role,
 //         salary: employee.salary,
-//         basic: employee.basic || Math.round(employee.salary * 0.6),
-//         hra: employee.hra || Math.round(employee.salary * 0.3),
+//         basic: employee.basic || Math.round(employee.salary * 0.5),
+//         hra: employee.hra || Math.round(employee.salary * 0.4),
 //         da: employee.da || Math.round(employee.salary * 0.1),
 //         reimbursement: employee.reimbursement,
 //         avatar: employee.avatar
@@ -45,9 +45,9 @@
 
 //   const calculateComponents = () => {
 //     if (formData.salary > 0) {
-//       const basic = Math.round(formData.salary * 0.6);
-//       const hra = Math.round(formData.salary * 0.3);
-//       const da = Math.round(formData.salary * 0.1);
+//       const basic = Math.round(formData.salary * 0.5);
+//       const hra = Math.round(basic * 0.4);
+//       const da = Math.round(basic * 0.1);
       
 //       setFormData(prev => ({
 //         ...prev,
@@ -57,6 +57,9 @@
 //       }));
 //     }
 //   };
+
+//   // Add ESIC information display
+//   const showESICInfo = formData.salary > 0 && formData.salary <= 21000;
 
 //   return (
 //     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
@@ -120,7 +123,7 @@
               
 //               <div className="grid grid-cols-3 gap-3">
 //                 <div>
-//                   <label className="block text-sm font-medium text-gray-700 mb-1">Basic (60%)</label>
+//                   <label className="block text-sm font-medium text-gray-700 mb-1">Basic (50%)</label>
 //                   <input
 //                     type="number"
 //                     name="basic"
@@ -130,7 +133,7 @@
 //                   />
 //                 </div>
 //                 <div>
-//                   <label className="block text-sm font-medium text-gray-700 mb-1">HRA (30%)</label>
+//                   <label className="block text-sm font-medium text-gray-700 mb-1">HRA (40% of Basic)</label>
 //                   <input
 //                     type="number"
 //                     name="hra"
@@ -140,7 +143,7 @@
 //                   />
 //                 </div>
 //                 <div>
-//                   <label className="block text-sm font-medium text-gray-700 mb-1">DA (10%)</label>
+//                   <label className="block text-sm font-medium text-gray-700 mb-1">DA (10% of Basic)</label>
 //                   <input
 //                     type="number"
 //                     name="da"
@@ -161,6 +164,13 @@
 //                   className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-indigo-600"
 //                 />
 //               </div>
+              
+//               {showESICInfo && (
+//                 <div className="bg-blue-50 p-2 rounded-md text-sm text-blue-800">
+//                   <i className="fas fa-info-circle mr-1"></i>
+//                   ESIC will be deducted (0.75%) as salary is ≤ ₹21,000
+//                 </div>
+//               )}
               
 //               <div>
 //                 <label className="block text-sm font-medium text-gray-700 mb-1">Profile Image URL</label>
@@ -198,11 +208,16 @@
 
 // export default EmployeeFormModal;
 
-// src/components/EmployeeFormModal.jsx
+
+
+
+
+// src/components/EmployeeFormModal.jsx --Personal Acc
 import React, { useState, useEffect } from 'react';
 
 const EmployeeFormModal = ({ employee, onSave, onClose }) => {
   const [formData, setFormData] = useState({
+    id: '',
     name: '',
     role: 'UI/UX Designer',
     salary: 0,
@@ -210,12 +225,14 @@ const EmployeeFormModal = ({ employee, onSave, onClose }) => {
     hra: 0,
     da: 0,
     reimbursement: 0,
-    avatar: 'https://randomuser.me/api/portraits/lego/1.jpg'
+    avatar: 'https://randomuser.me/api/portraits/lego/1.jpg',
+    status: 'Pending'
   });
 
   useEffect(() => {
     if (employee) {
       setFormData({
+        id: employee.id,
         name: employee.name,
         role: employee.role,
         salary: employee.salary,
@@ -223,7 +240,29 @@ const EmployeeFormModal = ({ employee, onSave, onClose }) => {
         hra: employee.hra || Math.round(employee.salary * 0.4),
         da: employee.da || Math.round(employee.salary * 0.1),
         reimbursement: employee.reimbursement,
-        avatar: employee.avatar
+        avatar: employee.avatar,
+        status: employee.status || 'Pending',
+        date: employee.date || new Date().toLocaleString('en-IN', { 
+          day: '2-digit', 
+          month: 'short', 
+          year: 'numeric', 
+          hour: '2-digit', 
+          minute: '2-digit' 
+        })
+      });
+    } else {
+      // Reset form for new employee
+      setFormData({
+        id: '',
+        name: '',
+        role: 'UI/UX Designer',
+        salary: 0,
+        basic: 0,
+        hra: 0,
+        da: 0,
+        reimbursement: 0,
+        avatar: 'https://randomuser.me/api/portraits/lego/1.jpg',
+        status: 'Pending'
       });
     }
   }, [employee]);
@@ -240,7 +279,22 @@ const EmployeeFormModal = ({ employee, onSave, onClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSave(formData);
+    // Preserve the original date if editing
+    const savedData = employee ? { 
+      ...formData,
+      date: employee.date // Keep original date when editing
+    } : {
+      ...formData,
+      date: new Date().toLocaleString('en-IN', { 
+        day: '2-digit', 
+        month: 'short', 
+        year: 'numeric', 
+        hour: '2-digit', 
+        minute: '2-digit' 
+      })
+    };
+    
+    onSave(savedData);
   };
 
   const calculateComponents = () => {
