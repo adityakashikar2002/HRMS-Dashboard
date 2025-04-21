@@ -832,7 +832,7 @@ const PayrollDashboard = () => {
         
         {/* Summary cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          <MetricCard 
+          {/* <MetricCard 
             title="Payrolls Cost" 
             value={metrics.payrollCost} 
             change="20%" 
@@ -859,6 +859,34 @@ const PayrollDashboard = () => {
             change={`+${metrics.newEmployees}`} 
             changeType="positive" 
             description="New Employee" 
+          /> */}
+          <MetricCard
+            title="Payrolls Cost"
+            value={metrics.payrollCost}
+            change="20%"
+            changeType="positive"
+            description={selectedMonth === 'all' ? 'all time' : 'selected month'}
+          />
+          <MetricCard
+            title="Total Expense"
+            value={metrics.totalExpense}
+            change="0.1%"
+            changeType="positive"
+            description="last month"
+          />
+          <MetricCard
+            title="Pending payments"
+            value={metrics.pendingPayments}
+            change="-50"
+            changeType="negative"
+            description="Total Employee"
+          />
+          <MetricCard
+            title="Total Payrolls"
+            value={metrics.totalPayrolls}
+            change={`+${metrics.newEmployees}`}
+            changeType="positive"
+            description="New Employee"
           />
         </div>
         
