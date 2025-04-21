@@ -1,7 +1,7 @@
 export const mockInboxEmails = [
   {
     id: 1,
-    sender: 'John Doe',
+    sender: 'Jack Dwedi',
     senderInitials: 'JD',
     subject: 'Weekly Team Meeting',
     preview: 'Reminder about our weekly sync tomorrow at 10 AM',
@@ -61,7 +61,7 @@ export const mockInboxEmails = [
   },
   {
     id: 4,
-    sender: 'Alice Smith',
+    sender: 'Aarav Sharma',
     senderInitials: 'AS',
     subject: 'Lunch Plans?',
     preview: 'Hey, want to grab lunch tomorrow?',

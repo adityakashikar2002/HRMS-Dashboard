@@ -35,9 +35,9 @@ const EmployeePage = () => {
       const initialEmployees = [
         {
           id: 'emp-1',
-          firstName: 'John',
-          lastName: 'Smith',
-          email: 'john.smith@example.com',
+          firstName: 'Amit',
+          lastName: 'Rana',
+          email: 'amit.rana@gmail.com',
           phone: '555-0101',
           position: 'CEO',
           department: '',
@@ -60,9 +60,9 @@ const EmployeePage = () => {
           name: 'Sales',
           description: 'Sales department',
           head: {
-            firstName: 'Michael',
-            lastName: 'Williams',
-            email: 'michael.w@example.com',
+            firstName: 'Manoj',
+            lastName: 'Bhoyar',
+            email: 'manoj.bhoyar@gmail.com',
             phone: '555-0103',
             position: 'Sales Manager',
             salary: '110000'
@@ -86,8 +86,8 @@ const EmployeePage = () => {
           description: 'HR department',
           head: {
             firstName: 'Sarah',
-            lastName: 'Johnson',
-            email: 'sarah.j@example.com',
+            lastName: 'Khan',
+            email: 'sarah.khan@gmail.com',
             phone: '555-0102',
             position: 'HR Manager',
             salary: '95000'
