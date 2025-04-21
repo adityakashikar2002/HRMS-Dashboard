@@ -183,7 +183,7 @@ const Sidebar = () => {
     {
       title: 'Analytics & Reports',
       items: [
-        { icon: 'fas fa-chart-line', label: 'Analytics', path: '/analytics' },
+        { icon: 'fas fa-chart-line', label: 'Manage Access', path: '/access' },
         { icon: 'fas fa-cog', label: 'Settings', path: '/settings' },
         { icon: 'fas fa-question-circle', label: 'Help & Support', path: '/help' },
       ],

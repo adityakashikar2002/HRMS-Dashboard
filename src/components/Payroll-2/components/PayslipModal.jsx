@@ -37,8 +37,8 @@ const PayslipModal = ({ payslip, onClose }) => {
             <div class="watermark">PAYSLIP</div>
             <div class="header">
               <div class="company-info">
-                <h2>Your Company Name</h2>
-                <p>Company Address</p>
+                <h2>Qloron</h2>
+                <p>Hyderabad</p>
                 <p>GSTIN: XXXXXX</p>
               </div>
               <div class="payslip-info">
