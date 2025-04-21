@@ -99,15 +99,28 @@ const ManageAccess = () => {
     setAccessSettings(prev => ({ ...prev, [name]: checked }));
   };
 
+  // const saveAccess = () => {
+  //   if (!selectedEmployee) return;
+    
+  //   const newAccess = Object.entries(accessSettings)
+  //     .filter(([_, value]) => value)
+  //     .map(([key]) => key);
+    
+  //   updateUserAccess(selectedEmployee.id, newAccess);
+  //   toast.success('Access updated successfully');
+  // };
+
   const saveAccess = () => {
     if (!selectedEmployee) return;
     
+    // Create new access array based on checked boxes
     const newAccess = Object.entries(accessSettings)
       .filter(([_, value]) => value)
       .map(([key]) => key);
     
+    // Update only the selected employee's access
     updateUserAccess(selectedEmployee.id, newAccess);
-    toast.success('Access updated successfully');
+    toast.success(`Access updated for ${selectedEmployee.name}`);
   };
 
   return (

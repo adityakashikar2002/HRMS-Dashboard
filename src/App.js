@@ -73,6 +73,7 @@ import Hiring from './components/Hiring-2/Hiring';
 import PayrollDashboard from './components/Payroll-2/pages/PayrollDashboard';
 import ManageAccess from './components/ManageAccess/ManageAccess';
 import Login from './auth/Login';
+import Register from './auth/Register';
 import { AuthProvider } from './auth/AuthContext';
 import ProtectedRoute from './utils/ProtectedRoute';
 import { ToastContainer } from 'react-toastify';
@@ -84,6 +85,7 @@ function App() {
         <div className="app bg-gray--100">
           <Routes>
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="*" element={
               <ProtectedRoute>
                 <MainLayout />

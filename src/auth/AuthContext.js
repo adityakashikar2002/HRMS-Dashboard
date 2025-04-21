@@ -1,6 +1,7 @@
+// // Works GOOD
 // import React, { createContext, useContext, useState, useEffect } from 'react';
 // import { useNavigate } from 'react-router-dom';
-// import { users } from '../data/users';
+// import { getUsers, updateUserAccess } from '../data/users';
 
 // const AuthContext = createContext();
 
@@ -12,13 +13,18 @@
 //   useEffect(() => {
 //     const storedUser = localStorage.getItem('user');
 //     if (storedUser) {
-//       setUser(JSON.parse(storedUser));
+//       const parsedUser = JSON.parse(storedUser);
+//       // Get fresh user data from our users storage
+//       const currentUserData = getUsers().find(u => u.id === parsedUser.id);
+//       if (currentUserData) {
+//         setUser(currentUserData);
+//       }
 //     }
 //     setLoading(false);
 //   }, []);
 
 //   const login = (email, password) => {
-//     const foundUser = users.find(u => u.email === email && u.password === password);
+//     const foundUser = getUsers().find(u => u.email === email && u.password === password);
 //     if (foundUser) {
 //       setUser(foundUser);
 //       localStorage.setItem('user', JSON.stringify(foundUser));
@@ -33,23 +39,22 @@
 //     navigate('/login');
 //   };
 
-//   const updateUserAccess = (userId, newAccess) => {
-//     const userIndex = users.findIndex(u => u.id === userId);
-//     if (userIndex !== -1) {
-//       users[userIndex].access = newAccess;
-//       // If the logged in user is being updated, update the state
-//       if (user && user.id === userId) {
-//         setUser({ ...user, access: newAccess });
-//         localStorage.setItem('user', JSON.stringify({ ...user, access: newAccess }));
-//       }
+//   const updateUserAccessContext = (userId, newAccess) => { // Renamed to avoid confusion
+//     const success = updateUserAccess(userId, newAccess); // Call the imported function
+//     if (success && user && user.id === userId) {
+//     // Update current user if they modified their own access
+//        setUser({ ...user, access: newAccess });
+//        localStorage.setItem('user', JSON.stringify({ ...user, access: newAccess }));
 //     }
+
+//     return success;
 //   };
 
 //   return (
-//     <AuthContext.Provider value={{ user, loading, login, logout, updateUserAccess }}>
-//       {children}
+//     <AuthContext.Provider value={{ user, loading, login, logout, updateUserAccess: updateUserAccessContext }}>
+//     {children}
 //     </AuthContext.Provider>
-//   );
+//     );
 // };
 
 // export const useAuth = () => useContext(AuthContext);
@@ -66,17 +71,32 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  useEffect(() => {
+  // Function to update user from storage
+  const updateUserFromStorage = () => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
-      // Get fresh user data from our users storage
       const currentUserData = getUsers().find(u => u.id === parsedUser.id);
       if (currentUserData) {
         setUser(currentUserData);
       }
     }
+  };
+
+  useEffect(() => {
+    // Initial load
+    updateUserFromStorage();
     setLoading(false);
+
+    // Listen for storage changes from other tabs
+    const handleStorageChange = (e) => {
+      if (e.key === 'efficio_users' || e.key === 'user') {
+        updateUserFromStorage();
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
   }, []);
 
   const login = (email, password) => {
@@ -95,22 +115,20 @@ export const AuthProvider = ({ children }) => {
     navigate('/login');
   };
 
-  const updateUserAccessContext = (userId, newAccess) => { // Renamed to avoid confusion
-    const success = updateUserAccess(userId, newAccess); // Call the imported function
+  const updateUserAccessContext = (userId, newAccess) => {
+    const success = updateUserAccess(userId, newAccess);
     if (success && user && user.id === userId) {
-    // Update current user if they modified their own access
-       setUser({ ...user, access: newAccess });
-       localStorage.setItem('user', JSON.stringify({ ...user, access: newAccess }));
+      setUser({ ...user, access: newAccess });
+      localStorage.setItem('user', JSON.stringify({ ...user, access: newAccess }));
     }
-
     return success;
   };
 
   return (
     <AuthContext.Provider value={{ user, loading, login, logout, updateUserAccess: updateUserAccessContext }}>
-    {children}
+      {children}
     </AuthContext.Provider>
-    );
+  );
 };
 
 export const useAuth = () => useContext(AuthContext);
