@@ -4,7 +4,7 @@ import React from 'react';
 const Header = ({ onSearch }) => {
   return (
     <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
-      <h1 className="text-gray-900 text-lg font-normal mb-3 sm:mb-0 font-bold">Payroll Management</h1>
+      <h1 className="text-gray-900 text-lg mb-3 sm:mb-0">Payroll Management</h1>
       <form 
         className="flex items-center w-full sm:w-auto border border-gray-300 rounded-md px-3 py-1.5 text-gray-400 text-sm focus-within:text-gray-600 focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600"
         onSubmit={(e) => {
