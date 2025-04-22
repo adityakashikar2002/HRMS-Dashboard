@@ -71,7 +71,8 @@ import EmployeePage from './components/Employee/pages/EmployeePage';
 import Attendance from './components/Attendance-3/Attendance';
 import Hiring from './components/Hiring-2/Hiring';
 import PayrollDashboard from './components/Payroll-2/pages/PayrollDashboard';
-import ManageAccess from './components/ManageAccess/ManageAccess';
+// import ManageAccess from './components/ManageAccess/ManageAccess';
+import AccessManagement from './components/ManageAccess/AccessManagement';
 import Login from './auth/Login';
 import Register from './auth/Register';
 import { AuthProvider } from './auth/AuthContext';
@@ -157,9 +158,14 @@ const MainLayout = () => {
               <PayrollDashboard />
             </ProtectedRoute>
           } />
-          <Route path="/access" element={
+          {/* <Route path="/access" element={
             <ProtectedRoute requiredAccess="access">
               <ManageAccess />
+            </ProtectedRoute>
+          } /> */}
+          <Route path="/access" element={
+            <ProtectedRoute requiredAccess="access">
+              <AccessManagement />
             </ProtectedRoute>
           } />
         </Routes>
