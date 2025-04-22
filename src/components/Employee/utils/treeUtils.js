@@ -2,9 +2,16 @@
 export const buildTree = (employees, departments) => {
   // Create CEO node
   const ceo = employees.find(e => e.position?.toLowerCase().includes('ceo'));
+  // const ceoNode = ceo ? {
+  //   ...ceo,
+  //   id: 'ceo-root',
+  //   name: `${ceo.firstName} ${ceo.lastName}`,
+  //   type: 'employee',
+  //   position: 'CEO',
+  //   children: []
+  // } : null;
   const ceoNode = ceo ? {
-    ...ceo,
-    id: 'ceo-root',
+    ...ceo,  // Spread all CEO properties
     name: `${ceo.firstName} ${ceo.lastName}`,
     type: 'employee',
     position: 'CEO',

@@ -30,7 +30,20 @@ const TreeNode = ({ node = {}, onEmployeeClick = () => {} }) => {
           <div className="w-14 h-14 rounded-full bg-white/30 mx-auto mb-3 flex items-center justify-center">
             <FaBuilding className="text-xl text-white" />
           </div>
-        ) : node.photo ? (
+        // ) : node.photo ? (
+        //   <div className="relative w-14 h-14 rounded-full mx-auto mb-3 overflow-hidden border-2 border-white shadow-inner">
+        //     <img
+        //       src={node.photo}
+        //       alt={node.name}
+        //       className="object-cover w-full h-full"
+        //     />
+        //     <div className="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-opacity duration-300"></div>
+        //   </div>
+        // ) : (
+        //   <div className="w-14 h-14 rounded-full bg-white/30 mx-auto mb-3 flex items-center justify-center">
+        //     <FaUserTie className="text-xl text-white" />
+        //   </div>
+      ) : node.photo ? (
           <div className="relative w-14 h-14 rounded-full mx-auto mb-3 overflow-hidden border-2 border-white shadow-inner">
             <img
               src={node.photo}

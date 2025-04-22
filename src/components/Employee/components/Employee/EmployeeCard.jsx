@@ -5,12 +5,27 @@ const EmployeeCard = ({ employee, onClick }) => {
         onClick={onClick}
       >
         <div className="flex items-start space-x-4">
-          <div className="flex-shrink-0">
+          {/* <div className="flex-shrink-0">
             <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center">
               <span className="text-xl font-semibold text-blue-600">
                 {employee.firstName.charAt(0)}{employee.lastName.charAt(0)}
               </span>
             </div>
+          </div> */}
+          <div className="flex-shrink-0">
+            {employee.photo ? (
+              <img 
+                src={employee.photo} 
+                alt="Profile" 
+                className="w-16 h-16 rounded-full object-cover"
+              />
+            ) : (
+              <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center">
+                <span className="text-xl font-semibold text-blue-600">
+                  {employee.firstName.charAt(0)}{employee.lastName.charAt(0)}
+                </span>
+              </div>
+            )}
           </div>
           <div className="flex-1">
             <h3 className="font-semibold text-gray-800">

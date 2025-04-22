@@ -32,27 +32,46 @@ const EmployeeForm = ({
 
   const isCEO = formData.position.toLowerCase().includes('ceo');
 
+  // const handleChange = useCallback((e) => {
+  //   const { name, value } = e.target;
+  //   if (name === 'photo' && e.target.files && e.target.files[0]) {
+  //     const reader = new FileReader();
+  //     reader.onload = (event) => {
+  //       setFormData(prev => ({
+  //         ...prev,
+  //         photo: event.target.result
+  //       }));
+  //     };
+  //     reader.readAsDataURL(e.target.files[0]);
+  //   }
+  //   setFormData(prev => ({
+  //     ...prev,
+  //     [name]: value
+  //   }));
+  //   if (onChange) {
+  //     onChange(e);
+  //   }
+  // }, [onChange]);
+
   const handleChange = useCallback((e) => {
-    const { name, value } = e.target;
-    if (name === 'photo' && e.target.files && e.target.files[0]) {
+    if (e.target.name === 'photo' && e.target.files && e.target.files[0]) {
       const reader = new FileReader();
       reader.onload = (event) => {
-        setFormData(prev => ({
-          ...prev,
-          photo: event.target.result
-        }));
+        const newEvent = {
+          target: {
+            name: 'photo',
+            value: event.target.result
+          }
+        };
+        onChange(newEvent);
       };
       reader.readAsDataURL(e.target.files[0]);
-    }
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-    if (onChange) {
+    } else {
+      const { name, value } = e.target;
       onChange(e);
     }
   }, [onChange]);
-
+  
   useEffect(() => {
     if (employeeData) {
       setFormData(prev => ({
