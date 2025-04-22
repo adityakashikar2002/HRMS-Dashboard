@@ -5,6 +5,7 @@ import EmployeeForm from './EmployeeForm';
 const EmployeeDetails = ({ 
   employee = {}, 
   employees = [],
+  departments=[],
   positions = [],
   isEditing = false, 
   onEditToggle = () => {},
@@ -39,6 +40,17 @@ const EmployeeDetails = ({
       ...prev,
       [name]: value
     }));
+    // If it's a photo upload from the form
+    if (name === 'photo' && e.target.files?.[0]) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setEmployeeData(prev => ({
+          ...prev,
+          photo: event.target.result
+        }));
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -245,7 +257,8 @@ const EmployeeDetails = ({
             onChange={handleChange}
             currentStep={3}
             employees={employees}
-            positions={positions}
+            departments={departments}  // Make sure this is passed
+            positions={positions}      // Make sure this is passed
             isEditMode={true}
           />
         )}

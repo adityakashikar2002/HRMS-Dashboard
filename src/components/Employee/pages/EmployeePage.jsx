@@ -408,6 +408,7 @@ const EmployeePage = () => {
           employee={selectedEmployee}
           employees={employees}
           departments={departments}
+          positions={positions}
           isEditing={isEditing}
           onEditToggle={() => setIsEditing(!isEditing)}
           onUpdate={handleUpdateEmployee}
