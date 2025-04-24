@@ -69,7 +69,8 @@ const Sidebar = () => {
         <nav>
           {menuSections.map((section, index) => (
             <div key={index} className="mb-4">
-              <h3 className="text-sm font-semibold text-gray-600 mb-2 text-center">
+              <h3 className="text-lg font-semibold text-gray-600 mb-2 text-center">
+              {/* <h3 className="text-lg font-extrabold text-gray-600 mb-2 text-left"> */}
                 {section.title}
               </h3>
               <ul>
