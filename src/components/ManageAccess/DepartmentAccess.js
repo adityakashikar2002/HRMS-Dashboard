@@ -1,3 +1,4 @@
+// DepartmentAccess.js
 import React, { useState, useEffect } from 'react';
 import { getDepartments, deleteDepartment, updateDepartment } from '../../data/departments';
 import { getUsersByDepartment } from '../../data/users';

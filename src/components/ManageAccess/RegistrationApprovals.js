@@ -1,4 +1,4 @@
-// src/components/ManageAccess/RegistrationApprovals.js
+// RegistrationApprovals.js
 import React, { useState, useEffect } from 'react';
 import { getPendingRegistrations, updateApprovalStatus } from '../../data/users';
 import { getDepartmentById } from '../../data/departments';

@@ -1,3 +1,4 @@
+//EmployeeAccess.js
 import React, { useState, useEffect } from 'react';
 import { getUsers, updateUserAccess, updateUserDepartment } from '../../data/users';
 import { getDepartments } from '../../data/departments';
