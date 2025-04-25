@@ -57,8 +57,9 @@
 //---------------------------------------------
 
 
+
 import React from 'react';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 import './App.css';
 import Sidebar from './components/Sidebar/Sidebar';
 import Header from './components/Header/Header';
@@ -75,41 +76,42 @@ import PayrollDashboard from './components/Payroll-2/pages/PayrollDashboard';
 import AccessManagement from './components/ManageAccess/AccessManagement';
 import Login from './auth/Login';
 import Register from './auth/Register';
-import { AuthProvider } from './auth/AuthContext';
+import { AuthProvider, useAuth } from './auth/AuthContext';
 import ProtectedRoute from './utils/ProtectedRoute';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
-      <AuthProvider>
-        <div className="app bg-gray--100">
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="*" element={
-              <ProtectedRoute>
-                <MainLayout />
-              </ProtectedRoute>
-            } />
-          </Routes>
-          <ToastContainer 
-            position="top-right"
-            autoClose={3000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-          />
-        </div>
-      </AuthProvider>
+    <AuthProvider>
+      <div className="app bg-gray--100">
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="*" element={
+            <ProtectedRoute>
+              <MainLayout />
+            </ProtectedRoute>
+          } />
+        </Routes>
+        <ToastContainer 
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+      </div>
+    </AuthProvider>
   );
 }
 
 const MainLayout = () => {
+  const { user } = useAuth();
   return (
     <div className="flex h-screen">
       <Sidebar />
@@ -165,7 +167,11 @@ const MainLayout = () => {
           } /> */}
           <Route path="/access" element={
             <ProtectedRoute requiredAccess="access">
-              <AccessManagement />
+              {user?.role === 'admin' ? (
+                <AccessManagement />
+              ) : (
+                <Navigate to="/" replace />
+              )}
             </ProtectedRoute>
           } />
         </Routes>

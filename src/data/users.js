@@ -1,97 +1,4 @@
 // // src/data/users.js
-// const USERS_KEY = 'efficio_users';
-
-// // Initial mock data
-// const initialUsers = [
-//   {
-//     id: 1,
-//     name: 'Admin User',
-//     email: 'admin@efficio.com',
-//     password: 'admin123',
-//     role: 'admin',
-//     access: ['dashboard', 'tasks', 'inbox', 'calendar', 'projects', 'employees', 'attendance', 'payroll', 'hiring', 'access', 'settings'],
-//     avatar: 'https://storage.googleapis.com/a1aa/image/M_ndFiXb_v1UvWw1xBPEm68Oge9VVCbOhtoHGeH8y3E.jpg'
-//   }
-//   // No initial employees - they will register
-// ];
-
-
-// // Load users from localStorage or initialize with mock data
-// const loadUsers = () => {
-//   const storedUsers = localStorage.getItem(USERS_KEY);
-//   return storedUsers ? JSON.parse(storedUsers) : [...initialUsers];
-// };
-
-// let users = loadUsers();
-
-// // Save users to localStorage
-// const saveUsers = () => {
-//   localStorage.setItem(USERS_KEY, JSON.stringify(users));
-// };
-
-// export const getUsers = () => users;
-
-// export const updateUserAccess = (userId, newAccess) => {
-//   const userIndex = users.findIndex(u => u.id === userId);
-//   if (userIndex !== -1) {
-//     users[userIndex].access = newAccess;
-//     saveUsers();
-//     return true;
-//   }
-//   return false;
-// };
-
-// export const addAdmin = (newAdmin) => {
-//   const adminCount = users.filter(u => u.role === 'admin').length;
-//   if (adminCount >= 2) {
-//     throw new Error('Maximum number of admins reached');
-//   }
-//   users.push(newAdmin);
-//   saveUsers();
-// };
-
-// export const addEmployee = (newEmployee) => {
-//   users.push({
-//     ...newEmployee,
-//     id: users.length + 1,
-//     role: 'employee',
-//     access: ['dashboard', 'tasks', 'inbox', 'calendar', 'projects']
-//   });
-//   saveUsers();
-// };
-
-// export const registerEmployee = (name, email, password) => {
-//   const users = getUsers();
-//   const emailExists = users.some(u => u.email === email);
-//   if (emailExists) {
-//     throw new Error('Email already registered');
-//   }
-
-//   const newEmployee = {
-//     id: users.length + 1,
-//     name,
-//     email,
-//     password,
-//     role: 'employee',
-//     access: ['dashboard', 'tasks', 'inbox', 'calendar', 'projects'], // Default access
-//     avatar: `https://i.pravatar.cc/150?u=${email}` // Generate random avatar
-//   };
-
-//   users.push(newEmployee);
-//   saveUsers(users);
-//   return newEmployee;
-// };
-
-// // Reset to initial data if needed (for development)
-// export const resetUsers = () => {
-//   users = [...initialUsers];
-//   saveUsers();
-// };
-//----------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------
-
-
-
 const USERS_KEY = 'efficio_users';
 
 // Indian names for employees
@@ -111,7 +18,8 @@ const initialUsers = [
     role: "admin",
     departmentId: null,
     access: ['dashboard', 'tasks', 'inbox', 'calendar', 'projects', 'employees', 'attendance', 'payroll', 'hiring', 'access', 'settings'],
-    avatar: 'https://storage.googleapis.com/a1aa/image/M_ndFiXb_v1UvWw1xBPEm68Oge9VVCbOhtoHGeH8y3E.jpg'
+    avatar: 'https://storage.googleapis.com/a1aa/image/M_ndFiXb_v1UvWw1xBPEm68Oge9VVCbOhtoHGeH8y3E.jpg',
+    approvalStatus: 'approved'
   },
   // HR Department Employees
   {
@@ -122,7 +30,8 @@ const initialUsers = [
     role: "employee",
     departmentId: 1,
     access: ['dashboard', 'tasks', 'inbox', 'calendar', 'employees', 'hiring', 'attendance'],
-    avatar: 'https://i.pravatar.cc/150?u=aarav.hr@efficio.com'
+    avatar: 'https://i.pravatar.cc/150?u=aarav.hr@efficio.com',
+    approvalStatus: 'approved'
   },
   {
     id: 3,
@@ -132,7 +41,8 @@ const initialUsers = [
     role: "employee",
     departmentId: 1,
     access: ['dashboard', 'tasks', 'inbox', 'calendar', 'employees', 'hiring'],
-    avatar: 'https://i.pravatar.cc/150?u=priya.hr@efficio.com'
+    avatar: 'https://i.pravatar.cc/150?u=priya.hr@efficio.com',
+    approvalStatus: 'approved'
   },
   // Finance Department Employees
   {
@@ -143,7 +53,8 @@ const initialUsers = [
     role: "employee",
     departmentId: 2,
     access: ['dashboard', 'tasks', 'inbox', 'calendar', 'payroll'],
-    avatar: 'https://i.pravatar.cc/150?u=rahul.finance@efficio.com'
+    avatar: 'https://i.pravatar.cc/150?u=rahul.finance@efficio.com',
+    approvalStatus: 'approved'
   },
   {
     id: 5,
@@ -153,7 +64,8 @@ const initialUsers = [
     role: "employee",
     departmentId: 2,
     access: ['dashboard', 'tasks', 'inbox', 'calendar', 'payroll'],
-    avatar: 'https://i.pravatar.cc/150?u=ananya.finance@efficio.com'
+    avatar: 'https://i.pravatar.cc/150?u=ananya.finance@efficio.com',
+    approvalStatus: 'approved'
   },
   // Engineering Department Employees
   {
@@ -164,7 +76,8 @@ const initialUsers = [
     role: "employee",
     departmentId: 3,
     access: ['dashboard', 'tasks', 'inbox', 'calendar', 'projects'],
-    avatar: 'https://i.pravatar.cc/150?u=vikram.eng@efficio.com'
+    avatar: 'https://i.pravatar.cc/150?u=vikram.eng@efficio.com',
+    approvalStatus: 'approved'
   },
   {
     id: 7,
@@ -174,7 +87,8 @@ const initialUsers = [
     role: "employee",
     departmentId: 3,
     access: ['dashboard', 'tasks', 'inbox', 'calendar', 'projects'],
-    avatar: 'https://i.pravatar.cc/150?u=neha.eng@efficio.com'
+    avatar: 'https://i.pravatar.cc/150?u=neha.eng@efficio.com',
+    approvalStatus: 'approved'
   }
 ];
 
@@ -194,7 +108,7 @@ export const getUsers = () => users;
 export const getUserById = (id) => users.find(u => u.id === id);
 
 export const getUsersByDepartment = (departmentId) => 
-  users.filter(u => u.departmentId === departmentId);
+  users.filter(u => u.departmentId === departmentId && u.approvalStatus === 'approved');
 
 export const updateUserAccess = (userId, newAccess) => {
   const userIndex = users.findIndex(u => u.id === userId);
@@ -249,14 +163,37 @@ export const registerEmployee = (name, email, password, departmentId = null) => 
     email,
     password,
     role: 'employee',
-    departmentId: departmentId ? parseInt(departmentId) : null,
-    access: ['dashboard', 'tasks', 'inbox', 'calendar', 'projects'],
-    avatar: `https://i.pravatar.cc/150?u=${email}`
+    registeredDepartmentId: departmentId ? parseInt(departmentId) : null, // Store separately
+    departmentId: null, // Will be set after approval
+    access: [], // No access until approved
+    avatar: `https://i.pravatar.cc/150?u=${email}`,
+    approvalStatus: 'pending' // 'pending', 'approved', 'rejected'
   };
 
   users.push(newEmployee);
   saveUsers();
   return newEmployee;
+};
+
+// Add new functions for approval management
+export const getPendingRegistrations = () => {
+  return users.filter(u => u.role === 'employee' && u.approvalStatus === 'pending');
+};
+
+export const updateApprovalStatus = (userId, status) => {
+  const userIndex = users.findIndex(u => u.id === userId);
+  if (userIndex !== -1) {
+    users[userIndex].approvalStatus = status;
+    if (status === 'approved') {
+      // Set departmentId only when approved
+      users[userIndex].departmentId = users[userIndex].registeredDepartmentId;
+      // Give default access when approved
+      users[userIndex].access = ['dashboard', 'tasks', 'inbox', 'calendar', 'projects'];
+    }
+    saveUsers();
+    return true;
+  }
+  return false;
 };
 
 export const deleteUser = (id) => {

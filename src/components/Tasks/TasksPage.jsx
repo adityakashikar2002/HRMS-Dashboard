@@ -5,7 +5,7 @@ import emailjs from 'emailjs-com';
 import './TasksPage.css';
 
 // Initialize EmailJS with your credentials
-emailjs.init(process.env.REACT_APP_EMAILJS_USER_ID); // Replace with your EmailJS user ID
+emailjs.init(process.env.REACT_APP_EMAILJS_USER_IDS); // Replace with your EmailJS user ID
 
 const TasksPage = () => {
   const [showCreateTaskModal, setShowCreateTaskModal] = useState(false);
@@ -45,8 +45,8 @@ const TasksPage = () => {
     };
 
     emailjs.send(
-        process.env.REACT_APP_EMAILJS_SERVICE_ID,  // Replace with your EmailJS service ID
-        process.env.REACT_APP_EMAILJS_TEMPLATE_ID, // Replace with your EmailJS template ID
+        process.env.REACT_APP_EMAILJS_SERVICE_IDS,  // Replace with your EmailJS service ID
+        process.env.REACT_APP_EMAILJS_TEMPLATE_IDS, // Replace with your EmailJS template ID
       emailParams
     )
     .then((response) => {

@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getUsers, updateUserAccess } from '../data/users';
+import { toast } from 'react-toastify';
 
 const AuthContext = createContext();
 
@@ -39,7 +40,14 @@ export const AuthProvider = ({ children }) => {
 
   const login = (email, password) => {
     const foundUser = getUsers().find(u => u.email === email && u.password === password);
+    
     if (foundUser) {
+      // Check if user is approved
+      if (foundUser.role === 'employee' && foundUser.approvalStatus !== 'approved') {
+        toast.error('Your registration is pending approval');
+        return false;
+      }
+      
       setUser(foundUser);
       localStorage.setItem('user', JSON.stringify(foundUser));
       return true;

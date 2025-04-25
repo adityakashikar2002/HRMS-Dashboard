@@ -91,7 +91,7 @@ const TaskForm = ({ onClose, onSubmit, mode, task }) => {
     }
   };
 
-  emailjs.init(process.env.REACT_APP_EMAILJS_USER_ID);
+  emailjs.init(process.env.REACT_APP_EMAILJS_USER_IDS);
   
   const sendEmailNotification = (task) => {
     const emailParams = {
@@ -108,8 +108,8 @@ const TaskForm = ({ onClose, onSubmit, mode, task }) => {
     };
 
     emailjs.send(
-      process.env.REACT_APP_EMAILJS_SERVICE_ID,
-      process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+      process.env.REACT_APP_EMAILJS_SERVICE_IDS,
+      process.env.REACT_APP_EMAILJS_TEMPLATE_IDS,
       emailParams
     ).catch((error) => {
       console.error('Failed to send email:', error);
